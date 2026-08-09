@@ -411,10 +411,9 @@
   }
   .broker-card{
     display:flex;
-    flex-direction:column;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    gap:10px;
     padding:18px 12px;
     border-radius:16px;
     background:var(--surface-2);
@@ -422,42 +421,7 @@
     transition:.2s;
   }
   .broker-card:hover{ border-color:rgba(201,162,39,.5); transform:translateY(-2px); }
-  .broker-logo{
-    width:56px;
-    height:56px;
-    border-radius:12px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-  }
-  .broker-logo img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
-  }
-  .broker-logo .placeholder{
-    font-family:var(--font-mono);
-    font-size:10px;
-    color:var(--text-muted);
-    letter-spacing:.5px;
-  }
-  .broker-name{ font-family:var(--font-display); font-size:14px; font-weight:600; }
-  .broker-cta{
-    width:100%;
-    display:block;
-    text-align:center;
-    padding:9px;
-    border-radius:10px;
-    font-weight:700;
-    font-size:12px;
-    text-decoration:none;
-    background:linear-gradient(135deg,var(--gold),var(--gold-bright));
-    color:#0a0c10;
-  }
+  .broker-name{ font-family:var(--font-display); font-size:15px; font-weight:600; color:var(--gold-bright); }
   .free-steps{
     margin-top:18px;
     padding-top:16px;
@@ -591,23 +555,19 @@
 
     <!-- ===== FREE (BROKER REFERRAL) PANEL ===== -->
     <div id="freePanel" style="display:none">
-      <p class="free-intro" id="freeIntro">Dapatkan akses AI Assistant Pribadi <strong>selamanya, gratis</strong> dengan mendaftar akun trading di salah satu broker partner kami melalui admin Telegram kami. Setelah pendaftaran terverifikasi, akses AI Assistant akan diaktifkan untuk Anda seumur hidup.</p>
+      <p class="free-intro" id="freeIntro">Dapatkan akses AI Assistant Pribadi secara <strong>gratis</strong> hanya dengan tertaut ke referral kami — gunakan broker kesayangan Anda di bawah ini. Jika Anda tidak menggunakan salah satu broker di bawah ini, Anda bisa aktifkan AI Assistant dengan cara registrasi berbayar, atau registrasi salah satu broker di bawah untuk mengaktifkan AI Assistant secara gratis.</p>
 
       <div class="broker-grid">
         <div class="broker-card">
-          <div class="broker-logo" id="logoHFM"><span class="placeholder">LOGO<br>HFM</span></div>
           <div class="broker-name">HFM</div>
         </div>
         <div class="broker-card">
-          <div class="broker-logo" id="logoVALETAX"><span class="placeholder">LOGO<br>VALETAX</span></div>
           <div class="broker-name">VALETAX</div>
         </div>
         <div class="broker-card">
-          <div class="broker-logo" id="logoEXNESS"><span class="placeholder">LOGO<br>EXNESS</span></div>
           <div class="broker-name">EXNESS</div>
         </div>
         <div class="broker-card">
-          <div class="broker-logo" id="logoFXGT"><span class="placeholder">LOGO<br>FXGT</span></div>
           <div class="broker-name">FXGT</div>
         </div>
       </div>
@@ -636,7 +596,7 @@
   <div class="card">
     <h2 id="portfolioTitle">🎯 Lihat Bukti Performa</h2>
     <p class="text" id="portfolioText">Semua hasil sinyal kami dicatat secara transparan dan diperbarui setiap hari.</p>
-    <a class="btn secondary" id="portfolioBtn" href="https://docs.google.com/spreadsheets/d/1p1jiuCcU6tUxxPEmodkwaQBmCB8u-BLOGa5J7LpETKE/edit?usp=sharing" target="_blank" onclick="gtag('event','backtest_click');">
+    <a class="btn secondary" id="portfolioBtn" href="https://websiteporto-production.up.railway.app/" target="_blank" onclick="gtag('event','backtest_click');">
       📊 Hasil Portofolio Signal AI Setiap Hari
     </a>
   </div>
@@ -665,35 +625,12 @@
 <script>
 let preferredLanguage = "id";
 
-// Ganti "#" di bawah ini dengan link referral resmi masing-masing broker,
-// dan ganti src gambar di brokerLogos begitu Anda punya file logonya.
 const BOT_LINKS = {
   personal: {
     base: "https://t.me/Intradayxauusd_bot?start=Halo_Bot_Mau_Join_Signal_AI_dong",
     ref:  "https://t.me/Intradayxauusd_bot?start=ref_"
   }
 };
-
-// Logo broker (.png). Upload 4 file ini ke folder assets/ (satu tingkat di bawah
-// folder file HTML ini), dengan nama persis seperti di bawah, dan logo akan otomatis tampil.
-const brokerLogos = {
-  HFM: "assets/hfm-logo.png",
-  VALETAX: "assets/valetax-logo.png",
-  EXNESS: "assets/exness-logo.png",
-  FXGT: "assets/fxgt-logo.png"
-};
-
-function applyBrokerLogos(){
-  Object.keys(brokerLogos).forEach(key=>{
-    const src = brokerLogos[key];
-    if(!src) return;
-    const holder = document.getElementById("logo" + key);
-    if(holder){
-      holder.innerHTML = `<img src="${src}" alt="${key} logo" onerror="this.parentElement.innerHTML='<span class=&quot;placeholder&quot;>LOGO<br>${key}</span>'">`;
-    }
-  });
-}
-applyBrokerLogos();
 
 const ctaFreeAdminEl = document.getElementById("ctaFreeAdmin");
 if(ctaFreeAdminEl){
@@ -828,9 +765,9 @@ const i18n = {
   planFeatP4:      { id: "Tanpa topik lain, murni fokus XAUUSD", en: "No other topics — pure XAUUSD focus", zh: "无其他话题，专注 XAUUSD" },
   ctaP:            { id: "Aktifkan AI Assistant Saya", en: "Activate My AI Assistant", zh: "激活我的 AI 助手" },
 
-  freeIntro:       { id: "Dapatkan akses AI Assistant Pribadi <strong>selamanya, gratis</strong> dengan mendaftar akun trading di salah satu broker partner kami melalui admin Telegram kami. Setelah pendaftaran terverifikasi, akses AI Assistant akan diaktifkan untuk Anda seumur hidup.",
-                     en: "Get lifetime, free access to the Personal AI Assistant by registering a trading account with one of our partner brokers through our Telegram admin. Once your registration is verified, your AI Assistant access will be activated for life.",
-                     zh: "通过我们的 Telegram 管理员在任一合作经纪商注册交易账户，即可终身免费获得私人 AI 助手访问权限。注册验证通过后，您的 AI 助手权限将被永久激活。" },
+  freeIntro:       { id: "Dapatkan akses AI Assistant Pribadi secara <strong>gratis</strong> hanya dengan tertaut ke referral kami — gunakan broker kesayangan Anda di bawah ini. Jika Anda tidak menggunakan salah satu broker di bawah ini, Anda bisa aktifkan AI Assistant dengan cara registrasi berbayar, atau registrasi salah satu broker di bawah untuk mengaktifkan AI Assistant secara gratis.",
+                     en: "Get free access to the Personal AI Assistant just by signing up through our referral link — use your favorite broker below. If you don't use one of the brokers below, you can activate the AI Assistant with a paid registration, or register with one of the brokers below to activate the AI Assistant for free.",
+                     zh: "只需通过我们的推荐链接注册，即可免费获得私人 AI 助手 — 使用下方您喜欢的经纪商即可。如果您不使用以下任一经纪商，您可以通过付费注册来激活 AI 助手，或注册下方任一经纪商即可免费激活 AI 助手。" },
   ctaFreeAdminText:{ id: "💬 Registrasi via Admin Telegram", en: "💬 Register via Telegram Admin", zh: "💬 通过 Telegram 管理员注册" },
   freeStep1Title:  { id: "Hubungi Admin", en: "Contact Admin", zh: "联系管理员" },
   freeStep1Desc:   { id: "Klik tombol di atas untuk chat admin kami di Telegram (@ADMOnePercentsFX).", en: "Click the button above to chat with our admin on Telegram (@ADMOnePercentsFX).", zh: "点击上方按钮在 Telegram 上联系我们的管理员（@ADMOnePercentsFX）。" },
