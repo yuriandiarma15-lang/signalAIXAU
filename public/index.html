@@ -397,6 +397,37 @@
     color:#5b6272;
   }
 
+  /* ---- Free-via-broker panel ---- */
+  .free-intro{
+    font-size:13px;
+    line-height:1.7;
+    color:var(--text-muted);
+    margin:0 0 18px;
+  }
+  .broker-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .broker-card{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:18px 12px;
+    border-radius:16px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    transition:.2s;
+  }
+  .broker-card:hover{ border-color:rgba(201,162,39,.5); transform:translateY(-2px); }
+  .broker-name{ font-family:var(--font-display); font-size:15px; font-weight:600; color:var(--gold-bright); }
+  .free-steps{
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px dashed var(--border);
+  }
+
   @media (min-width:640px){
     .broker-grid{ grid-template-columns:repeat(4,1fr); }
   }
@@ -455,7 +486,7 @@
     <h2 id="howTitle">🚀 Cara Kerja</h2>
     <div class="step">
       <div class="num">1</div>
-      <div><b id="step1Title">Aktifkan Akses</b><div class="desc" id="step1Desc">Pilih paket berlangganan sesuai kebutuhan Anda.</div></div>
+      <div><b id="step1Title">Pilih Cara Akses</b><div class="desc" id="step1Desc">Berbayar dengan harga tetap, atau gratis dengan daftar melalui referral broker partner kami.</div></div>
     </div>
     <div class="step">
       <div class="num">2</div>
@@ -468,9 +499,15 @@
   </div>
 
   <div class="card">
-    <h2 id="pricingTitle">💳 Aktifkan AI Assistant Anda</h2>
-    <p class="text" id="pricingIntro" style="margin-bottom:18px;">AI Assistant Pribadi untuk XAUUSD dengan harga tetap.</p>
+    <h2 id="pricingTitle">💳 Pilih Cara Akses</h2>
+    <p class="text" id="pricingIntro" style="margin-bottom:18px;">AI Assistant Pribadi untuk XAUUSD — akses berbayar dengan harga tetap, atau gratis dengan daftar melalui broker partner kami.</p>
 
+    <div class="toggle-row" id="accessToggle">
+      <button data-a="paid" class="active" id="accBtnPaid">Berbayar</button>
+      <button data-a="free" id="accBtnFree">Gratis via Broker</button>
+    </div>
+
+    <!-- ===== PAID PANEL ===== -->
     <div id="paidPanel">
       <div class="toggle-row" id="durationToggle">
         <button data-d="1" class="active" id="durBtn1">1 Bulan</button>
@@ -515,6 +552,45 @@
         </div>
       </div>
     </div>
+
+    <!-- ===== FREE (BROKER REFERRAL) PANEL ===== -->
+    <div id="freePanel" style="display:none">
+      <p class="free-intro" id="freeIntro">Dapatkan akses AI Assistant Pribadi secara <strong>gratis</strong> hanya dengan tertaut ke referral kami — gunakan broker kesayangan Anda di bawah ini. Jika Anda tidak menggunakan salah satu broker di bawah ini, Anda bisa aktifkan AI Assistant dengan cara registrasi berbayar, atau registrasi salah satu broker di bawah untuk mengaktifkan AI Assistant secara gratis.</p>
+
+      <div class="broker-grid">
+        <div class="broker-card">
+          <div class="broker-name">HFM</div>
+        </div>
+        <div class="broker-card">
+          <div class="broker-name">VALETAX</div>
+        </div>
+        <div class="broker-card">
+          <div class="broker-name">EXNESS</div>
+        </div>
+        <div class="broker-card">
+          <div class="broker-name">FXGT</div>
+        </div>
+      </div>
+
+      <a class="btn" id="ctaFreeAdmin" href="https://t.me/ADMOnePercentsFX" target="_blank" style="margin-top:18px;">
+        <span id="ctaFreeAdminText">💬 Registrasi via Admin Telegram</span>
+      </a>
+
+      <div class="free-steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div><b id="freeStep1Title">Hubungi Admin</b><div class="desc" id="freeStep1Desc">Klik tombol di atas untuk chat admin kami di Telegram (@ADMOnePercentsFX).</div></div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div><b id="freeStep2Title">Daftar & Verifikasi</b><div class="desc" id="freeStep2Desc">Admin akan membantu Anda mendaftar akun trading di salah satu broker partner (HFM, VALETAX, EXNESS, atau FXGT) dan menyelesaikan verifikasi.</div></div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div><b id="freeStep3Title">Akses Aktif Selamanya</b><div class="desc" id="freeStep3Desc">Setelah pendaftaran terverifikasi, akses AI Assistant Anda diaktifkan secara permanen, tanpa biaya.</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="card">
@@ -556,6 +632,11 @@ const BOT_LINKS = {
   }
 };
 
+const ctaFreeAdminEl = document.getElementById("ctaFreeAdmin");
+if(ctaFreeAdminEl){
+  ctaFreeAdminEl.addEventListener("click", ()=>gtag('event','telegram_admin_click_free_broker'));
+}
+
 const PRICING_PAID = { "1": 250000, "6": 500000, "12": 850000, "36": 1500000 };
 const DURATION_MONTHS = { "1": 1, "6": 6, "12": 12, "36": 36 };
 const PERMONTH_SUFFIX = { id: "/bulan", en: "/mo", zh: "/月" };
@@ -586,6 +667,16 @@ document.getElementById("durationToggle").addEventListener("click", (e)=>{
 });
 
 renderPaidPrice("1");
+
+document.getElementById("accessToggle").addEventListener("click", (e)=>{
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  document.querySelectorAll("#accessToggle button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  const isPaid = btn.dataset.a === "paid";
+  document.getElementById("paidPanel").style.display = isPaid ? "block" : "none";
+  document.getElementById("freePanel").style.display = isPaid ? "none" : "block";
+});
 
 const urlParams = new URLSearchParams(window.location.search);
 const referral = urlParams.get("ref");
@@ -648,15 +739,17 @@ const i18n = {
   feat4Desc:       { id: "Setiap rekomendasi disertai pendekatan manajemen risiko.", en: "Every recommendation comes with a risk management approach.", zh: "每项建议都附带风险管理方案。" },
 
   howTitle:        { id: "🚀 Cara Kerja", en: "🚀 How It Works", zh: "🚀 使用方法" },
-  step1Title:      { id: "Aktifkan Akses", en: "Activate Access", zh: "激活访问权限" },
-  step1Desc:       { id: "Pilih paket berlangganan sesuai kebutuhan Anda.", en: "Choose the subscription plan that fits your needs.", zh: "选择适合您需求的订阅套餐。" },
+  step1Title:      { id: "Pilih Cara Akses", en: "Choose Access Method", zh: "选择获取方式" },
+  step1Desc:       { id: "Berbayar dengan harga tetap, atau gratis dengan daftar melalui referral broker partner kami.", en: "Paid with a fixed price, or free by registering through our partner broker's referral link.", zh: "固定价格付费，或通过我们合作经纪商的推荐链接免费注册获取。" },
   step2Title:      { id: "Mesin Analisa AI", en: "AI Analysis Engine", zh: "AI 分析引擎" },
   step2Desc:       { id: "AI menganalisa XAUUSD menggunakan Smart Money Concept, Liquidity, dan Market Structure.", en: "The AI analyzes XAUUSD using Smart Money Concept, Liquidity, and Market Structure.", zh: "AI 使用聪明钱理论、流动性和市场结构分析 XAUUSD。" },
   step3Title:      { id: "Pengiriman Sinyal", en: "Signal Delivery", zh: "信号推送" },
   step3Desc:       { id: "Informasi entry dikirim secara real-time ke Telegram Anda.", en: "Entry information is delivered to your Telegram in real time.", zh: "入场信息实时发送到您的 Telegram。" },
 
-  pricingTitle:    { id: "💳 Aktifkan AI Assistant Anda", en: "💳 Activate Your AI Assistant", zh: "💳 激活您的 AI 助手" },
-  pricingIntro:    { id: "AI Assistant Pribadi untuk XAUUSD dengan harga tetap.", en: "Personal AI Assistant for XAUUSD at a fixed price.", zh: "XAUUSD 私人 AI 助手，固定价格。" },
+  pricingTitle:    { id: "💳 Pilih Cara Akses", en: "💳 Choose Your Access", zh: "💳 选择获取方式" },
+  pricingIntro:    { id: "AI Assistant Pribadi untuk XAUUSD — akses berbayar dengan harga tetap, atau gratis dengan daftar melalui broker partner kami.", en: "Personal AI Assistant for XAUUSD — access it paid at a fixed price, or free by registering through our partner broker.", zh: "XAUUSD 私人 AI 助手 — 可固定价格付费获取，或通过合作经纪商注册免费获取。" },
+  accBtnPaid:      { id: "Berbayar", en: "Paid", zh: "付费" },
+  accBtnFree:      { id: "Gratis via Broker", en: "Free via Broker", zh: "经纪商免费获取" },
   durBtn1:         { id: "1 Bulan", en: "1 Month", zh: "1 个月" },
   durBtn6:         { id: "6 Bulan", en: "6 Months", zh: "6 个月" },
   durBtn12:        { id: "12 Bulan", en: "12 Months", zh: "12 个月" },
@@ -671,6 +764,17 @@ const i18n = {
   planFeatP3:      { id: "Analisa singkat di setiap sinyal", en: "Brief analysis included with every signal", zh: "每个信号附带简要分析" },
   planFeatP4:      { id: "Tanpa topik lain, murni fokus XAUUSD", en: "No other topics — pure XAUUSD focus", zh: "无其他话题，专注 XAUUSD" },
   ctaP:            { id: "Aktifkan AI Assistant Saya", en: "Activate My AI Assistant", zh: "激活我的 AI 助手" },
+
+  freeIntro:       { id: "Dapatkan akses AI Assistant Pribadi secara <strong>gratis</strong> hanya dengan tertaut ke referral kami — gunakan broker kesayangan Anda di bawah ini. Jika Anda tidak menggunakan salah satu broker di bawah ini, Anda bisa aktifkan AI Assistant dengan cara registrasi berbayar, atau registrasi salah satu broker di bawah untuk mengaktifkan AI Assistant secara gratis.",
+                     en: "Get free access to the Personal AI Assistant just by signing up through our referral link — use your favorite broker below. If you don't use one of the brokers below, you can activate the AI Assistant with a paid registration, or register with one of the brokers below to activate the AI Assistant for free.",
+                     zh: "只需通过我们的推荐链接注册，即可免费获得私人 AI 助手 — 使用下方您喜欢的经纪商即可。如果您不使用以下任一经纪商，您可以通过付费注册来激活 AI 助手，或注册下方任一经纪商即可免费激活 AI 助手。" },
+  ctaFreeAdminText:{ id: "💬 Registrasi via Admin Telegram", en: "💬 Register via Telegram Admin", zh: "💬 通过 Telegram 管理员注册" },
+  freeStep1Title:  { id: "Hubungi Admin", en: "Contact Admin", zh: "联系管理员" },
+  freeStep1Desc:   { id: "Klik tombol di atas untuk chat admin kami di Telegram (@ADMOnePercentsFX).", en: "Click the button above to chat with our admin on Telegram (@ADMOnePercentsFX).", zh: "点击上方按钮在 Telegram 上联系我们的管理员（@ADMOnePercentsFX）。" },
+  freeStep2Title:  { id: "Daftar & Verifikasi", en: "Register & Verify", zh: "注册与验证" },
+  freeStep2Desc:   { id: "Admin akan membantu Anda mendaftar akun trading di salah satu broker partner (HFM, VALETAX, EXNESS, atau FXGT) dan menyelesaikan verifikasi.", en: "Our admin will help you register a trading account with one of our partner brokers (HFM, VALETAX, EXNESS, or FXGT) and complete verification.", zh: "管理员将协助您在合作经纪商（HFM、VALETAX、EXNESS 或 FXGT）之一注册交易账户并完成验证。" },
+  freeStep3Title:  { id: "Akses Aktif Selamanya", en: "Lifetime Access Activated", zh: "永久激活访问权限" },
+  freeStep3Desc:   { id: "Setelah pendaftaran terverifikasi, akses AI Assistant Anda diaktifkan secara permanen, tanpa biaya.", en: "Once your registration is verified, your AI Assistant access is activated permanently, at no cost.", zh: "注册验证通过后，您的 AI 助手权限将被永久激活，完全免费。" },
 
   portfolioTitle:  { id: "🎯 Lihat Bukti Performa", en: "🎯 See Our Track Record", zh: "🎯 查看业绩记录" },
   portfolioText:   { id: "Semua hasil sinyal kami dicatat secara transparan dan diperbarui setiap hari.", en: "All our signal results are recorded transparently and updated daily.", zh: "我们所有的信号结果都透明记录并每日更新。" },
@@ -689,6 +793,9 @@ const i18n = {
   footerText:      { id: "Teknologi Pasar AI Profesional", en: "Professional AI Market Technology", zh: "专业 AI 市场技术" }
 };
 
+// keys whose value contains markup and must use innerHTML instead of textContent
+const HTML_KEYS = new Set(["freeIntro"]);
+
 function setLang(lang){
   preferredLanguage = lang;
 
@@ -699,7 +806,11 @@ function setLang(lang){
   Object.keys(i18n).forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
-    el.textContent = i18n[id][lang];
+    if(HTML_KEYS.has(id)){
+      el.innerHTML = i18n[id][lang];
+    } else {
+      el.textContent = i18n[id][lang];
+    }
   });
 
   document.querySelectorAll("#langToggle button").forEach(b=>{
