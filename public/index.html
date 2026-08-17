@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XAU AI Intelligence | Professional Trading System</title>
+<title>XAU AI Intelligence | Promo Kemerdekaan RI ke-81</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DCVKX2J5CM"></script>
@@ -22,9 +22,10 @@
     --bg:#0a0c10;
     --surface:#12151c;
     --surface-2:#171c26;
-    --border:#242a37;
-    --gold:#c9a227;
-    --gold-bright:#e9c76a;
+    --border:#2a1e21;
+    --gold:#D2222D;
+    --gold-bright:#FF4B4B;
+    --putih:#F5F5F5;
     --text:#eef1f6;
     --text-muted:#8e96a8;
     --buy:#3fa796;
@@ -52,8 +53,8 @@
     inset:0;
     z-index:-2;
     background-image:
-      linear-gradient(rgba(201,162,39,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,162,39,.05) 1px, transparent 1px);
+      linear-gradient(rgba(210,34,45,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(210,34,45,.06) 1px, transparent 1px);
     background-size:34px 34px;
   }
   body::after{
@@ -64,7 +65,7 @@
     width:900px;
     height:900px;
     transform:translateX(-50%);
-    background:radial-gradient(circle, rgba(201,162,39,.16), transparent 65%);
+    background:radial-gradient(circle, rgba(210,34,45,.18), transparent 65%);
     z-index:-1;
     pointer-events:none;
   }
@@ -89,8 +90,8 @@
     font-weight:600;
     font-size:13px;
   }
-  .lang button:hover{ background:var(--gold); color:#0a0c10; border-color:var(--gold); }
-  .lang button.active{ background:var(--gold); color:#0a0c10; border-color:var(--gold); }
+  .lang button:hover{ background:var(--gold); color:#fff; border-color:var(--gold); }
+  .lang button.active{ background:var(--gold); color:#fff; border-color:var(--gold); }
 
   #bgCanvas{
     position:fixed;
@@ -105,7 +106,43 @@
     padding:24px 20px 40px;
   }
 
-  .hero{ text-align:center; padding-top:44px; }
+  /* ===== Bunting (bendera segitiga merah-putih) ===== */
+  .bunting{
+    display:flex;
+    justify-content:center;
+    padding-top:8px;
+  }
+  .pennant{
+    width:0; height:0;
+    border-left:11px solid transparent;
+    border-right:11px solid transparent;
+    border-top:18px solid var(--flagcolor);
+    margin:0 2px;
+    transform-origin:top center;
+    animation:sway 3.2s ease-in-out infinite;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));
+  }
+  .pennant:nth-child(odd){ --flagcolor:var(--gold-bright); animation-delay:0s; }
+  .pennant:nth-child(even){ --flagcolor:var(--putih); animation-delay:.35s; }
+  @keyframes sway{ 0%,100%{ transform:rotate(-4deg); } 50%{ transform:rotate(4deg); } }
+
+  .hero{ text-align:center; padding-top:18px; }
+
+  .indep-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 14px;
+    border-radius:50px;
+    background:linear-gradient(90deg, rgba(210,34,45,.22), rgba(245,245,245,.06));
+    border:1px solid rgba(255,75,75,.45);
+    color:var(--putih);
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
 
   .eyebrow{
     display:inline-flex;
@@ -113,8 +150,8 @@
     gap:8px;
     padding:8px 16px;
     border-radius:50px;
-    background:rgba(201,162,39,.1);
-    border:1px solid rgba(201,162,39,.3);
+    background:rgba(210,34,45,.1);
+    border:1px solid rgba(210,34,45,.3);
     color:var(--gold-bright);
     font-family:var(--font-mono);
     font-size:11px;
@@ -146,8 +183,20 @@
     color:var(--text-muted);
   }
 
+  .promo-strip{
+    margin-top:18px;
+    padding:13px 16px;
+    border-radius:12px;
+    background:rgba(210,34,45,.14);
+    border:1px solid rgba(255,75,75,.4);
+    font-size:13px;
+    color:var(--putih);
+    line-height:1.6;
+  }
+  .promo-strip strong{ color:var(--gold-bright); font-family:var(--font-mono); }
+
   .ticker-wrap{
-    margin-top:28px;
+    margin-top:20px;
     border:1px solid var(--border);
     border-radius:14px;
     background:var(--surface);
@@ -240,8 +289,8 @@
     flex:0 0 auto;
     width:28px; height:28px;
     border-radius:50%;
-    background:rgba(201,162,39,.12);
-    border:1px solid rgba(201,162,39,.35);
+    background:rgba(210,34,45,.14);
+    border:1px solid rgba(210,34,45,.4);
     color:var(--gold-bright);
     font-family:var(--font-mono);
     font-size:13px;
@@ -273,7 +322,7 @@
   }
   .toggle-row button.active{
     background:var(--gold);
-    color:#0a0c10;
+    color:#fff;
   }
 
   .plans{ display:flex; flex-direction:column; gap:14px; }
@@ -283,10 +332,28 @@
     border:1px solid var(--border);
     background:var(--surface-2);
     padding:22px;
+    overflow:hidden;
   }
   .plan.highlight{
-    border-color:rgba(201,162,39,.55);
-    background:linear-gradient(180deg, rgba(201,162,39,.08), var(--surface-2) 40%);
+    border-color:rgba(255,75,75,.55);
+    background:linear-gradient(180deg, rgba(210,34,45,.1), var(--surface-2) 40%);
+  }
+  .promo-ribbon{
+    display:none;
+    position:absolute;
+    top:16px;
+    right:-38px;
+    width:150px;
+    text-align:center;
+    transform:rotate(40deg);
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    color:#fff;
+    font-family:var(--font-mono);
+    font-weight:700;
+    font-size:11.5px;
+    letter-spacing:.5px;
+    padding:5px 0;
+    box-shadow:0 3px 8px rgba(0,0,0,.4);
   }
   .plan-icon{
     width:100%;
@@ -316,20 +383,44 @@
     text-transform:uppercase;
     padding:4px 10px;
     border-radius:50px;
-    background:rgba(201,162,39,.15);
+    background:rgba(210,34,45,.18);
     color:var(--gold-bright);
     margin-bottom:10px;
   }
   .plan-name{ font-family:var(--font-display); font-size:18px; font-weight:600; margin:0 0 4px; }
   .plan-tag{ font-size:12.5px; color:var(--text-muted); margin-bottom:16px; }
   .plan-price{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .price-old{
+    display:none;
+    font-family:var(--font-mono);
+    font-size:16px;
+    color:var(--text-muted);
+    text-decoration:line-through;
+  }
+  #priceP{
     font-family:var(--font-mono);
     font-size:28px;
     font-weight:700;
     color:var(--text);
   }
   .plan-price small{ font-size:13px; color:var(--text-muted); font-weight:500; }
-  .plan-permonth{ font-size:12px; color:var(--gold-bright); font-family:var(--font-mono); margin-top:4px; min-height:16px; }
+  .promo-note{
+    display:none;
+    margin-top:8px;
+    font-size:11.5px;
+    font-family:var(--font-mono);
+    color:var(--gold-bright);
+    background:rgba(255,75,75,.12);
+    border:1px solid rgba(255,75,75,.35);
+    padding:6px 10px;
+    border-radius:8px;
+  }
+  .plan-permonth{ font-size:12px; color:var(--gold-bright); font-family:var(--font-mono); margin-top:8px; min-height:16px; }
   .plan-features{ list-style:none; padding:0; margin:18px 0 20px; }
   .plan-features li{
     font-size:13px;
@@ -354,7 +445,7 @@
     font-size:14px;
     text-decoration:none;
     background:linear-gradient(135deg,var(--gold),var(--gold-bright));
-    color:#0a0c10;
+    color:#fff;
     border:none;
   }
 
@@ -366,7 +457,7 @@
     text-align:center;
     text-decoration:none;
     background:linear-gradient(135deg,var(--gold),var(--gold-bright));
-    color:#0a0c10;
+    color:#fff;
     font-weight:700;
     font-size:14.5px;
     transition:.25s;
@@ -390,8 +481,16 @@
     text-align:center;
   }
 
+  .tricolor-bar{
+    margin-top:26px;
+    height:4px;
+    border-radius:4px;
+    background:linear-gradient(90deg, var(--gold) 50%, var(--putih) 50%);
+    opacity:.55;
+  }
+
   .footer{
-    margin-top:30px;
+    margin-top:14px;
     text-align:center;
     font-size:11.5px;
     color:#5b6272;
@@ -415,10 +514,17 @@
 
 <div class="container">
 
+  <div class="bunting" id="bunting"></div>
+
   <section class="hero">
+    <div class="indep-badge">🇮🇩 <span id="indepText">HUT RI KE-81 · SPESIAL KEMERDEKAAN</span></div>
     <div class="eyebrow"><span class="dot"></span> AI POWERED MARKET ANALYTICS</div>
     <h1 id="heroTitle">Professional AI Assistant For <span class="gold">XAUUSD</span></h1>
     <p class="subtitle" id="heroSubtitle">AI Trading Assistant yang membaca peluang pergerakan XAUUSD dan mengirimkannya langsung ke Telegram Anda, real-time, 24/7.</p>
+
+    <div class="promo-strip" id="promoStrip">
+      🎉 <strong id="promoStripStrong">PROMO KEMERDEKAAN</strong> — <span id="promoStripText">1 Bulan cuma Rp170.080, berlaku sampai 20 Agustus 2026</span>
+    </div>
 
     <div class="ticker-wrap">
       <div class="ticker-track" id="tickerTrack"></div>
@@ -479,6 +585,7 @@
     </div>
     <div class="plans">
       <div class="plan highlight">
+        <div class="promo-ribbon" id="promoRibbon">-32%</div>
         <div class="plan-icon">
           <svg viewBox="0 0 260 140" role="img" aria-label="Satu AI mengirim sinyal XAU langsung ke satu pengguna">
             <defs>
@@ -502,7 +609,11 @@
         <span class="plan-badge" id="planBadgeP">Privat & Eksklusif</span>
         <div class="plan-name" id="planNameP">AI Assistant Pribadi</div>
         <div class="plan-tag" id="planTagP">Satu AI, satu fokus: XAUUSD real-time langsung ke chat pribadi Anda — tanpa antre, tanpa distraksi.</div>
-        <div class="plan-price"><span id="priceP">Rp250.000</span></div>
+        <div class="plan-price">
+          <span class="price-old" id="priceOld"></span>
+          <span id="priceP">Rp250.000</span>
+        </div>
+        <div class="promo-note" id="promoNote">🎉 Promo berlaku sampai 20 Agustus 2026</div>
         <div class="plan-permonth" id="permonthP"></div>
         <ul class="plan-features">
           <li id="planFeatP1">Sinyal AI XAUUSD real-time setiap jam</li>
@@ -537,8 +648,10 @@
     Trader bertanggung jawab atas keputusan trading masing-masing.</span>
   </div>
 
+  <div class="tricolor-bar"></div>
+
   <div class="footer">
-    XAU AI Intelligence © 2026<br>
+    XAU AI Intelligence © 2026 · Dirgahayu Republik Indonesia ke-81<br>
     <span id="footerText">Teknologi Pasar AI Profesional</span>
   </div>
 
@@ -558,6 +671,15 @@ const PRICING_PAID = { "1": 250000, "6": 500000, "12": 850000, "36": 1500000 };
 const DURATION_MONTHS = { "1": 1, "6": 6, "12": 12, "36": 36 };
 const PERMONTH_SUFFIX = { id: "/bulan", en: "/mo", zh: "/月" };
 
+// Promo Kemerdekaan: harga khusus 1 Bulan, berlaku sampai akhir 20 Agustus 2026 (WIB)
+const PROMO_DURATION = "1";
+const PROMO_PRICE = 170080;
+const PROMO_END = new Date("2026-08-21T00:00:00+07:00");
+
+function isPromoActive(){
+  return new Date() < PROMO_END;
+}
+
 let currentDuration = "1";
 
 function formatRupiah(n){
@@ -566,13 +688,31 @@ function formatRupiah(n){
 
 function renderPaidPrice(duration){
   currentDuration = duration;
-  const price = PRICING_PAID[duration];
-  document.getElementById("priceP").textContent = formatRupiah(price);
+  const normalPrice = PRICING_PAID[duration];
+  const promoActive = duration === PROMO_DURATION && isPromoActive();
+  const displayPrice = promoActive ? PROMO_PRICE : normalPrice;
+
+  document.getElementById("priceP").textContent = formatRupiah(displayPrice);
+
+  const oldPriceEl = document.getElementById("priceOld");
+  oldPriceEl.textContent = formatRupiah(normalPrice);
+  oldPriceEl.style.display = promoActive ? "inline" : "none";
+
+  document.getElementById("promoNote").style.display = promoActive ? "block" : "none";
+  document.getElementById("promoRibbon").style.display = promoActive ? "block" : "none";
+  document.getElementById("promoStrip").style.display = isPromoActive() ? "block" : "none";
 
   const months = DURATION_MONTHS[duration];
-  const perMonth = Math.round(price / months);
-  const suffix = PERMONTH_SUFFIX[preferredLanguage];
-  document.getElementById("permonthP").textContent = "≈ " + formatRupiah(perMonth) + suffix;
+  const permonthEl = document.getElementById("permonthP");
+  if(months > 1){
+    const perMonth = Math.round(displayPrice / months);
+    const suffix = PERMONTH_SUFFIX[preferredLanguage];
+    permonthEl.textContent = "≈ " + formatRupiah(perMonth) + suffix;
+    permonthEl.style.display = "block";
+  } else {
+    permonthEl.textContent = "";
+    permonthEl.style.display = "none";
+  }
 }
 
 document.getElementById("durationToggle").addEventListener("click", (e)=>{
@@ -617,6 +757,14 @@ function renderTicker(){
 }
 renderTicker();
 
+function renderBunting(){
+  const wrap = document.getElementById("bunting");
+  let html = "";
+  for(let i=0;i<17;i++){ html += '<div class="pennant"></div>'; }
+  wrap.innerHTML = html;
+}
+renderBunting();
+
 // Language preference kept in memory for this session (localStorage is not
 // available inside the artifact sandbox)
 const heroText = {
@@ -635,6 +783,11 @@ const heroText = {
 };
 
 const i18n = {
+  indepText:       { id: "HUT RI KE-81 · SPESIAL KEMERDEKAAN", en: "81st Independence Day · Special Promo", zh: "独立81周年 · 特别促销" },
+  promoStripStrong:{ id: "PROMO KEMERDEKAAN", en: "INDEPENDENCE DAY PROMO", zh: "独立日促销" },
+  promoStripText:  { id: "1 Bulan cuma Rp170.080, berlaku sampai 20 Agustus 2026", en: "1 Month only Rp170,080, valid until August 20, 2026", zh: "1个月仅需Rp170,080，有效期至2026年8月20日" },
+  promoNote:       { id: "🎉 Promo berlaku sampai 20 Agustus 2026", en: "🎉 Promo valid until August 20, 2026", zh: "🎉 促销有效期至2026年8月20日" },
+
   featuresTitle:   { id: "⚡ Fitur AI Trading", en: "⚡ AI Trading Features", zh: "⚡ AI 交易功能" },
   feat1Title:      { id: "Kecerdasan Pasar AI", en: "AI Market Intelligence", zh: "AI 市场智能" },
   feat1Desc:       { id: "Analisa XAUUSD berbasis Smart Money Concept & Market Structure.", en: "XAUUSD analysis based on Smart Money Concept & Market Structure.", zh: "基于聪明钱理论（SMC）与市场结构的 XAUUSD 分析。" },
@@ -663,7 +816,6 @@ const i18n = {
   planBadgeP:      { id: "Privat & Eksklusif", en: "Private & Exclusive", zh: "私享专属" },
   planNameP:       { id: "AI Assistant Pribadi", en: "Personal AI Assistant", zh: "私人 AI 助手" },
   planTagP:        { id: "Satu AI, satu fokus: XAUUSD real-time langsung ke chat pribadi Anda — tanpa antre, tanpa distraksi.", en: "One AI, one focus: real-time XAUUSD straight to your private chat — no queue, no distractions.", zh: "一个 AI，专注一件事：XAUUSD 实时信号直接发送到您的私人聊天 — 无需排队，无干扰。" },
-  permonthP:       { id: "Harga tetap, sekali bayar untuk akses penuh", en: "Fixed price, one-time payment for full access", zh: "固定价格，一次性付款获得完整访问权限" },
   planFeatP1:      { id: "Sinyal AI XAUUSD real-time setiap jam", en: "Real-time AI XAUUSD signals every hour", zh: "每小时实时 AI XAUUSD 信号" },
   planFeatP2:      { id: "Dikirim langsung ke DM Telegram pribadi Anda", en: "Delivered straight to your private Telegram DM", zh: "直接发送到您的 Telegram 私信" },
   planFeatP3:      { id: "Analisa singkat di setiap sinyal", en: "Brief analysis included with every signal", zh: "每个信号附带简要分析" },
@@ -727,7 +879,7 @@ document.querySelectorAll(".card").forEach((card, i)=>{
 
 /* =====================
    ANIMATED TECH BACKGROUND
-   AI network nodes (drifting, connecting lines) + a slow
+   AI network nodes (drifting, connecting lines, merah-putih) + a slow
    scrolling "market chart" line near the top of the page.
    ===================== */
 (function(){
@@ -743,12 +895,13 @@ document.querySelectorAll(".card").forEach((card, i)=>{
   window.addEventListener("resize", resize);
 
   const NODE_COUNT = Math.min(50, Math.floor((window.innerWidth * window.innerHeight) / 22000));
-  const nodes = Array.from({length: NODE_COUNT}, () => ({
+  const nodes = Array.from({length: NODE_COUNT}, (_, idx) => ({
     x: Math.random() * w,
     y: Math.random() * h,
     vx: (Math.random() - 0.5) * 0.22,
     vy: (Math.random() - 0.5) * 0.22,
-    r: Math.random() * 1.6 + 0.6
+    r: Math.random() * 1.6 + 0.6,
+    white: idx % 4 === 0
   }));
 
   const CHART_SPACING = 42;
@@ -763,7 +916,7 @@ document.querySelectorAll(".card").forEach((card, i)=>{
         const a = nodes[i], b = nodes[j];
         const dist = Math.hypot(a.x - b.x, a.y - b.y);
         if(dist < 130){
-          ctx.strokeStyle = `rgba(201,162,39,${(1 - dist / 130) * 0.16})`;
+          ctx.strokeStyle = `rgba(210,34,45,${(1 - dist / 130) * 0.16})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -773,12 +926,12 @@ document.querySelectorAll(".card").forEach((card, i)=>{
       }
     }
 
-    ctx.fillStyle = "rgba(233,199,106,0.55)";
     for(const n of nodes){
       n.x += n.vx;
       n.y += n.vy;
       if(n.x < 0 || n.x > w) n.vx *= -1;
       if(n.y < 0 || n.y > h) n.vy *= -1;
+      ctx.fillStyle = n.white ? "rgba(245,245,245,0.5)" : "rgba(255,75,75,0.55)";
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
@@ -787,7 +940,7 @@ document.querySelectorAll(".card").forEach((card, i)=>{
     chartOffset += 0.5;
     const baseY = 120;
     const amp = 70;
-    ctx.strokeStyle = "rgba(233,199,106,0.22)";
+    ctx.strokeStyle = "rgba(255,75,75,0.22)";
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     let started = false;
