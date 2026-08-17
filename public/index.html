@@ -194,6 +194,44 @@
     line-height:1.6;
   }
   .promo-strip strong{ color:var(--gold-bright); font-family:var(--font-mono); }
+  .promo-howto{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed rgba(255,75,75,.35);
+    text-align:left;
+  }
+  .promo-howto-title{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    margin-bottom:8px;
+  }
+  .promo-howto-step{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    font-size:12.5px;
+    line-height:1.6;
+    color:var(--text-muted);
+    margin-bottom:6px;
+  }
+  .promo-howto-step:last-child{ margin-bottom:0; }
+  .promo-howto-step b{ color:var(--putih); font-weight:700; }
+  .howto-num{
+    flex:0 0 auto;
+    width:18px; height:18px;
+    border-radius:50%;
+    background:rgba(255,75,75,.18);
+    border:1px solid rgba(255,75,75,.4);
+    color:var(--gold-bright);
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    margin-top:1px;
+  }
 
   .ticker-wrap{
     margin-top:20px;
@@ -524,6 +562,11 @@
 
     <div class="promo-strip" id="promoStrip">
       🎉 <strong id="promoStripStrong">PROMO KEMERDEKAAN</strong> — <span id="promoStripText">1 Bulan cuma Rp170.080, berlaku sampai 20 Agustus 2026</span>
+      <div class="promo-howto">
+        <div class="promo-howto-title" id="howtoTitle">Cara klaim promo di Bot:</div>
+        <div class="promo-howto-step"><span class="howto-num">1</span><span id="howtoStep1">Di Bot, tetap pilih paket <b>1 Bulan — Rp250.000</b> (harga di bot tidak berubah).</span></div>
+        <div class="promo-howto-step"><span class="howto-num">2</span><span id="howtoStep2">Transfer sesuai harga promo, lalu saat kirim bukti transfer ke admin, cantumkan keterangan <b>"17 Agustus"</b> dan nominal <b>Rp170.080</b>.</span></div>
+      </div>
     </div>
 
     <div class="ticker-wrap">
@@ -787,6 +830,9 @@ const i18n = {
   promoStripStrong:{ id: "PROMO KEMERDEKAAN", en: "INDEPENDENCE DAY PROMO", zh: "独立日促销" },
   promoStripText:  { id: "1 Bulan cuma Rp170.080, berlaku sampai 20 Agustus 2026", en: "1 Month only Rp170,080, valid until August 20, 2026", zh: "1个月仅需Rp170,080，有效期至2026年8月20日" },
   promoNote:       { id: "🎉 Promo berlaku sampai 20 Agustus 2026", en: "🎉 Promo valid until August 20, 2026", zh: "🎉 促销有效期至2026年8月20日" },
+  howtoTitle:      { id: "Cara klaim promo di Bot:", en: "How to claim the promo in the Bot:", zh: "在 Bot 中领取促销的方法：" },
+  howtoStep1:      { id: 'Di Bot, tetap pilih paket <b>1 Bulan — Rp250.000</b> (harga di bot tidak berubah).', en: 'In the Bot, still select the <b>1 Month — Rp250,000</b> package (the bot price stays the same).', zh: '在 Bot 中，仍然选择 <b>1个月 — Rp250,000</b> 套餐（Bot 内价格不变）。' },
+  howtoStep2:      { id: 'Transfer sesuai harga promo, lalu saat kirim bukti transfer ke admin, cantumkan keterangan <b>"17 Agustus"</b> dan nominal <b>Rp170.080</b>.', en: 'Transfer the promo amount, then when sending proof of transfer to admin, include the note <b>"17 Agustus"</b> and amount <b>Rp170,080</b>.', zh: '按促销金额转账，发送转账凭证给管理员时，请注明 <b>"17 Agustus"</b> 并填写金额 <b>Rp170,080</b>。' },
 
   featuresTitle:   { id: "⚡ Fitur AI Trading", en: "⚡ AI Trading Features", zh: "⚡ AI 交易功能" },
   feat1Title:      { id: "Kecerdasan Pasar AI", en: "AI Market Intelligence", zh: "AI 市场智能" },
@@ -846,10 +892,15 @@ function setLang(lang){
   document.getElementById("heroTitle").innerHTML = hero.title;
   document.getElementById("heroSubtitle").textContent = hero.subtitle;
 
+  const HTML_FIELDS = ["howtoStep1", "howtoStep2"];
   Object.keys(i18n).forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
-    el.textContent = i18n[id][lang];
+    if(HTML_FIELDS.includes(id)){
+      el.innerHTML = i18n[id][lang];
+    } else {
+      el.textContent = i18n[id][lang];
+    }
   });
 
   document.querySelectorAll("#langToggle button").forEach(b=>{
