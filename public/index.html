@@ -146,8 +146,28 @@
     color:var(--text-muted);
   }
 
+  /* ===== Hero visual: robot + live chart ===== */
+  .hero-visual{
+    margin-top:24px;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    background:var(--surface);
+    padding:10px;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-visual svg{ width:100%; height:auto; display:block; }
+  .hero-visual::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:var(--radius);
+    box-shadow:inset 0 0 40px rgba(201,162,39,.06);
+    pointer-events:none;
+  }
+
   .ticker-wrap{
-    margin-top:20px;
+    margin-top:16px;
     border:1px solid var(--border);
     border-radius:14px;
     background:var(--surface);
@@ -229,133 +249,24 @@
   .step b{ display:block; font-size:14px; margin-bottom:2px; }
   .step .desc{ font-size:13px; color:var(--text-muted); line-height:1.6; }
 
-  .toggle-row{
-    display:flex;
-    gap:6px;
-    background:var(--surface-2);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:4px;
-    margin-bottom:18px;
-  }
-  .toggle-row button{
-    flex:1;
-    padding:11px 6px;
-    border-radius:9px;
-    border:none;
-    background:transparent;
-    color:var(--text-muted);
-    font-family:var(--font-mono);
-    font-size:12.5px;
-    cursor:pointer;
-    font-weight:600;
-  }
-  .toggle-row button.active{
-    background:var(--gold);
-    color:#fff;
-  }
-
-  .plans{ display:flex; flex-direction:column; gap:14px; }
-  .plan{
-    position:relative;
-    border-radius:18px;
-    border:1px solid var(--border);
-    background:var(--surface-2);
-    padding:22px;
-    overflow:hidden;
-  }
-  .plan.highlight{
-    border-color:rgba(255,210,76,.55);
-    background:linear-gradient(180deg, rgba(201,162,39,.1), var(--surface-2) 40%);
-  }
-  .plan-icon{
-    width:100%;
-    height:132px;
-    margin-bottom:14px;
-    border-radius:14px;
-    background:var(--surface);
-    border:1px solid var(--border);
-  }
-  .plan-icon svg{ width:100%; height:100%; display:block; }
-
-  @keyframes flowDot{
-    0%{ offset-distance:0%; opacity:0; }
-    12%{ opacity:1; }
-    85%{ opacity:1; }
-    100%{ offset-distance:100%; opacity:0; }
-  }
-  @keyframes eyeBlink{ 0%,100%{ opacity:1; } 50%{ opacity:.5; } }
-  .flow-dot{ animation:flowDot 2s linear infinite; }
-  .bot-eye{ animation:eyeBlink 2.6s ease-in-out infinite; }
-
-  .plan-badge{
-    display:inline-block;
-    font-family:var(--font-mono);
-    font-size:10.5px;
-    letter-spacing:.5px;
-    text-transform:uppercase;
-    padding:4px 10px;
-    border-radius:50px;
-    background:rgba(201,162,39,.18);
-    color:var(--gold-bright);
-    margin-bottom:10px;
-  }
-  .plan-name{ font-family:var(--font-display); font-size:18px; font-weight:600; margin:0 0 4px; }
-  .plan-tag{ font-size:12.5px; color:var(--text-muted); margin-bottom:16px; }
-  .plan-price{
-    display:flex;
-    align-items:baseline;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  #priceP{
-    font-family:var(--font-mono);
-    font-size:28px;
-    font-weight:700;
-    color:var(--text);
-  }
-  .plan-price small{ font-size:13px; color:var(--text-muted); font-weight:500; }
-  .plan-permonth{ font-size:12px; color:var(--gold-bright); font-family:var(--font-mono); margin-top:8px; min-height:16px; }
-  .plan-features{ list-style:none; padding:0; margin:18px 0 20px; }
-  .plan-features li{
-    font-size:13px;
-    color:var(--text-muted);
-    padding:6px 0 6px 22px;
-    position:relative;
-    line-height:1.5;
-  }
-  .plan-features li::before{
-    content:"✓";
-    position:absolute;
-    left:0;
-    color:var(--buy);
-    font-weight:700;
-  }
-  .plan-cta{
-    display:block;
-    text-align:center;
-    padding:14px;
-    border-radius:12px;
-    font-weight:700;
-    font-size:14px;
-    text-decoration:none;
-    background:linear-gradient(135deg,var(--gold),var(--gold-bright));
-    color:#fff;
-    border:none;
-  }
-
+  /* ===== CTA section (replaces pricing) ===== */
+  .cta-stack{ display:flex; flex-direction:column; gap:12px; }
   .btn{
-    display:block;
-    margin-top:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-top:0;
     padding:16px;
     border-radius:14px;
     text-align:center;
     text-decoration:none;
     background:linear-gradient(135deg,var(--gold),var(--gold-bright));
-    color:#fff;
+    color:#0a0c10;
     font-weight:700;
     font-size:14.5px;
     transition:.25s;
+    border:none;
   }
   .btn:hover{ transform:translateY(-2px); }
   .btn.secondary{
@@ -363,6 +274,7 @@
     color:var(--text);
     border:1px solid var(--border);
   }
+  .btn .arrow{ font-size:16px; }
 
   .req{ display:flex; gap:10px; margin-bottom:12px; font-size:13.5px; color:var(--text-muted); }
   .req:last-child{ margin-bottom:0; }
@@ -381,10 +293,6 @@
     text-align:center;
     font-size:11.5px;
     color:#5b6272;
-  }
-
-  @media (min-width:640px){
-    .broker-grid{ grid-template-columns:repeat(4,1fr); }
   }
 </style>
 </head>
@@ -405,6 +313,153 @@
     <div class="eyebrow"><span class="dot"></span> AI POWERED MARKET ANALYTICS</div>
     <h1 id="heroTitle">Professional AI Assistant For <span class="gold">XAUUSD</span></h1>
     <p class="subtitle" id="heroSubtitle">AI Trading Assistant yang membaca peluang pergerakan XAUUSD dan mengirimkannya langsung ke Telegram Anda, real-time, 24/7.</p>
+
+    <!-- Animated robot + live chart -->
+    <div class="hero-visual">
+      <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Robot AI menganalisa chart XAUUSD secara real-time">
+        <defs>
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#20242e"/>
+            <stop offset="100%" stop-color="#12151c"/>
+          </linearGradient>
+          <linearGradient id="scanGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="var(--gold-bright)" stop-opacity="0"/>
+            <stop offset="50%" stop-color="var(--gold-bright)" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="var(--gold-bright)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <!-- floating robot -->
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0; 0 -7; 0 0" dur="3.2s" repeatCount="indefinite"/>
+
+          <!-- antenna -->
+          <line x1="85" y1="38" x2="85" y2="24" stroke="var(--gold)" stroke-width="2"/>
+          <circle cx="85" cy="19" r="4.5" fill="var(--gold-bright)">
+            <animate attributeName="opacity" values="1;.25;1" dur="1.4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- head -->
+          <rect x="53" y="38" width="64" height="46" rx="15" fill="url(#bodyGrad)" stroke="var(--gold)" stroke-width="1.4"/>
+          <rect x="62" y="54" width="46" height="18" rx="9" fill="#05070a"/>
+          <circle cx="76" cy="63" r="3.4" fill="var(--gold-bright)">
+            <animate attributeName="opacity" keyTimes="0;0.46;0.5;0.54;1" values="1;1;0.15;1;1" dur="3.4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="97" cy="63" r="3.4" fill="var(--gold-bright)">
+            <animate attributeName="opacity" keyTimes="0;0.46;0.5;0.54;1" values="1;1;0.15;1;1" dur="3.4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- neck -->
+          <rect x="76" y="84" width="18" height="8" fill="var(--border)"/>
+
+          <!-- left arm -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate" values="-8 42 100; 10 42 100; -8 42 100" dur="2.8s" repeatCount="indefinite"/>
+            <rect x="14" y="97" width="30" height="9" rx="4.5" fill="var(--surface-2)" stroke="var(--gold)" stroke-width="1"/>
+          </g>
+
+          <!-- right arm -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate" values="8 128 100; -10 128 100; 8 128 100" dur="2.8s" repeatCount="indefinite" begin="-1.4s"/>
+            <rect x="126" y="97" width="30" height="9" rx="4.5" fill="var(--surface-2)" stroke="var(--gold)" stroke-width="1"/>
+          </g>
+
+          <!-- body -->
+          <rect x="38" y="92" width="94" height="72" rx="22" fill="url(#bodyGrad)" stroke="var(--gold)" stroke-width="1.4"/>
+          <circle cx="85" cy="128" r="15" fill="#05070a" stroke="var(--gold-bright)" stroke-width="1.6"/>
+          <circle cx="85" cy="128" r="7" fill="var(--gold-bright)">
+            <animate attributeName="r" values="5.5;9;5.5" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".7;1;.7" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- base -->
+          <rect x="53" y="163" width="64" height="14" rx="7" fill="var(--border)"/>
+        </g>
+
+        <!-- signal dots travelling from robot to chart -->
+        <circle r="3.2" fill="var(--gold-bright)">
+          <animateMotion path="M100 128 C 140 100, 160 90, 190 78" dur="2.2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.8;1" dur="2.2s" repeatCount="indefinite"/>
+        </circle>
+        <circle r="3.2" fill="var(--gold-bright)">
+          <animateMotion path="M100 128 C 140 100, 160 90, 190 78" dur="2.2s" begin="-1.1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.8;1" dur="2.2s" begin="-1.1s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- live chart panel -->
+        <rect x="180" y="26" width="198" height="176" rx="16" fill="var(--surface-2)" stroke="var(--border)" stroke-width="1"/>
+        <line x1="192" y1="62" x2="366" y2="62" stroke="var(--border)" stroke-width="1"/>
+        <line x1="192" y1="98" x2="366" y2="98" stroke="var(--border)" stroke-width="1"/>
+        <line x1="192" y1="134" x2="366" y2="134" stroke="var(--border)" stroke-width="1"/>
+        <line x1="192" y1="170" x2="366" y2="170" stroke="var(--border)" stroke-width="1"/>
+
+        <!-- candlesticks -->
+        <g>
+          <line x1="200" y1="90" x2="200" y2="150" stroke="var(--buy)" stroke-width="1.4"/>
+          <rect x="195" y="105" width="10" height="30" fill="var(--buy)">
+            <animate attributeName="y" values="105;95;115;105" dur="3.1s" repeatCount="indefinite"/>
+            <animate attributeName="height" values="30;40;20;30" dur="3.1s" repeatCount="indefinite"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="222" y1="80" x2="222" y2="160" stroke="var(--sell)" stroke-width="1.4"/>
+          <rect x="217" y="100" width="10" height="45" fill="var(--sell)">
+            <animate attributeName="y" values="100;115;90;100" dur="2.6s" repeatCount="indefinite" begin="-.4s"/>
+            <animate attributeName="height" values="45;25;55;45" dur="2.6s" repeatCount="indefinite" begin="-.4s"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="244" y1="70" x2="244" y2="140" stroke="var(--buy)" stroke-width="1.4"/>
+          <rect x="239" y="85" width="10" height="35" fill="var(--buy)">
+            <animate attributeName="y" values="85;70;100;85" dur="3.4s" repeatCount="indefinite" begin="-1s"/>
+            <animate attributeName="height" values="35;50;25;35" dur="3.4s" repeatCount="indefinite" begin="-1s"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="266" y1="95" x2="266" y2="165" stroke="var(--sell)" stroke-width="1.4"/>
+          <rect x="261" y="110" width="10" height="35" fill="var(--sell)">
+            <animate attributeName="y" values="110;125;95;110" dur="2.9s" repeatCount="indefinite" begin="-.8s"/>
+            <animate attributeName="height" values="35;25;50;35" dur="2.9s" repeatCount="indefinite" begin="-.8s"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="288" y1="60" x2="288" y2="130" stroke="var(--buy)" stroke-width="1.4"/>
+          <rect x="283" y="75" width="10" height="35" fill="var(--buy)">
+            <animate attributeName="y" values="75;60;90;75" dur="3.2s" repeatCount="indefinite" begin="-1.6s"/>
+            <animate attributeName="height" values="35;50;22;35" dur="3.2s" repeatCount="indefinite" begin="-1.6s"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="310" y1="85" x2="310" y2="155" stroke="var(--sell)" stroke-width="1.4"/>
+          <rect x="305" y="100" width="10" height="35" fill="var(--sell)">
+            <animate attributeName="y" values="100;115;80;100" dur="2.7s" repeatCount="indefinite" begin="-.3s"/>
+            <animate attributeName="height" values="35;25;55;35" dur="2.7s" repeatCount="indefinite" begin="-.3s"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="332" y1="65" x2="332" y2="140" stroke="var(--buy)" stroke-width="1.4"/>
+          <rect x="327" y="80" width="10" height="35" fill="var(--buy)">
+            <animate attributeName="y" values="80;65;100;80" dur="3.6s" repeatCount="indefinite" begin="-2s"/>
+            <animate attributeName="height" values="35;50;20;35" dur="3.6s" repeatCount="indefinite" begin="-2s"/>
+          </rect>
+        </g>
+        <g>
+          <line x1="354" y1="90" x2="354" y2="150" stroke="var(--buy)" stroke-width="1.4"/>
+          <rect x="349" y="100" width="10" height="35" fill="var(--buy)">
+            <animate attributeName="y" values="100;85;110;100" dur="3s" repeatCount="indefinite" begin="-1.2s"/>
+            <animate attributeName="height" values="35;45;25;35" dur="3s" repeatCount="indefinite" begin="-1.2s"/>
+          </rect>
+        </g>
+
+        <!-- AI scanning sweep -->
+        <rect x="192" y="34" width="4" height="160" fill="url(#scanGrad)">
+          <animate attributeName="x" values="192;362;192" dur="4s" repeatCount="indefinite"/>
+        </rect>
+
+        <!-- chart label -->
+        <text x="191" y="40" font-family="var(--font-mono)" font-size="9" fill="var(--gold-bright)" letter-spacing="1">XAUUSD · LIVE</text>
+      </svg>
+    </div>
 
     <div class="ticker-wrap">
       <div class="ticker-track" id="tickerTrack"></div>
@@ -441,7 +496,7 @@
     <h2 id="howTitle">🚀 Cara Kerja</h2>
     <div class="step">
       <div class="num">1</div>
-      <div><b id="step1Title">Aktivasi Akses</b><div class="desc" id="step1Desc">Registrasi dengan harga tetap sesuai durasi yang Anda pilih.</div></div>
+      <div><b id="step1Title">Buka AI Assistant</b><div class="desc" id="step1Desc">Sapa AI langsung lewat Telegram, tanpa instalasi apapun.</div></div>
     </div>
     <div class="step">
       <div class="num">2</div>
@@ -454,67 +509,22 @@
   </div>
 
   <div class="card">
-    <h2 id="pricingTitle">💳 Aktivasi Akses</h2>
-    <p class="text" id="pricingIntro" style="margin-bottom:18px;">AI Assistant Pribadi untuk XAUUSD — akses berbayar dengan harga tetap sesuai durasi langganan.</p>
-
-    <div class="toggle-row" id="durationToggle">
-      <button data-d="1" class="active" id="durBtn1">1 Bulan</button>
-      <button data-d="6" id="durBtn6">6 Bulan</button>
-      <button data-d="12" id="durBtn12">12 Bulan</button>
-      <button data-d="36" id="durBtn36">3 Tahun</button>
-    </div>
-    <div class="plans">
-      <div class="plan highlight">
-        <div class="plan-icon">
-          <svg viewBox="0 0 260 140" role="img" aria-label="Satu AI mengirim sinyal XAU langsung ke satu pengguna">
-            <defs>
-              <linearGradient id="gPersonal" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="var(--gold-bright)"/>
-                <stop offset="100%" stop-color="var(--gold)"/>
-              </linearGradient>
-            </defs>
-            <rect x="102" y="4" width="56" height="16" rx="8" fill="var(--surface-2)" stroke="var(--gold)" stroke-width="1"/>
-            <text x="130" y="15.5" text-anchor="middle" font-family="var(--font-mono)" font-size="10.5" font-weight="700" fill="var(--gold-bright)">XAU</text>
-            <line x1="130" y1="20" x2="130" y2="26" stroke="var(--gold)" stroke-width="1.5"/>
-            <rect x="106" y="26" width="48" height="34" rx="10" fill="url(#gPersonal)"/>
-            <circle class="bot-eye" cx="120" cy="43" r="3" fill="var(--surface)"/>
-            <circle class="bot-eye" cx="140" cy="43" r="3" fill="var(--surface)"/>
-            <line x1="130" y1="60" x2="130" y2="100" stroke="var(--gold)" stroke-width="1" opacity="0.3"/>
-            <circle class="flow-dot" r="4" fill="var(--gold-bright)" style="offset-path:path('M130 60 L130 100')"/>
-            <circle cx="130" cy="108" r="10" fill="var(--text)"/>
-            <rect x="112" y="120" width="36" height="18" rx="9" fill="var(--text-muted)"/>
-          </svg>
-        </div>
-        <span class="plan-badge" id="planBadgeP">Privat & Eksklusif</span>
-        <div class="plan-name" id="planNameP">AI Assistant Pribadi</div>
-        <div class="plan-tag" id="planTagP">Satu AI, satu fokus: XAUUSD real-time langsung ke chat pribadi Anda — tanpa antre, tanpa distraksi.</div>
-        <div class="plan-price">
-          <span id="priceP">Rp250.000</span>
-        </div>
-        <div class="plan-permonth" id="permonthP"></div>
-        <ul class="plan-features">
-          <li id="planFeatP1">Sinyal AI XAUUSD real-time setiap jam</li>
-          <li id="planFeatP2">Dikirim langsung ke DM Telegram pribadi Anda</li>
-          <li id="planFeatP3">Analisa singkat di setiap sinyal</li>
-          <li id="planFeatP4">Tanpa topik lain, murni fokus XAUUSD</li>
-        </ul>
-        <a class="plan-cta" id="ctaP" href="#" target="_blank">Aktifkan AI Assistant Saya</a>
-      </div>
+    <h2 id="ctaTitle">🎯 Mulai Sekarang</h2>
+    <p class="text" id="ctaText" style="margin-bottom:18px;">Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri secara gratis di Telegram.</p>
+    <div class="cta-stack">
+      <a class="btn" id="ctaTrial" href="https://t.me/Assistant1day_bot" target="_blank" onclick="gtag('event','free_trial_click');">
+        🤖 <span id="ctaTrialText">Coba AI Nya Secara Gratis</span> <span class="arrow">→</span>
+      </a>
+      <a class="btn secondary" id="ctaPortfolio" href="https://t.me/OnePercentsFX" target="_blank" onclick="gtag('event','portfolio_click');">
+        📊 <span id="ctaPortfolioText">Lihat Portofolio Setiap Hari</span> <span class="arrow">→</span>
+      </a>
     </div>
   </div>
 
   <div class="card">
-    <h2 id="portfolioTitle">🎯 Lihat Bukti Performa</h2>
-    <p class="text" id="portfolioText">Semua hasil sinyal kami dicatat secara transparan dan diperbarui setiap hari.</p>
-    <a class="btn secondary" id="portfolioBtn" href="https://websiteporto-production.up.railway.app/" target="_blank" onclick="gtag('event','backtest_click');">
-      📊 Hasil Portofolio Signal AI Setiap Hari
-    </a>
-  </div>
-
-  <div class="card">
-    <h2 id="reqTitle">📋 Syarat Akses</h2>
+    <h2 id="reqTitle">📋 Syarat Menggunakan</h2>
     <div class="req"><span class="check">✓</span> <span id="req1">Memiliki akun Telegram aktif.</span></div>
-    <div class="req"><span class="check">✓</span> <span id="req2">Bergabung melalui sistem registrasi.</span></div>
+    <div class="req"><span class="check">✓</span> <span id="req2">Bergabung langsung lewat bot Telegram AI kami.</span></div>
     <div class="req"><span class="check">✓</span> <span id="req3">Menggunakan informasi sebagai referensi analisa trading.</span></div>
   </div>
 
@@ -535,66 +545,6 @@
 <script>
 let preferredLanguage = "id";
 
-const BOT_LINKS = {
-  personal: {
-    base: "https://t.me/Intradayxauusd_bot?start=Halo_Bot_Mau_Join_Signal_AI_dong",
-    ref:  "https://t.me/Intradayxauusd_bot?start=ref_"
-  }
-};
-
-const PRICING_PAID = { "1": 250000, "6": 500000, "12": 850000, "36": 1500000 };
-const DURATION_MONTHS = { "1": 1, "6": 6, "12": 12, "36": 36 };
-const PERMONTH_SUFFIX = { id: "/bulan", en: "/mo", zh: "/月" };
-
-let currentDuration = "1";
-
-function formatRupiah(n){
-  return "Rp" + n.toLocaleString("id-ID");
-}
-
-function renderPaidPrice(duration){
-  currentDuration = duration;
-  const price = PRICING_PAID[duration];
-
-  document.getElementById("priceP").textContent = formatRupiah(price);
-
-  const months = DURATION_MONTHS[duration];
-  const permonthEl = document.getElementById("permonthP");
-  if(months > 1){
-    const perMonth = Math.round(price / months);
-    const suffix = PERMONTH_SUFFIX[preferredLanguage];
-    permonthEl.textContent = "≈ " + formatRupiah(perMonth) + suffix;
-    permonthEl.style.display = "block";
-  } else {
-    permonthEl.textContent = "";
-    permonthEl.style.display = "none";
-  }
-}
-
-document.getElementById("durationToggle").addEventListener("click", (e)=>{
-  const btn = e.target.closest("button");
-  if(!btn) return;
-  document.querySelectorAll("#durationToggle button").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  renderPaidPrice(btn.dataset.d);
-});
-
-renderPaidPrice("1");
-
-const urlParams = new URLSearchParams(window.location.search);
-const referral = urlParams.get("ref");
-
-function buildLink(kind){
-  const cfg = BOT_LINKS[kind];
-  if(referral && referral.trim() !== ""){
-    return cfg.ref + encodeURIComponent(referral.trim());
-  }
-  return cfg.base;
-}
-
-document.getElementById("ctaP").href = buildLink("personal");
-document.getElementById("ctaP").addEventListener("click", ()=>gtag('event','telegram_join_click_personal'));
-
 const tickerData = [
   {dir:"buy",  label:"XAUUSD", price:"2378.40", note:"BUY · SMC breakout"},
   {dir:"sell", label:"XAUUSD", price:"2381.10", note:"SELL · liquidity grab"},
@@ -613,8 +563,6 @@ function renderTicker(){
 }
 renderTicker();
 
-// Language preference kept in memory for this session (localStorage is not
-// available inside the artifact sandbox)
 const heroText = {
   id: {
     title: 'Professional AI Assistant For <span class="gold">XAUUSD</span>',
@@ -642,36 +590,21 @@ const i18n = {
   feat4Desc:       { id: "Setiap rekomendasi disertai pendekatan manajemen risiko.", en: "Every recommendation comes with a risk management approach.", zh: "每项建议都附带风险管理方案。" },
 
   howTitle:        { id: "🚀 Cara Kerja", en: "🚀 How It Works", zh: "🚀 使用方法" },
-  step1Title:      { id: "Aktivasi Akses", en: "Activate Access", zh: "激活访问权限" },
-  step1Desc:       { id: "Registrasi dengan harga tetap sesuai durasi yang Anda pilih.", en: "Register at a fixed price for the duration you choose.", zh: "按您选择的期限以固定价格注册。" },
+  step1Title:      { id: "Buka AI Assistant", en: "Open the AI Assistant", zh: "打开 AI 助手" },
+  step1Desc:       { id: "Sapa AI langsung lewat Telegram, tanpa instalasi apapun.", en: "Say hi to the AI straight on Telegram, no installation needed.", zh: "直接在 Telegram 上与 AI 打招呼，无需安装任何软件。" },
   step2Title:      { id: "Mesin Analisa AI", en: "AI Analysis Engine", zh: "AI 分析引擎" },
   step2Desc:       { id: "AI menganalisa XAUUSD menggunakan Smart Money Concept, Liquidity, dan Market Structure.", en: "The AI analyzes XAUUSD using Smart Money Concept, Liquidity, and Market Structure.", zh: "AI 使用聪明钱理论、流动性和市场结构分析 XAUUSD。" },
   step3Title:      { id: "Pengiriman Sinyal", en: "Signal Delivery", zh: "信号推送" },
   step3Desc:       { id: "Informasi entry dikirim secara real-time ke Telegram Anda.", en: "Entry information is delivered to your Telegram in real time.", zh: "入场信息实时发送到您的 Telegram。" },
 
-  pricingTitle:    { id: "💳 Aktivasi Akses", en: "💳 Activate Access", zh: "💳 激活访问权限" },
-  pricingIntro:    { id: "AI Assistant Pribadi untuk XAUUSD — akses berbayar dengan harga tetap sesuai durasi langganan.", en: "Personal AI Assistant for XAUUSD — paid access at a fixed price per subscription duration.", zh: "XAUUSD 私人 AI 助手 — 按订阅期限以固定价格付费获取。" },
-  durBtn1:         { id: "1 Bulan", en: "1 Month", zh: "1 个月" },
-  durBtn6:         { id: "6 Bulan", en: "6 Months", zh: "6 个月" },
-  durBtn12:        { id: "12 Bulan", en: "12 Months", zh: "12 个月" },
-  durBtn36:        { id: "3 Tahun", en: "3 Years", zh: "3 年" },
+  ctaTitle:        { id: "🎯 Mulai Sekarang", en: "🎯 Get Started", zh: "🎯 立即开始" },
+  ctaText:         { id: "Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri secara gratis di Telegram.", en: "Check out the AI's track record first, or try it yourself for free on Telegram.", zh: "先看看 AI 的实际表现，或直接在 Telegram 上免费试用。" },
+  ctaTrialText:    { id: "Coba AI Nya Secara Gratis", en: "Try the AI For Free", zh: "免费试用 AI" },
+  ctaPortfolioText:{ id: "Lihat Portofolio Setiap Hari", en: "See the Daily Portfolio", zh: "查看每日投资组合" },
 
-  planBadgeP:      { id: "Privat & Eksklusif", en: "Private & Exclusive", zh: "私享专属" },
-  planNameP:       { id: "AI Assistant Pribadi", en: "Personal AI Assistant", zh: "私人 AI 助手" },
-  planTagP:        { id: "Satu AI, satu fokus: XAUUSD real-time langsung ke chat pribadi Anda — tanpa antre, tanpa distraksi.", en: "One AI, one focus: real-time XAUUSD straight to your private chat — no queue, no distractions.", zh: "一个 AI，专注一件事：XAUUSD 实时信号直接发送到您的私人聊天 — 无需排队，无干扰。" },
-  planFeatP1:      { id: "Sinyal AI XAUUSD real-time setiap jam", en: "Real-time AI XAUUSD signals every hour", zh: "每小时实时 AI XAUUSD 信号" },
-  planFeatP2:      { id: "Dikirim langsung ke DM Telegram pribadi Anda", en: "Delivered straight to your private Telegram DM", zh: "直接发送到您的 Telegram 私信" },
-  planFeatP3:      { id: "Analisa singkat di setiap sinyal", en: "Brief analysis included with every signal", zh: "每个信号附带简要分析" },
-  planFeatP4:      { id: "Tanpa topik lain, murni fokus XAUUSD", en: "No other topics — pure XAUUSD focus", zh: "无其他话题，专注 XAUUSD" },
-  ctaP:            { id: "Aktifkan AI Assistant Saya", en: "Activate My AI Assistant", zh: "激活我的 AI 助手" },
-
-  portfolioTitle:  { id: "🎯 Lihat Bukti Performa", en: "🎯 See Our Track Record", zh: "🎯 查看业绩记录" },
-  portfolioText:   { id: "Semua hasil sinyal kami dicatat secara transparan dan diperbarui setiap hari.", en: "All our signal results are recorded transparently and updated daily.", zh: "我们所有的信号结果都透明记录并每日更新。" },
-  portfolioBtn:    { id: "📊 Hasil Portofolio Signal AI Setiap Hari", en: "📊 Daily AI Signal Portfolio Results", zh: "📊 每日 AI 信号投资组合结果" },
-
-  reqTitle:        { id: "📋 Syarat Akses", en: "📋 Access Requirements", zh: "📋 访问要求" },
+  reqTitle:        { id: "📋 Syarat Menggunakan", en: "📋 Requirements", zh: "📋 使用条件" },
   req1:            { id: "Memiliki akun Telegram aktif.", en: "Have an active Telegram account.", zh: "拥有一个有效的 Telegram 账户。" },
-  req2:            { id: "Bergabung melalui sistem registrasi.", en: "Join through the registration system.", zh: "通过注册系统加入。" },
+  req2:            { id: "Bergabung langsung lewat bot Telegram AI kami.", en: "Join directly through our AI Telegram bot.", zh: "直接通过我们的 AI Telegram 机器人加入。" },
   req3:            { id: "Menggunakan informasi sebagai referensi analisa trading.", en: "Use the information as a trading analysis reference.", zh: "将信息用作交易分析参考。" },
 
   disclaimerTitle: { id: "Risk Disclaimer", en: "Risk Disclaimer", zh: "风险提示" },
@@ -698,8 +631,6 @@ function setLang(lang){
   document.querySelectorAll("#langToggle button").forEach(b=>{
     b.classList.toggle("active", b.dataset.lang === lang);
   });
-
-  renderPaidPrice(currentDuration);
 }
 
 document.getElementById("langToggle").addEventListener("click", (e)=>{
