@@ -166,38 +166,6 @@
     pointer-events:none;
   }
 
-  .ticker-wrap{
-    margin-top:16px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:var(--surface);
-    overflow:hidden;
-    padding:12px 0;
-  }
-  .ticker-track{
-    display:flex;
-    width:max-content;
-    gap:28px;
-    animation:scrollTicker 22s linear infinite;
-    padding-left:28px;
-  }
-  .ticker-track:hover{ animation-play-state:paused; }
-  @keyframes scrollTicker{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(-50%); }
-  }
-  .tick{
-    font-family:var(--font-mono);
-    font-size:13px;
-    white-space:nowrap;
-    display:flex;
-    align-items:center;
-    gap:6px;
-  }
-  .tick.buy{ color:var(--buy); }
-  .tick.sell{ color:var(--sell); }
-  .tick b{ color:var(--text); font-weight:600; margin-right:2px; }
-
   .card{
     margin-top:20px;
     padding:24px;
@@ -460,10 +428,6 @@
         <text x="191" y="40" font-family="var(--font-mono)" font-size="9" fill="var(--gold-bright)" letter-spacing="1">XAUUSD · LIVE</text>
       </svg>
     </div>
-
-    <div class="ticker-wrap">
-      <div class="ticker-track" id="tickerTrack"></div>
-    </div>
   </section>
 
   <div class="card">
@@ -510,10 +474,10 @@
 
   <div class="card">
     <h2 id="ctaTitle">🎯 Mulai Sekarang</h2>
-    <p class="text" id="ctaText" style="margin-bottom:18px;">Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri secara gratis di Telegram.</p>
+    <p class="text" id="ctaText" style="margin-bottom:18px;">Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri di Telegram.</p>
     <div class="cta-stack">
-      <a class="btn" id="ctaTrial" href="https://t.me/Assistant1day_bot" target="_blank" onclick="gtag('event','free_trial_click');">
-        🤖 <span id="ctaTrialText">Coba AI Nya Secara Gratis</span> <span class="arrow">→</span>
+      <a class="btn" id="ctaTrial" href="https://t.me/Intradayxauusd_bot" target="_blank" onclick="gtag('event','free_trial_click');">
+        🤖 <span id="ctaTrialText">Coba AI Nya Sekarang</span> <span class="arrow">→</span>
       </a>
       <a class="btn secondary" id="ctaPortfolio" href="https://t.me/OnePercentsFX" target="_blank" onclick="gtag('event','portfolio_click');">
         📊 <span id="ctaPortfolioText">Lihat Portofolio Setiap Hari</span> <span class="arrow">→</span>
@@ -544,24 +508,6 @@
 
 <script>
 let preferredLanguage = "id";
-
-const tickerData = [
-  {dir:"buy",  label:"XAUUSD", price:"2378.40", note:"BUY · SMC breakout"},
-  {dir:"sell", label:"XAUUSD", price:"2381.10", note:"SELL · liquidity grab"},
-  {dir:"buy",  label:"XAUUSD", price:"2374.85", note:"BUY · structure shift"},
-  {dir:"sell", label:"XAUUSD", price:"2386.20", note:"SELL · resistance rejection"},
-  {dir:"buy",  label:"XAUUSD", price:"2369.90", note:"BUY · demand zone"},
-];
-function renderTicker(){
-  const track = document.getElementById("tickerTrack");
-  const items = [...tickerData, ...tickerData];
-  track.innerHTML = items.map(t => `
-    <div class="tick ${t.dir}">
-      <b>${t.label}</b> ${t.price} ${t.dir === "buy" ? "▲" : "▼"} <span>${t.note}</span>
-    </div>
-  `).join("");
-}
-renderTicker();
 
 const heroText = {
   id: {
@@ -598,8 +544,8 @@ const i18n = {
   step3Desc:       { id: "Informasi entry dikirim secara real-time ke Telegram Anda.", en: "Entry information is delivered to your Telegram in real time.", zh: "入场信息实时发送到您的 Telegram。" },
 
   ctaTitle:        { id: "🎯 Mulai Sekarang", en: "🎯 Get Started", zh: "🎯 立即开始" },
-  ctaText:         { id: "Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri secara gratis di Telegram.", en: "Check out the AI's track record first, or try it yourself for free on Telegram.", zh: "先看看 AI 的实际表现，或直接在 Telegram 上免费试用。" },
-  ctaTrialText:    { id: "Coba AI Nya Secara Gratis", en: "Try the AI For Free", zh: "免费试用 AI" },
+  ctaText:         { id: "Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri di Telegram.", en: "Check out the AI's track record first, or try it yourself on Telegram.", zh: "先看看 AI 的实际表现，或直接在 Telegram 上试用。" },
+  ctaTrialText:    { id: "Coba AI Nya Sekarang", en: "Try the AI Now", zh: "立即试用 AI" },
   ctaPortfolioText:{ id: "Lihat Portofolio Setiap Hari", en: "See the Daily Portfolio", zh: "查看每日投资组合" },
 
   reqTitle:        { id: "📋 Syarat Menggunakan", en: "📋 Requirements", zh: "📋 使用条件" },
