@@ -217,6 +217,75 @@
   .step b{ display:block; font-size:14px; margin-bottom:2px; }
   .step .desc{ font-size:13px; color:var(--text-muted); line-height:1.6; }
 
+  /* ===== Promo banner ===== */
+  .promo-banner{
+    margin-bottom:18px;
+    padding:16px;
+    border-radius:14px;
+    text-align:center;
+    background:linear-gradient(135deg, rgba(201,162,39,.18), rgba(255,210,76,.06));
+    border:1px solid rgba(201,162,39,.45);
+    position:relative;
+    overflow:hidden;
+  }
+  .promo-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 13px;
+    border-radius:50px;
+    background:rgba(201,162,39,.2);
+    border:1px solid rgba(201,162,39,.5);
+    color:var(--gold-bright);
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:9px;
+  }
+  .promo-tag .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold-bright);
+    box-shadow:0 0 8px var(--gold-bright);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  .promo-title{
+    margin:0 0 4px;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--text);
+  }
+  .promo-price{
+    margin:0 0 6px;
+    font-size:14px;
+    color:var(--text);
+  }
+  .promo-price .promo-price-label{
+    display:block;
+    font-size:12px;
+    color:var(--text-muted);
+    margin-bottom:3px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+  }
+  .promo-old{
+    color:var(--text-muted);
+    text-decoration:line-through;
+    margin-right:6px;
+  }
+  .promo-new{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:18px;
+    color:var(--gold-bright);
+  }
+  .promo-desc{
+    margin:0;
+    font-size:13px;
+    color:var(--text-muted);
+  }
+
   /* ===== CTA section (replaces pricing) ===== */
   .cta-stack{ display:flex; flex-direction:column; gap:12px; }
   .btn{
@@ -474,6 +543,18 @@
 
   <div class="card">
     <h2 id="ctaTitle">🎯 Mulai Sekarang</h2>
+
+    <div class="promo-banner">
+      <span class="promo-tag"><span class="dot"></span> <span id="promoBadge">PROMO SPESIAL</span></span>
+      <p class="promo-title" id="promoTitle">Spesial Update Pengembangan AI</p>
+      <p class="promo-price">
+        <span class="promo-price-label" id="promoPriceLabel">STARTER · 1 Bulan</span>
+        <s class="promo-old">Rp250.000</s>
+        <span class="promo-new">Rp99.000</span>
+      </p>
+      <p class="promo-desc" id="promoDesc">Berlaku sampai 5 September 2026</p>
+    </div>
+
     <p class="text" id="ctaText" style="margin-bottom:18px;">Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri di Telegram.</p>
     <div class="cta-stack">
       <a class="btn" id="ctaTrial" href="https://t.me/Intradayxauusd_bot" target="_blank" onclick="gtag('event','free_trial_click');">
@@ -544,6 +625,10 @@ const i18n = {
   step3Desc:       { id: "Informasi entry dikirim secara real-time ke Telegram Anda.", en: "Entry information is delivered to your Telegram in real time.", zh: "入场信息实时发送到您的 Telegram。" },
 
   ctaTitle:        { id: "🎯 Mulai Sekarang", en: "🎯 Get Started", zh: "🎯 立即开始" },
+  promoBadge:      { id: "PROMO SPESIAL", en: "SPECIAL PROMO", zh: "特别优惠" },
+  promoTitle:      { id: "Spesial Update Pengembangan AI", en: "Special AI Development Update", zh: "AI 开发特别更新" },
+  promoPriceLabel: { id: "STARTER · 1 Bulan", en: "STARTER · 1 Month", zh: "STARTER · 1 个月" },
+  promoDesc:       { id: "Berlaku sampai 5 September 2026", en: "Valid until September 5, 2026", zh: "有效期至 2026 年 9 月 5 日" },
   ctaText:         { id: "Lihat dulu hasil kerja AI-nya, atau langsung coba sendiri di Telegram.", en: "Check out the AI's track record first, or try it yourself on Telegram.", zh: "先看看 AI 的实际表现，或直接在 Telegram 上试用。" },
   ctaTrialText:    { id: "Coba AI Nya Sekarang", en: "Try the AI Now", zh: "立即试用 AI" },
   ctaPortfolioText:{ id: "Lihat Portofolio Setiap Hari", en: "See the Daily Portfolio", zh: "查看每日投资组合" },
