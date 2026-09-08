@@ -222,17 +222,27 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:12px;
-    margin-bottom:18px;
+    margin-bottom:14px;
   }
   .price-card{
+    display:block;
     padding:16px 14px;
     border-radius:14px;
     background:var(--surface-2);
     border:1px solid var(--border);
     text-align:center;
     position:relative;
+    text-decoration:none;
+    cursor:pointer;
     transition:.25s;
   }
+  .price-card:hover,
+  .price-card:focus-visible{
+    border-color:var(--gold);
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(0,0,0,.25);
+  }
+  .price-card:active{ transform:translateY(0); }
   .price-card.featured{
     border-color:rgba(201,162,39,.6);
     background:linear-gradient(160deg, rgba(201,162,39,.14), rgba(255,210,76,.03));
@@ -272,6 +282,25 @@
     font-size:11px;
     color:var(--text-muted);
     margin-top:4px;
+  }
+  .price-card .plan-tap{
+    margin-top:8px;
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+  }
+
+  .pricing-hint{
+    font-size:12px;
+    color:var(--text-muted);
+    text-align:center;
+    margin:0 0 18px;
   }
 
   /* ===== CTA section (replaces pricing) ===== */
@@ -532,31 +561,42 @@
   <div class="card">
     <h2 id="ctaTitle">🎯 Mulai Sekarang</h2>
 
-    <div class="pricing-grid">
-      <div class="price-card">
+    <!--
+      PENTING: value di data-pkg HARUS SAMA PERSIS dengan
+      key di PACKAGE_MAP pada bot (mis. "1month", "6month",
+      "12month", "permanent"). Kalau nama key paket di bot
+      berbeda, ganti juga di sini.
+    -->
+    <div class="pricing-grid" id="pricingGrid">
+      <a class="price-card" data-pkg="1month" href="#" target="_blank" rel="noopener">
         <div class="plan-label" id="plan1Label">1 Bulan</div>
         <div class="plan-price">Rp299.000</div>
         <div class="plan-note" id="plan1Note">Akses AI Assistant 30 hari</div>
-      </div>
-      <div class="price-card">
+        <div class="plan-tap" id="plan1Tap">Tap untuk bayar →</div>
+      </a>
+      <a class="price-card" data-pkg="6month" href="#" target="_blank" rel="noopener">
         <div class="plan-label" id="plan2Label">6 Bulan</div>
         <div class="plan-price">Rp500.000</div>
         <div class="plan-note" id="plan2Note">Akses AI Assistant 6 bulan</div>
-      </div>
-      <div class="price-card featured">
+        <div class="plan-tap" id="plan2Tap">Tap untuk bayar →</div>
+      </a>
+      <a class="price-card featured" data-pkg="12month" href="#" target="_blank" rel="noopener">
         <span class="badge" id="plan3Badge">TERLARIS</span>
         <div class="plan-label" id="plan3Label">12 Bulan</div>
-        <div class="plan-price">Rp900.000</div>
+        <div class="plan-price">Rp850.000</div>
         <div class="plan-note" id="plan3Note">Akses AI Assistant 1 tahun penuh</div>
-      </div>
-      <div class="price-card">
+        <div class="plan-tap" id="plan3Tap">Tap untuk bayar →</div>
+      </a>
+      <a class="price-card" data-pkg="permanent" href="#" target="_blank" rel="noopener">
         <div class="plan-label" id="plan4Label">3 Tahun</div>
         <div class="plan-price">Rp1.500.000</div>
         <div class="plan-note" id="plan4Note">Hemat untuk jangka panjang</div>
-      </div>
+        <div class="plan-tap" id="plan4Tap">Tap untuk bayar →</div>
+      </a>
     </div>
+    <p class="pricing-hint" id="pricingHint">Tap salah satu paket di atas untuk langsung membuka QRIS pembayarannya di Telegram.</p>
 
-    <p class="text" id="ctaText" style="margin-bottom:18px;">Pilih paket sesuai kebutuhan Anda, lalu hubungi admin lewat Telegram untuk aktivasi.</p>
+    <p class="text" id="ctaText" style="margin-bottom:18px;">Atau mulai dari bot untuk melihat semua paket dan memilih sendiri.</p>
     <div class="cta-stack">
       <a class="btn" id="ctaTrial" href="https://t.me/Intradayxauusd_bot?start=landing" target="_blank" onclick="gtag('event','free_trial_click');">
         🤖 <span id="ctaTrialText">Coba AI Nya Sekarang</span> <span class="arrow">→</span>
@@ -590,6 +630,30 @@
 
 <script>
 let preferredLanguage = "id";
+
+// =========================================================
+// KONFIGURASI DEEP-LINK PAKET
+//
+// Username bot Telegram (tanpa @) dan key paket harus SAMA
+// PERSIS dengan key di PACKAGE_MAP milik bot, supaya saat
+// user tap harga di web, bot langsung tahu paket mana yang
+// dipilih dan langsung menampilkan QRIS + harga yang benar
+// (lihat handler /start di bot: menerima payload deep-link).
+// =========================================================
+
+const BOT_USERNAME = "Intradayxauusd_bot";
+
+function buildPackageLink(packageKey){
+  return `https://t.me/${BOT_USERNAME}?start=${packageKey}`;
+}
+
+document.querySelectorAll(".price-card[data-pkg]").forEach(card=>{
+  const pkg = card.getAttribute("data-pkg");
+  card.setAttribute("href", buildPackageLink(pkg));
+  card.addEventListener("click", ()=>{
+    gtag('event','package_click', { package: pkg });
+  });
+});
 
 const heroText = {
   id: {
@@ -628,14 +692,19 @@ const i18n = {
   ctaTitle:        { id: "🎯 Mulai Sekarang", en: "🎯 Get Started", zh: "🎯 立即开始" },
   plan1Label:      { id: "1 Bulan", en: "1 Month", zh: "1 个月" },
   plan1Note:       { id: "Akses AI Assistant 30 hari", en: "30 days of AI Assistant access", zh: "30 天 AI 助手使用权" },
+  plan1Tap:        { id: "Tap untuk bayar →", en: "Tap to pay →", zh: "点击支付 →" },
   plan2Label:      { id: "6 Bulan", en: "6 Months", zh: "6 个月" },
   plan2Note:       { id: "Akses AI Assistant 6 bulan", en: "6 months of AI Assistant access", zh: "6 个月 AI 助手使用权" },
+  plan2Tap:        { id: "Tap untuk bayar →", en: "Tap to pay →", zh: "点击支付 →" },
   plan3Badge:      { id: "TERLARIS", en: "BEST SELLER", zh: "最受欢迎" },
   plan3Label:      { id: "12 Bulan", en: "12 Months", zh: "12 个月" },
   plan3Note:       { id: "Akses AI Assistant 1 tahun penuh", en: "A full year of AI Assistant access", zh: "整年 AI 助手使用权" },
+  plan3Tap:        { id: "Tap untuk bayar →", en: "Tap to pay →", zh: "点击支付 →" },
   plan4Label:      { id: "3 Tahun", en: "3 Years", zh: "3 年" },
   plan4Note:       { id: "Hemat untuk jangka panjang", en: "Best value for the long term", zh: "长期使用更划算" },
-  ctaText:         { id: "Pilih paket sesuai kebutuhan Anda, lalu hubungi admin lewat Telegram untuk aktivasi.", en: "Pick the plan that fits your needs, then contact our admin on Telegram to activate.", zh: "选择适合您的方案，然后通过 Telegram 联系管理员进行激活。" },
+  plan4Tap:        { id: "Tap untuk bayar →", en: "Tap to pay →", zh: "点击支付 →" },
+  pricingHint:     { id: "Tap salah satu paket di atas untuk langsung membuka QRIS pembayarannya di Telegram.", en: "Tap any plan above to open its QRIS payment directly on Telegram.", zh: "点击上方任意方案，直接在 Telegram 中打开对应的 QRIS 付款。" },
+  ctaText:         { id: "Atau mulai dari bot untuk melihat semua paket dan memilih sendiri.", en: "Or start from the bot to see all plans and choose yourself.", zh: "或从机器人开始，查看所有方案并自行选择。" },
   ctaTrialText:    { id: "Coba AI Nya Sekarang", en: "Try the AI Now", zh: "立即试用 AI" },
   ctaPortfolioText:{ id: "Lihat Portofolio Setiap Hari", en: "See the Daily Portfolio", zh: "查看每日投资组合" },
 
