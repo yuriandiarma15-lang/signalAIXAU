@@ -217,6 +217,56 @@
   .step b{ display:block; font-size:14px; margin-bottom:2px; }
   .step .desc{ font-size:13px; color:var(--text-muted); line-height:1.6; }
 
+  /* ===== Countdown banner ===== */
+  .countdown-card{
+    margin-top:20px;
+    padding:20px;
+    background:linear-gradient(160deg, rgba(201,162,39,.14), rgba(255,210,76,.03));
+    border:1px solid rgba(201,162,39,.5);
+    border-radius:var(--radius);
+    text-align:center;
+  }
+  .countdown-label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    margin-bottom:12px;
+  }
+  .countdown-timer{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+  }
+  .countdown-unit{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px 12px;
+    min-width:56px;
+  }
+  .countdown-unit .val{
+    font-family:var(--font-display);
+    font-size:22px;
+    font-weight:700;
+    color:var(--text);
+    line-height:1;
+  }
+  .countdown-unit .lbl{
+    font-family:var(--font-mono);
+    font-size:9.5px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-top:5px;
+  }
+  .countdown-note{
+    margin-top:12px;
+    font-size:12px;
+    color:var(--text-muted);
+  }
+
   /* ===== Pricing grid ===== */
   .pricing-grid{
     display:grid;
@@ -277,6 +327,15 @@
     font-size:20px;
     color:var(--gold-bright);
     line-height:1.2;
+  }
+  .price-card .plan-price .old-price{
+    display:block;
+    font-family:var(--font-body);
+    font-weight:500;
+    font-size:12px;
+    color:var(--text-muted);
+    text-decoration:line-through;
+    margin-bottom:2px;
   }
   .price-card .plan-note{
     font-size:11px;
@@ -558,6 +617,29 @@
     </div>
   </div>
 
+  <div class="countdown-card">
+    <div class="countdown-label" id="countdownLabel">⏳ Promo Berakhir Dalam</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit">
+        <div class="val" id="cdDays">16</div>
+        <div class="lbl" id="cdDaysLbl">Hari</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="val" id="cdHours">00</div>
+        <div class="lbl" id="cdHoursLbl">Jam</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="val" id="cdMinutes">00</div>
+        <div class="lbl" id="cdMinutesLbl">Menit</div>
+      </div>
+      <div class="countdown-unit">
+        <div class="val" id="cdSeconds">00</div>
+        <div class="lbl" id="cdSecondsLbl">Detik</div>
+      </div>
+    </div>
+    <div class="countdown-note" id="countdownNote">Harga spesial paket 3 Tahun Rp999.000 berakhir 30 September.</div>
+  </div>
+
   <div class="card">
     <h2 id="ctaTitle">🎯 Mulai Sekarang</h2>
 
@@ -588,8 +670,9 @@
         <div class="plan-tap" id="plan3Tap">Tap untuk bayar →</div>
       </a>
       <a class="price-card" data-pkg="permanent" href="#" target="_blank" rel="noopener">
+        <span class="badge" id="plan4Badge">PROMO</span>
         <div class="plan-label" id="plan4Label">3 Tahun</div>
-        <div class="plan-price">Rp1.500.000</div>
+        <div class="plan-price"><span class="old-price">Rp1.500.000</span>Rp999.000</div>
         <div class="plan-note" id="plan4Note">Hemat untuk jangka panjang</div>
         <div class="plan-tap" id="plan4Tap">Tap untuk bayar →</div>
       </a>
@@ -689,6 +772,13 @@ const i18n = {
   step3Title:      { id: "Pengiriman Sinyal", en: "Signal Delivery", zh: "信号推送" },
   step3Desc:       { id: "Informasi entry dikirim secara real-time ke Telegram Anda.", en: "Entry information is delivered to your Telegram in real time.", zh: "入场信息实时发送到您的 Telegram。" },
 
+  countdownLabel:  { id: "⏳ Promo Berakhir Dalam", en: "⏳ Promo Ends In", zh: "⏳ 优惠倒计时" },
+  cdDaysLbl:       { id: "Hari", en: "Days", zh: "天" },
+  cdHoursLbl:      { id: "Jam", en: "Hours", zh: "小时" },
+  cdMinutesLbl:    { id: "Menit", en: "Minutes", zh: "分钟" },
+  cdSecondsLbl:    { id: "Detik", en: "Seconds", zh: "秒" },
+  countdownNote:   { id: "Harga spesial paket 3 Tahun Rp999.000 berakhir 30 September.", en: "Special 3-Year plan price of Rp999,000 ends September 30.", zh: "3 年方案特价 Rp999.000，优惠截止 9 月 30 日。" },
+
   ctaTitle:        { id: "🎯 Mulai Sekarang", en: "🎯 Get Started", zh: "🎯 立即开始" },
   plan1Label:      { id: "1 Bulan", en: "1 Month", zh: "1 个月" },
   plan1Note:       { id: "Akses AI Assistant 30 hari", en: "30 days of AI Assistant access", zh: "30 天 AI 助手使用权" },
@@ -700,6 +790,7 @@ const i18n = {
   plan3Label:      { id: "12 Bulan", en: "12 Months", zh: "12 个月" },
   plan3Note:       { id: "Akses AI Assistant 1 tahun penuh", en: "A full year of AI Assistant access", zh: "整年 AI 助手使用权" },
   plan3Tap:        { id: "Tap untuk bayar →", en: "Tap to pay →", zh: "点击支付 →" },
+  plan4Badge:      { id: "PROMO", en: "PROMO", zh: "限时优惠" },
   plan4Label:      { id: "3 Tahun", en: "3 Years", zh: "3 年" },
   plan4Note:       { id: "Hemat untuk jangka panjang", en: "Best value for the long term", zh: "长期使用更划算" },
   plan4Tap:        { id: "Tap untuk bayar →", en: "Tap to pay →", zh: "点击支付 →" },
@@ -756,6 +847,51 @@ document.querySelectorAll(".card").forEach((card, i)=>{
     card.style.transform = "translateY(0)";
   }, i*120);
 });
+
+/* =====================
+   PROMO COUNTDOWN TIMER
+   Berakhir 30 September (23:59:59 WIB / UTC+7)
+   ===================== */
+(function(){
+  // Target: 30 September tahun berjalan, jam 23:59:59 WIB (UTC+7)
+  function getTargetDate(){
+    const now = new Date();
+    let year = now.getFullYear();
+    // Jika 30 September tahun ini sudah lewat, pakai tahun depan
+    const candidate = new Date(Date.UTC(year, 8, 30, 16, 59, 59)); // 30 Sep 23:59:59 WIB = 16:59:59 UTC
+    if(candidate.getTime() < now.getTime()){
+      return new Date(Date.UTC(year + 1, 8, 30, 16, 59, 59));
+    }
+    return candidate;
+  }
+
+  const target = getTargetDate();
+  const elDays = document.getElementById("cdDays");
+  const elHours = document.getElementById("cdHours");
+  const elMinutes = document.getElementById("cdMinutes");
+  const elSeconds = document.getElementById("cdSeconds");
+
+  function pad(n){ return String(n).padStart(2, "0"); }
+
+  function tick(){
+    const now = new Date().getTime();
+    let diff = target.getTime() - now;
+    if(diff < 0) diff = 0;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    if(elDays) elDays.textContent = days;
+    if(elHours) elHours.textContent = pad(hours);
+    if(elMinutes) elMinutes.textContent = pad(minutes);
+    if(elSeconds) elSeconds.textContent = pad(seconds);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
 
 /* =====================
    ANIMATED TECH BACKGROUND
