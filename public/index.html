@@ -1,5479 +1,4053 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>XAU AI SMC GOLD</title>
-
-<meta name="description"
-      content="XAU AI SMC GOLD - AI Trading Assistant untuk analisa XAUUSD menggunakan Smart Money Concept dan Fundamental Analysis.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
-      rel="stylesheet">
-
-<style>
-:root{
-    --bg:#080b0f;
-    --surface:#10151b;
-    --surface2:#151c24;
-    --surface3:#1b232d;
-    --border:#27303b;
-
-    --gold:#c9a227;
-    --gold2:#ffd84d;
-    --gold3:#fff0a6;
-
-    --text:#f1f4f7;
-    --muted:#8d98a7;
-
-    --green:#42c7a5;
-    --red:#d65a5a;
-    --blue:#5aa9e6;
-}
-
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    background:
-        radial-gradient(circle at 50% -10%,rgba(201,162,39,.10),transparent 35%),
-        #080b0f;
-    color:var(--text);
-    font-family:Inter,sans-serif;
-    overflow-x:hidden;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-        linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
-    background-size:70px 70px;
-    mask-image:linear-gradient(to bottom,black,transparent 85%);
-    z-index:-2;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button{
-    font-family:inherit;
-}
-
-.container{
-    width:min(1080px,calc(100% - 28px));
-    margin:auto;
-}
-
-/* =========================================================
-   LANGUAGE
-========================================================= */
-
-.language-bar{
-    position:fixed;
-    top:16px;
-    right:18px;
-    z-index:1000;
-
-    display:flex;
-    gap:5px;
-
-    padding:5px;
-
-    background:rgba(8,11,15,.82);
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:999px;
-
-    box-shadow:0 10px 40px rgba(0,0,0,.35);
-}
-
-.lang-btn{
-    border:0;
-    color:#8d98a7;
-    background:transparent;
-
-    padding:7px 10px;
-    border-radius:999px;
-
-    font-size:11px;
-    font-weight:700;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    cursor:pointer;
-    transition:.2s;
-}
+    <title>XAU AI Intelligence — AI Trading Assistant XAUUSD</title>
 
-.lang-btn.active{
-    background:rgba(201,162,39,.18);
-    color:var(--gold2);
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    padding:90px 0 25px;
-    text-align:center;
-}
-
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-
-    padding:7px 12px;
-
-    border:1px solid rgba(201,162,39,.25);
-    border-radius:999px;
-
-    background:rgba(201,162,39,.06);
-
-    color:var(--gold2);
-
-    font-family:"JetBrains Mono",monospace;
-    font-size:10px;
-    letter-spacing:1.2px;
-}
-
-.eyebrow-dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#49d9a8;
-    box-shadow:0 0 12px #49d9a8;
-}
-
-h1{
-    margin:18px auto 12px;
-
-    max-width:850px;
+    <meta name="description"
+          content="XAU AI Intelligence — AI Trading Assistant untuk analisa XAUUSD berbasis Smart Money Concept dan Fundamental Analysis. Signal dikirim langsung ke Telegram.">
 
-    font-family:"Space Grotesk",sans-serif;
-    font-size:clamp(36px,7vw,72px);
-    line-height:.98;
-    letter-spacing:-2.5px;
-}
+    <meta name="theme-color" content="#0a0c10">
 
-.gradient-text{
-    background:linear-gradient(
-        100deg,
-        #fff,
-        #ffe58a 35%,
-        #c9a227 70%,
-        #fff
-    );
+    <!-- =========================================================
+         GOOGLE FONT
+    ========================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+          rel="stylesheet">
 
-.hero-subtitle{
-    max-width:700px;
-    margin:auto;
+    <!-- =========================================================
+         GOOGLE ANALYTICS
+    ========================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DCVKX2J5CM"></script>
 
-    color:var(--muted);
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    font-size:14px;
-    line-height:1.8;
-}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-/* =========================================================
-   3D OFFICE
-========================================================= */
+        gtag('js', new Date());
+        gtag('config', 'G-DCVKX2J5CM');
+    </script>
 
-.office-section{
-    margin-top:28px;
-}
+    <!-- =========================================================
+         STYLE
+    ========================================================== -->
+    <style>
 
-.office-shell{
-    position:relative;
+        :root {
+            --bg: #0a0c10;
+            --bg-soft: #0d1015;
 
-    width:100%;
-    height:min(650px,68vw);
-    min-height:430px;
+            --surface: #12151c;
+            --surface-2: #171c26;
+            --surface-3: #1b202a;
 
-    overflow:hidden;
+            --border: #242832;
+            --border-light: #303642;
 
-    border-radius:28px;
+            --gold: #c9a227;
+            --gold-bright: #ffd24c;
+            --gold-soft: rgba(201, 162, 39, 0.12);
+            --gold-glow: rgba(255, 210, 76, 0.18);
 
-    border:1px solid rgba(255,255,255,.10);
+            --text: #eef1f6;
+            --text-muted: #8e96a8;
+            --text-soft: #b9c0cc;
 
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(201,162,39,.08),
-            transparent 45%
-        ),
-        #0c1218;
+            --buy: #3fa796;
+            --sell: #c1494b;
 
-    box-shadow:
-        0 35px 100px rgba(0,0,0,.55),
-        inset 0 0 80px rgba(255,255,255,.025);
-}
+            --radius: 18px;
+        }
 
-#officeCanvas{
-    width:100%;
-    height:100%;
-    display:block;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    touch-action:none;
-    cursor:grab;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-#officeCanvas:active{
-    cursor:grabbing;
-}
+        body {
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(201, 162, 39, 0.10),
+                    transparent 35%
+                ),
+                var(--bg);
 
-.office-topbar{
-    position:absolute;
-    top:16px;
-    left:16px;
-    right:16px;
+            color: var(--text);
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+            font-family: 'Inter', sans-serif;
 
-    pointer-events:none;
+            min-height: 100vh;
 
-    z-index:5;
-}
+            overflow-x: hidden;
+        }
 
-.office-brand{
-    display:flex;
-    align-items:center;
-    gap:9px;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    padding:8px 11px;
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    border-radius:10px;
+        /* =====================================================
+           BACKGROUND
+        ====================================================== */
 
-    background:rgba(5,8,11,.72);
-    backdrop-filter:blur(12px);
+        #bgCanvas {
+            position: fixed;
 
-    border:1px solid rgba(255,255,255,.08);
+            inset: 0;
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:10px;
-    letter-spacing:.7px;
-}
+            width: 100%;
+            height: 100%;
 
-.live-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#46d7a6;
-    box-shadow:0 0 12px #46d7a6;
-}
+            z-index: -2;
 
-.office-status{
-    padding:8px 11px;
+            opacity: 0.55;
 
-    border-radius:10px;
+            pointer-events: none;
+        }
 
-    background:rgba(5,8,11,.72);
-    backdrop-filter:blur(12px);
+        .background-glow {
+            position: fixed;
 
-    border:1px solid rgba(255,255,255,.08);
+            width: 500px;
+            height: 500px;
 
-    color:#c8d0da;
+            border-radius: 50%;
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:9px;
-}
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(201, 162, 39, 0.08),
+                    transparent 70%
+                );
 
-.office-status strong{
-    color:var(--gold2);
-}
+            top: -250px;
+            left: 50%;
 
-/* =========================================================
-   AGENT BUBBLE
-========================================================= */
+            transform: translateX(-50%);
 
-.speech-bubble{
-    position:absolute;
+            pointer-events: none;
 
-    min-width:145px;
-    max-width:220px;
+            z-index: -1;
+        }
 
-    padding:9px 11px;
+        /* =====================================================
+           LANGUAGE
+        ====================================================== */
 
-    border-radius:11px;
+        .language-switcher {
+            position: fixed;
 
-    background:rgba(8,11,15,.94);
-    border:1px solid rgba(201,162,39,.35);
+            top: 18px;
+            right: 18px;
 
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.45),
-        0 0 20px rgba(201,162,39,.06);
+            display: flex;
 
-    color:#edf1f5;
+            gap: 5px;
 
-    font-size:10px;
-    line-height:1.45;
+            padding: 5px;
 
-    transform:translate(-50%,-100%);
+            background: rgba(10, 12, 16, 0.82);
 
-    pointer-events:none;
+            border: 1px solid var(--border);
 
-    opacity:0;
+            border-radius: 12px;
 
-    transition:
-        opacity .18s ease,
-        transform .18s ease;
+            backdrop-filter: blur(15px);
 
-    z-index:20;
-}
+            z-index: 100;
+        }
 
-.speech-bubble.visible{
-    opacity:1;
-    transform:translate(-50%,calc(-100% - 8px));
-}
+        .language-btn {
+            border: 0;
 
-.speech-bubble::after{
-    content:"";
+            background: transparent;
 
-    position:absolute;
-    bottom:-5px;
-    left:50%;
+            color: var(--text-muted);
 
-    width:9px;
-    height:9px;
+            font-family: 'Inter', sans-serif;
 
-    transform:translateX(-50%) rotate(45deg);
+            font-size: 11px;
+            font-weight: 700;
 
-    background:rgba(8,11,15,.94);
+            padding: 7px 9px;
 
-    border-right:1px solid rgba(201,162,39,.35);
-    border-bottom:1px solid rgba(201,162,39,.35);
-}
+            border-radius: 8px;
 
-.bubble-name{
-    display:block;
+            cursor: pointer;
 
-    margin-bottom:3px;
+            transition: 0.2s ease;
+        }
 
-    color:var(--gold2);
+        .language-btn:hover {
+            color: var(--text);
+        }
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:8px;
-    letter-spacing:.5px;
-}
+        .language-btn.active {
+            background: var(--gold-soft);
 
-/* =========================================================
-   SELECTED AGENT
-========================================================= */
+            color: var(--gold-bright);
 
-.agent-card{
-    position:absolute;
+            box-shadow:
+                inset 0 0 0 1px rgba(201, 162, 39, 0.2);
+        }
 
-    padding:10px 13px;
+        /* =====================================================
+           MAIN
+        ====================================================== */
 
-    min-width:175px;
+        .container {
+            width: min(560px, calc(100% - 30px));
 
-    border-radius:13px;
+            margin: 0 auto;
 
-    background:rgba(7,10,14,.95);
+            padding:
+                70px
+                0
+                50px;
+        }
 
-    border:1px solid rgba(255,216,77,.5);
+        /* =====================================================
+           HERO
+        ====================================================== */
 
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.55),
-        0 0 30px rgba(201,162,39,.15);
+        .hero {
+            text-align: center;
 
-    pointer-events:none;
+            margin-bottom: 26px;
+        }
 
-    opacity:0;
+        .eyebrow {
+            display: inline-flex;
 
-    transform:translate(-50%,-100%) scale(.95);
+            align-items: center;
 
-    transition:
-        opacity .12s ease,
-        transform .12s ease;
+            gap: 8px;
 
-    z-index:30;
-}
+            padding: 7px 11px;
 
-.agent-card.visible{
-    opacity:1;
-    transform:translate(-50%,calc(-100% - 30px)) scale(1);
-}
+            border-radius: 999px;
 
-.agent-card .agent-name{
-    color:#fff;
-    font-weight:800;
-    font-size:12px;
-}
+            border: 1px solid rgba(201, 162, 39, 0.25);
 
-.agent-card .agent-role{
-    margin-top:3px;
-    color:var(--gold2);
-    font-size:10px;
-}
+            background: rgba(201, 162, 39, 0.07);
 
-.agent-card .agent-tf{
-    margin-top:5px;
-    color:#8290a0;
-    font-family:"JetBrains Mono",monospace;
-    font-size:8px;
-}
+            color: var(--gold-bright);
 
-/* =========================================================
-   OFFICE HINT
-========================================================= */
+            font-family: 'JetBrains Mono', monospace;
 
-.office-hint{
-    position:absolute;
-    left:50%;
-    bottom:15px;
+            font-size: 10px;
 
-    transform:translateX(-50%);
+            letter-spacing: 0.8px;
 
-    padding:7px 11px;
+            margin-bottom: 15px;
+        }
 
-    border-radius:999px;
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
 
-    background:rgba(5,8,11,.72);
-    backdrop-filter:blur(12px);
+            border-radius: 50%;
 
-    border:1px solid rgba(255,255,255,.07);
+            background: var(--gold-bright);
 
-    color:#8894a3;
+            box-shadow:
+                0 0 12px var(--gold-bright);
 
-    font-size:9px;
+            animation: pulse 1.8s infinite;
+        }
 
-    pointer-events:none;
+        @keyframes pulse {
 
-    white-space:nowrap;
-}
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
 
-.office-hint span{
-    color:var(--gold2);
-}
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-/* =========================================================
-   VISUAL DESCRIPTION
-========================================================= */
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
 
-.visual-description{
-    margin-top:15px;
+            font-size: clamp(34px, 8vw, 48px);
 
-    padding:20px;
+            line-height: 1.02;
 
-    border:1px solid var(--border);
-    border-radius:18px;
+            letter-spacing: -1.8px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(201,162,39,.05),
-            rgba(255,255,255,.015)
-        );
-}
+            margin-bottom: 15px;
 
-.visual-title{
-    display:flex;
-    align-items:center;
-    gap:9px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 10%,
+                    #ffffff 42%,
+                    var(--gold-bright) 100%
+                );
 
-    font-weight:800;
-    font-size:14px;
-}
+            -webkit-background-clip: text;
+            background-clip: text;
 
-.visual-title .icon{
-    width:28px;
-    height:28px;
+            color: transparent;
+        }
 
-    display:grid;
-    place-items:center;
+        .hero-subtitle {
+            max-width: 480px;
 
-    border-radius:8px;
+            margin: 0 auto;
 
-    background:rgba(201,162,39,.12);
-    color:var(--gold2);
-}
+            color: var(--text-muted);
 
-.visual-description p{
-    margin:12px 0 0;
+            font-size: 14px;
 
-    color:#98a2b0;
+            line-height: 1.75;
+        }
 
-    font-size:12px;
-    line-height:1.8;
-}
+        /* =====================================================
+           STATUS
+        ====================================================== */
 
-.agent-chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
+        .status-bar {
+            display: flex;
 
-    margin-top:15px;
-}
+            justify-content: center;
 
-.agent-chip{
-    padding:6px 8px;
+            gap: 8px;
 
-    border-radius:7px;
+            flex-wrap: wrap;
 
-    background:#0b1015;
-    border:1px solid #202a34;
+            margin: 22px 0;
+        }
 
-    color:#9ca7b4;
+        .status-chip {
+            display: inline-flex;
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:8px;
-}
+            align-items: center;
 
-.agent-chip b{
-    color:var(--gold2);
-}
+            gap: 7px;
 
-/* =========================================================
-   CARDS
-========================================================= */
+            padding: 7px 10px;
 
-.section{
-    margin-top:18px;
+            background: rgba(18, 21, 28, 0.82);
 
-    padding:22px;
+            border: 1px solid var(--border);
 
-    background:rgba(16,21,27,.9);
+            border-radius: 999px;
 
-    border:1px solid var(--border);
+            color: var(--text-soft);
 
-    border-radius:20px;
+            font-family: 'JetBrains Mono', monospace;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.18);
-}
+            font-size: 9px;
+        }
 
-.section-title{
-    margin:0;
+        .status-chip .dot {
+            width: 5px;
+            height: 5px;
 
-    font-family:"Space Grotesk",sans-serif;
-    font-size:20px;
-}
+            border-radius: 50%;
 
-.section-sub{
-    margin:7px 0 0;
+            background: var(--buy);
 
-    color:var(--muted);
+            box-shadow:
+                0 0 8px rgba(63, 167, 150, 0.7);
+        }
 
-    font-size:11px;
-    line-height:1.7;
-}
+        /* =====================================================
+           AI BADGE
+        ====================================================== */
 
-/* FEATURES */
+        .ai-badge {
+            position: relative;
 
-.features{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
+            overflow: hidden;
 
-    margin-top:18px;
-}
+            margin: 24px 0;
 
-.feature{
-    padding:16px;
+            padding: 24px 20px;
 
-    background:#0d1218;
+            border: 1px solid var(--border);
 
-    border:1px solid #202832;
+            border-radius: var(--radius);
 
-    border-radius:14px;
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201, 162, 39, 0.08),
+                    rgba(18, 21, 28, 0.96) 50%,
+                    rgba(23, 28, 38, 0.96)
+                );
 
-.feature-icon{
-    width:32px;
-    height:32px;
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.25);
+        }
 
-    display:grid;
-    place-items:center;
+        .ai-badge::before {
+            content: "";
 
-    border-radius:9px;
+            position: absolute;
 
-    background:rgba(201,162,39,.09);
+            width: 180px;
+            height: 180px;
 
-    color:var(--gold2);
+            border-radius: 50%;
 
-    margin-bottom:12px;
-}
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 210, 76, 0.12),
+                    transparent 70%
+                );
 
-.feature h3{
-    margin:0;
+            top: -110px;
+            right: -70px;
 
-    font-size:12px;
-}
+            pointer-events: none;
+        }
 
-.feature p{
-    margin:7px 0 0;
+        .ai-badge-top {
+            display: flex;
 
-    color:#84909f;
+            align-items: center;
 
-    font-size:10px;
-    line-height:1.7;
-}
+            justify-content: space-between;
 
-/* =========================================================
-   HOW IT WORKS
-========================================================= */
+            margin-bottom: 18px;
+        }
 
-.steps{
-    display:grid;
-    gap:9px;
+        .ai-brand {
+            font-family: 'Space Grotesk', sans-serif;
 
-    margin-top:18px;
-}
+            font-weight: 700;
 
-.step{
-    display:grid;
-    grid-template-columns:35px 1fr;
+            font-size: 14px;
 
-    gap:10px;
+            letter-spacing: 0.4px;
+        }
 
-    padding:13px;
+        .ai-live {
+            display: flex;
 
-    border-radius:12px;
+            align-items: center;
 
-    background:#0c1116;
+            gap: 6px;
 
-    border:1px solid #202832;
-}
+            color: var(--buy);
 
-.step-number{
-    width:29px;
-    height:29px;
+            font-family: 'JetBrains Mono', monospace;
 
-    display:grid;
-    place-items:center;
+            font-size: 9px;
+        }
 
-    border-radius:8px;
+        .ai-live-dot {
+            width: 6px;
+            height: 6px;
 
-    background:rgba(201,162,39,.12);
+            background: var(--buy);
 
-    color:var(--gold2);
+            border-radius: 50%;
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:10px;
-}
+            box-shadow:
+                0 0 10px rgba(63, 167, 150, 0.7);
+        }
 
-.step h3{
-    margin:0;
+        .ai-main-title {
+            font-family: 'Space Grotesk', sans-serif;
 
-    font-size:11px;
-}
+            font-size: 25px;
 
-.step p{
-    margin:4px 0 0;
+            font-weight: 700;
 
-    color:#7f8b99;
+            margin-bottom: 7px;
+        }
 
-    font-size:9px;
-    line-height:1.6;
-}
+        .ai-main-title span {
+            color: var(--gold-bright);
+        }
 
-/* =========================================================
-   PRICING
-========================================================= */
+        .ai-description {
+            color: var(--text-muted);
 
-.pricing{
-    display:grid;
-    gap:10px;
+            font-size: 12px;
 
-    margin-top:18px;
-}
+            line-height: 1.7;
+        }
 
-.price-card{
-    position:relative;
+        /* =====================================================
+           SECTION
+        ====================================================== */
 
-    padding:18px;
+        .section {
+            margin-top: 18px;
+        }
 
-    border-radius:15px;
+        .section-header {
+            display: flex;
 
-    border:1px solid #252e38;
+            align-items: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.025),
-            rgba(255,255,255,.005)
-        );
+            gap: 10px;
 
-    transition:.2s;
-}
+            margin-bottom: 12px;
+        }
 
-.price-card:hover{
-    transform:translateY(-2px);
+        .section-number {
+            display: flex;
 
-    border-color:rgba(201,162,39,.4);
-}
+            align-items: center;
+            justify-content: center;
 
-.price-card.popular{
-    border-color:rgba(201,162,39,.5);
+            width: 25px;
+            height: 25px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(201,162,39,.10),
-            rgba(255,255,255,.015)
-        );
-}
+            border-radius: 8px;
 
-.badge{
-    position:absolute;
+            background: var(--gold-soft);
 
-    top:12px;
-    right:12px;
+            color: var(--gold-bright);
 
-    padding:4px 7px;
+            font-family: 'JetBrains Mono', monospace;
 
-    border-radius:5px;
+            font-size: 10px;
 
-    background:rgba(201,162,39,.14);
+            font-weight: 700;
+        }
 
-    color:var(--gold2);
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:7px;
-}
+            font-size: 17px;
 
-.price-name{
-    font-size:12px;
-    font-weight:700;
-}
+            font-weight: 700;
+        }
 
-.price{
-    margin-top:6px;
+        /* =====================================================
+           FEATURE CARDS
+        ====================================================== */
 
-    color:var(--gold2);
+        .feature-grid {
+            display: grid;
 
-    font-family:"Space Grotesk",sans-serif;
-    font-size:26px;
-    font-weight:700;
-}
+            grid-template-columns: 1fr 1fr;
 
-.price-desc{
-    margin-top:5px;
+            gap: 10px;
+        }
 
-    color:#7f8b99;
+        .feature-card {
+            position: relative;
 
-    font-size:9px;
-}
+            padding: 17px;
 
-.price-button{
-    width:100%;
+            min-height: 145px;
 
-    margin-top:13px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(23, 28, 38, 0.94),
+                    rgba(18, 21, 28, 0.94)
+                );
 
-    padding:11px 12px;
+            border: 1px solid var(--border);
 
-    border:0;
-    border-radius:9px;
+            border-radius: 15px;
 
-    background:linear-gradient(
-        135deg,
-        #c9a227,
-        #f2c63d
-    );
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
 
-    color:#080b0f;
+        .feature-card:hover {
+            transform: translateY(-3px);
 
-    font-weight:800;
-    font-size:10px;
+            border-color: rgba(201, 162, 39, 0.4);
 
-    cursor:pointer;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.2);
+        }
 
-    transition:.2s;
-}
+        .feature-icon {
+            width: 35px;
+            height: 35px;
 
-.price-button:hover{
-    filter:brightness(1.08);
-    transform:translateY(-1px);
-}
+            display: flex;
 
-/* =========================================================
-   COUNTDOWN
-========================================================= */
+            align-items: center;
+            justify-content: center;
 
-.countdown{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:7px;
+            border-radius: 10px;
 
-    margin-top:15px;
-}
+            background: var(--gold-soft);
 
-.count-box{
-    padding:11px 5px;
+            color: var(--gold-bright);
 
-    text-align:center;
+            margin-bottom: 12px;
 
-    border-radius:10px;
+            font-size: 16px;
+        }
 
-    background:#0b1015;
+        .feature-card h3 {
+            font-size: 13px;
 
-    border:1px solid #202832;
-}
+            margin-bottom: 7px;
 
-.count-value{
-    color:var(--gold2);
+            font-weight: 700;
+        }
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:17px;
-    font-weight:700;
-}
+        .feature-card p {
+            color: var(--text-muted);
 
-.count-label{
-    margin-top:3px;
+            font-size: 10.5px;
 
-    color:#687483;
+            line-height: 1.65;
+        }
 
-    font-size:7px;
-}
+        /* =====================================================
+           HOW IT WORKS
+        ====================================================== */
 
-/* =========================================================
-   CTA
-========================================================= */
+        .steps {
+            display: flex;
 
-.cta{
-    margin-top:18px;
+            flex-direction: column;
 
-    padding:24px;
+            gap: 9px;
+        }
 
-    text-align:center;
+        .step {
+            display: flex;
 
-    border-radius:20px;
+            align-items: center;
 
-    border:1px solid rgba(201,162,39,.25);
+            gap: 13px;
 
-    background:
-        radial-gradient(
-            circle at 50% 0,
-            rgba(201,162,39,.12),
-            transparent 60%
-        ),
-        #10151b;
-}
+            padding: 13px;
 
-.cta h2{
-    margin:0;
+            background: rgba(18, 21, 28, 0.85);
 
-    font-family:"Space Grotesk",sans-serif;
-    font-size:25px;
-}
+            border: 1px solid var(--border);
 
-.cta p{
-    max-width:550px;
+            border-radius: 14px;
+        }
 
-    margin:8px auto 0;
+        .step-number {
+            flex: 0 0 31px;
 
-    color:#84909f;
+            width: 31px;
+            height: 31px;
 
-    font-size:10px;
-    line-height:1.7;
-}
+            display: flex;
 
-.cta-buttons{
-    display:flex;
-    justify-content:center;
-    gap:8px;
+            align-items: center;
+            justify-content: center;
 
-    margin-top:17px;
-}
+            border-radius: 10px;
 
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+            background: var(--gold-soft);
 
-    padding:11px 17px;
+            border: 1px solid rgba(201, 162, 39, 0.15);
 
-    border-radius:9px;
+            color: var(--gold-bright);
 
-    font-size:10px;
-    font-weight:800;
-}
+            font-family: 'JetBrains Mono', monospace;
 
-.btn-primary{
-    background:linear-gradient(
-        135deg,
-        #c9a227,
-        #f2c63d
-    );
+            font-size: 10px;
 
-    color:#080b0f;
-}
+            font-weight: 700;
+        }
 
-.btn-secondary{
-    background:#151c24;
+        .step-content {
+            min-width: 0;
+        }
 
-    border:1px solid #2a333e;
+        .step-title {
+            font-size: 12px;
 
-    color:#c5ccd5;
-}
+            font-weight: 700;
 
-/* =========================================================
-   DISCLAIMER
-========================================================= */
+            margin-bottom: 3px;
+        }
 
-.disclaimer{
-    margin:18px 0;
+        .step-description {
+            color: var(--text-muted);
 
-    padding:15px;
+            font-size: 10px;
 
-    border-radius:13px;
+            line-height: 1.55;
+        }
 
-    border:1px solid #202832;
+        /* =====================================================
+           SIGNAL BOX
+        ====================================================== */
 
-    background:#0b1015;
+        .signal-box {
+            margin-top: 10px;
 
-    color:#687483;
+            padding: 16px;
 
-    text-align:center;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(63, 167, 150, 0.07),
+                    rgba(18, 21, 28, 0.95)
+                );
 
-    font-size:8px;
-    line-height:1.7;
-}
+            border: 1px solid rgba(63, 167, 150, 0.18);
 
-footer{
-    padding:20px 0 35px;
+            border-radius: 15px;
+        }
 
-    text-align:center;
+        .signal-header {
+            display: flex;
 
-    color:#4e5966;
+            align-items: center;
 
-    font-family:"JetBrains Mono",monospace;
-    font-size:8px;
-}
+            justify-content: space-between;
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+            margin-bottom: 12px;
+        }
 
-@media(max-width:760px){
+        .signal-label {
+            color: var(--text-muted);
 
-    .language-bar{
-        top:10px;
-        right:10px;
-    }
+            font-family: 'JetBrains Mono', monospace;
 
-    .hero{
-        padding-top:72px;
-    }
+            font-size: 9px;
+        }
 
-    h1{
-        letter-spacing:-1.7px;
-    }
+        .signal-status {
+            color: var(--buy);
 
-    .hero-subtitle{
-        font-size:12px;
-    }
+            font-family: 'JetBrains Mono', monospace;
 
-    .office-shell{
-        height:520px;
-        min-height:520px;
+            font-size: 9px;
+        }
 
-        border-radius:20px;
-    }
+        .signal-content {
+            display: grid;
 
-    .office-status{
-        display:none;
-    }
+            grid-template-columns:
+                repeat(3, 1fr);
 
-    .office-hint{
-        bottom:10px;
+            gap: 8px;
+        }
 
-        font-size:8px;
-    }
+        .signal-item {
+            padding: 10px;
 
-    .features{
-        grid-template-columns:1fr;
-    }
+            border-radius: 10px;
 
-    .cta-buttons{
-        flex-direction:column;
-    }
-}
+            background: rgba(255, 255, 255, 0.025);
 
-@media(max-width:450px){
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
 
-    .container{
-        width:min(100% - 18px,1080px);
-    }
+        .signal-item span {
+            display: block;
 
-    .office-shell{
-        height:470px;
-        min-height:470px;
-    }
+            color: var(--text-muted);
 
-    .visual-description,
-    .section{
-        padding:17px;
-    }
+            font-size: 8px;
 
-    .speech-bubble{
-        min-width:125px;
-        max-width:170px;
-        font-size:9px;
-    }
-}
-</style>
+            margin-bottom: 4px;
+        }
+
+        .signal-item strong {
+            font-family: 'JetBrains Mono', monospace;
+
+            font-size: 11px;
+        }
+
+        .signal-buy {
+            color: var(--buy);
+        }
+
+        .signal-gold {
+            color: var(--gold-bright);
+        }
+
+        /* =====================================================
+           PROMO
+        ====================================================== */
+
+        .promo-card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 20px;
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201, 162, 39, 0.13),
+                    rgba(18, 21, 28, 0.98)
+                );
+
+            border: 1px solid rgba(201, 162, 39, 0.28);
+
+            margin-bottom: 12px;
+        }
+
+        .promo-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            border-radius: 50%;
+
+            right: -110px;
+            top: -110px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255, 210, 76, 0.12),
+                    transparent 70%
+                );
+        }
+
+        .promo-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 10px;
+        }
+
+        .promo-title {
+            font-family: 'Space Grotesk', sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .promo-badge {
+            padding: 5px 8px;
+
+            background: var(--gold);
+
+            color: #111;
+
+            border-radius: 7px;
+
+            font-family: 'JetBrains Mono', monospace;
+
+            font-size: 8px;
+
+            font-weight: 800;
+        }
+
+        .promo-description {
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            margin-bottom: 15px;
+        }
+
+        .countdown {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 7px;
+        }
+
+        .countdown-item {
+            text-align: center;
+
+            padding: 10px 5px;
+
+            background: rgba(0, 0, 0, 0.18);
+
+            border: 1px solid rgba(255, 255, 255, 0.05);
+
+            border-radius: 10px;
+        }
+
+        .countdown-value {
+            display: block;
+
+            font-family: 'JetBrains Mono', monospace;
+
+            color: var(--gold-bright);
+
+            font-size: 17px;
+
+            font-weight: 600;
+        }
+
+        .countdown-label {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--text-muted);
+
+            font-size: 7px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+        }
+
+        /* =====================================================
+           PRICING
+        ====================================================== */
+
+        .pricing-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .price-card {
+            position: relative;
+
+            padding: 17px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(23, 28, 38, 0.95),
+                    rgba(18, 21, 28, 0.95)
+                );
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            transition: 0.25s ease;
+        }
+
+        .price-card:hover {
+            border-color: rgba(201, 162, 39, 0.4);
+
+            transform: translateY(-2px);
+        }
+
+        .price-card.featured {
+            border-color: rgba(201, 162, 39, 0.55);
+
+            box-shadow:
+                0 0 0 1px rgba(201, 162, 39, 0.05),
+                0 20px 50px rgba(0, 0, 0, 0.22);
+        }
+
+        .price-badge {
+            position: absolute;
+
+            top: 13px;
+            right: 13px;
+
+            padding: 5px 8px;
+
+            border-radius: 7px;
+
+            background: var(--gold);
+
+            color: #111;
+
+            font-family: 'JetBrains Mono', monospace;
+
+            font-size: 7px;
+
+            font-weight: 800;
+        }
+
+        .price-top {
+            margin-bottom: 10px;
+        }
+
+        .price-name {
+            color: var(--text-soft);
+
+            font-family: 'JetBrains Mono', monospace;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            margin-bottom: 4px;
+        }
+
+        .price-duration {
+            font-family: 'Space Grotesk', sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .price {
+            font-family: 'Space Grotesk', sans-serif;
+
+            font-size: 26px;
+
+            font-weight: 700;
+
+            color: var(--gold-bright);
+
+            margin: 8px 0;
+        }
+
+        .price-old {
+            color: var(--text-muted);
+
+            text-decoration: line-through;
+
+            font-size: 10px;
+
+            margin-left: 5px;
+        }
+
+        .price-feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            margin-bottom: 6px;
+        }
+
+        .price-feature::before {
+            content: "✓";
+
+            color: var(--gold-bright);
+
+            font-weight: 800;
+        }
+
+        .price-button {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+
+            min-height: 43px;
+
+            margin-top: 14px;
+
+            border-radius: 11px;
+
+            background: var(--gold);
+
+            color: #101010;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            border: 0;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .price-button:hover {
+            background: var(--gold-bright);
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 25px rgba(201, 162, 39, 0.15);
+        }
+
+        /* =====================================================
+           TRIAL
+        ====================================================== */
+
+        .trial-box {
+            margin-top: 12px;
+
+            padding: 17px;
+
+            text-align: center;
+
+            border: 1px dashed rgba(201, 162, 39, 0.32);
+
+            border-radius: 15px;
+
+            background: rgba(201, 162, 39, 0.035);
+        }
+
+        .trial-title {
+            font-family: 'Space Grotesk', sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+        }
+
+        .trial-description {
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+            margin-bottom: 12px;
+        }
+
+        .trial-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            border: 1px solid rgba(201, 162, 39, 0.4);
+
+            background: rgba(201, 162, 39, 0.08);
+
+            color: var(--gold-bright);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .trial-button:hover {
+            background: rgba(201, 162, 39, 0.15);
+        }
+
+        /* =====================================================
+           REQUIREMENTS
+        ====================================================== */
+
+        .requirements {
+            padding: 17px;
+
+            border-radius: 15px;
+
+            background: rgba(18, 21, 28, 0.85);
+
+            border: 1px solid var(--border);
+        }
+
+        .requirement {
+            display: flex;
+
+            gap: 10px;
+
+            align-items: flex-start;
+
+            padding: 9px 0;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+        }
+
+        .requirement:last-child {
+            border-bottom: 0;
+
+            padding-bottom: 0;
+        }
+
+        .requirement:first-child {
+            padding-top: 0;
+        }
+
+        .requirement-icon {
+            flex: 0 0 23px;
+
+            width: 23px;
+            height: 23px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            background: var(--gold-soft);
+
+            color: var(--gold-bright);
+
+            font-size: 10px;
+        }
+
+        .requirement-text {
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            line-height: 1.55;
+        }
+
+        /* =====================================================
+           CTA
+        ====================================================== */
+
+        .main-cta {
+            margin-top: 18px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+        .cta-button {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 50px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gold-bright),
+                    var(--gold)
+                );
+
+            color: #101010;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 35px rgba(201, 162, 39, 0.12);
+
+            transition: 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 40px rgba(201, 162, 39, 0.2);
+        }
+
+        .secondary-cta {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 44px;
+
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+
+            background: rgba(18, 21, 28, 0.85);
+
+            color: var(--text-soft);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .secondary-cta:hover {
+            border-color: var(--border-light);
+
+            color: var(--text);
+        }
+
+        /* =====================================================
+           DISCLAIMER
+        ====================================================== */
+
+        .disclaimer {
+            margin-top: 25px;
+
+            padding: 14px;
+
+            border-radius: 13px;
+
+            background: rgba(255, 255, 255, 0.018);
+
+            border: 1px solid rgba(255, 255, 255, 0.04);
+
+            text-align: center;
+        }
+
+        .disclaimer p {
+            color: #697181;
+
+            font-size: 8.5px;
+
+            line-height: 1.65;
+        }
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            text-align: center;
+
+            padding-top: 25px;
+
+            color: #555d6b;
+
+            font-family: 'JetBrains Mono', monospace;
+
+            font-size: 8px;
+        }
+
+        footer strong {
+            color: #777f8e;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 470px) {
+
+            .container {
+                width: min(100% - 22px, 560px);
+
+                padding-top: 65px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                min-height: auto;
+            }
+
+            .signal-content {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+            }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 350px) {
+
+            .container {
+                width: calc(100% - 18px);
+            }
+
+            .countdown-value {
+                font-size: 15px;
+            }
+
+            .price {
+                font-size: 23px;
+            }
+        }
+
+        /* =====================================================
+           FADE ANIMATION
+        ====================================================== */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(15px);
+
+            animation:
+                revealUp 0.65s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.08s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.16s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.24s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.32s;
+        }
+
+        @keyframes revealUp {
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
 <!-- =========================================================
-     LANGUAGE
-========================================================= -->
+     BACKGROUND
+========================================================== -->
 
-<div class="language-bar">
-    <button class="lang-btn active" data-lang="id">ID</button>
-    <button class="lang-btn" data-lang="en">EN</button>
-    <button class="lang-btn" data-lang="zh">中文</button>
+<canvas id="bgCanvas"></canvas>
+
+<div class="background-glow"></div>
+
+
+<!-- =========================================================
+     LANGUAGE SWITCHER
+========================================================== -->
+
+<div class="language-switcher">
+
+    <button class="language-btn active" data-lang="id">
+        ID
+    </button>
+
+    <button class="language-btn" data-lang="en">
+        EN
+    </button>
+
+    <button class="language-btn" data-lang="zh">
+        中文
+    </button>
+
 </div>
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
 
 <main class="container">
 
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero">
-
-    <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        AI POWERED XAUUSD ANALYTICS
-    </div>
-
-    <h1>
-        <span class="gradient-text">
-            XAU AI SMC GOLD
-        </span>
-    </h1>
-
-    <p class="hero-subtitle" id="heroSubtitle">
-        AI Trading Assistant yang menggabungkan Smart Money Concept,
-        Fundamental Analysis dan beberapa timeframe untuk membaca
-        kondisi XAUUSD dan mengirimkan signal langsung ke Telegram.
-    </p>
-
-</section>
-
-
-<!-- =========================================================
-     3D AI OFFICE
-========================================================= -->
-
-<section class="office-section">
-
-    <div class="office-shell">
-
-        <canvas id="officeCanvas"></canvas>
-
-        <div class="office-topbar">
-
-            <div class="office-brand">
-                <span class="live-dot"></span>
-                XAU AI SMC GOLD
-            </div>
-
-            <div class="office-status">
-                <strong id="officeStatus">AI TEAM ANALYZING</strong>
-            </div>
-
-        </div>
-
-        <!-- speech bubble -->
-        <div id="speechBubble" class="speech-bubble">
-            <span class="bubble-name" id="bubbleName"></span>
-            <span id="bubbleText"></span>
-        </div>
-
-        <!-- selected agent -->
-        <div id="agentCard" class="agent-card">
-
-            <div class="agent-name" id="agentName">
-                M15 SMC
-            </div>
-
-            <div class="agent-role" id="agentRole">
-                SMC Analyst
-            </div>
-
-            <div class="agent-tf" id="agentTF">
-                TIMEFRAME M15
-            </div>
-
-        </div>
-
-        <div class="office-hint">
-            <span>DRAG</span> untuk memutar kantor •
-            <span>SCROLL</span> untuk zoom •
-            tekan/tahan AI untuk melihat identitas
-        </div>
-
-    </div>
-
 
     <!-- =====================================================
-         DESCRIPTION
+         HERO
     ====================================================== -->
 
-    <div class="visual-description">
+    <section class="hero reveal">
 
-        <div class="visual-title">
+        <div class="eyebrow">
 
-            <div class="icon">AI</div>
+            <span class="eyebrow-dot"></span>
 
-            <span id="visualTitle">
-                AI Team Sedang Menganalisa XAUUSD
+            <span id="eyebrowText">
+                AI POWERED MARKET ANALYTICS
             </span>
 
         </div>
 
-        <p id="visualText">
-            Visualisasi Team AI yang sedang menganalisa XAUUSD
-            menggunakan Smart Money Concept (SMC) yang dikombinasikan
-            dengan Fundamental Analysis dari beberapa timeframe.
-            Setiap jam, sistem menggabungkan hasil analisa untuk
-            menghasilkan signal dan mengirimkannya langsung ke
-            Telegram Bot.
+
+        <h1 id="heroTitle">
+            Professional AI Assistant For XAUUSD
+        </h1>
+
+
+        <p class="hero-subtitle" id="heroSubtitle">
+
+            AI Trading Assistant yang membaca peluang pergerakan
+            XAUUSD menggunakan Smart Money Concept dan Fundamental
+            Analysis, lalu mengirimkan signal langsung ke Telegram.
+
         </p>
 
-        <div class="agent-chips">
 
-            <div class="agent-chip">
-                <b>M30</b> MACRO
+        <!-- STATUS -->
+
+        <div class="status-bar">
+
+            <div class="status-chip">
+
+                <span class="dot"></span>
+
+                XAUUSD
+
             </div>
 
-            <div class="agent-chip">
-                <b>M15</b> SMC
+
+            <div class="status-chip">
+
+                <span class="dot"></span>
+
+                SMC
+
             </div>
 
-            <div class="agent-chip">
-                <b>M5</b> ENTRY
+
+            <div class="status-chip">
+
+                <span class="dot"></span>
+
+                FUNDAMENTAL
+
             </div>
 
-            <div class="agent-chip">
-                <b>M1</b> EXECUTION
-            </div>
 
-            <div class="agent-chip">
-                <b>FUND</b> FUNDAMENTAL
+            <div class="status-chip">
+
+                <span class="dot"></span>
+
+                TELEGRAM
+
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     FEATURES
-========================================================= -->
 
-<section class="section">
+    <!-- =====================================================
+         AI BRAND CARD
+    ====================================================== -->
 
-    <h2 class="section-title" id="featureTitle">
-        Fitur AI Trading
-    </h2>
+    <section class="ai-badge reveal delay-1">
 
-    <p class="section-sub" id="featureSub">
-        Sistem visualisasi AI yang menggambarkan proses kerja
-        multi-agent sebelum signal dikirim ke Telegram.
-    </p>
+        <div class="ai-badge-top">
 
-    <div class="features">
+            <div class="ai-brand">
+                XAU AI INTELLIGENCE
+            </div>
 
-        <div class="feature">
+            <div class="ai-live">
 
-            <div class="feature-icon">◈</div>
+                <span class="ai-live-dot"></span>
 
-            <h3 id="f1Title">
-                Smart Money Concept
-            </h3>
+                SYSTEM ONLINE
 
-            <p id="f1Text">
-                Market Structure, BOS, CHoCH, Liquidity,
-                Order Block dan Fair Value Gap.
+            </div>
+
+        </div>
+
+
+        <div class="ai-main-title">
+
+            AI Trading Assistant
+            <span>XAUUSD</span>
+
+        </div>
+
+
+        <p class="ai-description" id="aiDescription">
+
+            Sistem AI dirancang untuk membantu membaca kondisi
+            market XAUUSD dengan pendekatan Smart Money Concept,
+            Market Structure, Liquidity dan Fundamental Analysis.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+    <section class="section reveal delay-2">
+
+        <div class="section-header">
+
+            <div class="section-number">
+                01
+            </div>
+
+            <div class="section-title" id="featureSectionTitle">
+                Fitur AI Trading
+            </div>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <!-- FEATURE 1 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ◈
+                </div>
+
+                <h3 id="feature1Title">
+                    Smart Money Concept
+                </h3>
+
+                <p id="feature1Text">
+
+                    Analisa market menggunakan konsep
+                    market structure, BOS, CHoCH, liquidity,
+                    Order Block dan Fair Value Gap.
+
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 2 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ◇
+                </div>
+
+                <h3 id="feature2Title">
+                    Multi Timeframe
+                </h3>
+
+                <p id="feature2Text">
+
+                    Kondisi market dibaca dari beberapa
+                    timeframe untuk mendapatkan konteks
+                    pergerakan XAUUSD yang lebih lengkap.
+
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 3 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ◎
+                </div>
+
+                <h3 id="feature3Title">
+                    Fundamental Analysis
+                </h3>
+
+                <p id="feature3Text">
+
+                    Kondisi fundamental dan faktor ekonomi
+                    dapat digunakan sebagai bagian dari
+                    konteks analisa market.
+
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 4 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ↗
+                </div>
+
+                <h3 id="feature4Title">
+                    Signal Telegram
+                </h3>
+
+                <p id="feature4Text">
+
+                    Signal dikirim langsung ke Telegram
+                    sehingga Anda dapat menerima informasi
+                    market tanpa harus terus membuka chart.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HOW IT WORKS
+    ====================================================== -->
+
+    <section class="section reveal delay-3">
+
+        <div class="section-header">
+
+            <div class="section-number">
+                02
+            </div>
+
+            <div class="section-title" id="howSectionTitle">
+                Cara Kerja
+            </div>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title" id="step1Title">
+                        Market Data
+                    </div>
+
+                    <div class="step-description" id="step1Text">
+
+                        Sistem membaca kondisi market XAUUSD
+                        dan data pergerakan harga.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title" id="step2Title">
+                        AI Analysis
+                    </div>
+
+                    <div class="step-description" id="step2Text">
+
+                        AI menggabungkan Smart Money Concept,
+                        Market Structure, Liquidity dan
+                        Fundamental Analysis.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title" id="step3Title">
+                        Signal Generation
+                    </div>
+
+                    <div class="step-description" id="step3Text">
+
+                        Sistem menghasilkan setup signal
+                        berdasarkan kondisi market yang terbaca.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <div class="step-content">
+
+                    <div class="step-title" id="step4Title">
+                        Telegram Delivery
+                    </div>
+
+                    <div class="step-description" id="step4Text">
+
+                        Signal dikirim langsung ke Telegram
+                        setiap siklus signal.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SIGNAL PREVIEW -->
+
+        <div class="signal-box">
+
+            <div class="signal-header">
+
+                <span class="signal-label">
+                    SIGNAL PREVIEW
+                </span>
+
+                <span class="signal-status">
+                    AI SYSTEM
+                </span>
+
+            </div>
+
+
+            <div class="signal-content">
+
+                <div class="signal-item">
+
+                    <span>
+                        SYMBOL
+                    </span>
+
+                    <strong class="signal-gold">
+                        XAUUSD
+                    </strong>
+
+                </div>
+
+
+                <div class="signal-item">
+
+                    <span>
+                        DIRECTION
+                    </span>
+
+                    <strong class="signal-buy">
+                        BUY
+                    </strong>
+
+                </div>
+
+
+                <div class="signal-item">
+
+                    <span>
+                        DELIVERY
+                    </span>
+
+                    <strong>
+                        TELEGRAM
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROMO
+    ====================================================== -->
+
+    <section class="section reveal delay-4">
+
+        <div class="section-header">
+
+            <div class="section-number">
+                03
+            </div>
+
+            <div class="section-title" id="promoSectionTitle">
+                Promo
+            </div>
+
+        </div>
+
+
+        <div class="promo-card">
+
+            <div class="promo-top">
+
+                <div class="promo-title" id="promoTitle">
+                    Promo Terbatas
+                </div>
+
+                <div class="promo-badge">
+                    LIMITED
+                </div>
+
+            </div>
+
+
+            <p class="promo-description" id="promoDescription">
+
+                Gunakan kesempatan harga promo sebelum
+                periode promo berakhir.
+
             </p>
 
-        </div>
+
+            <div class="countdown">
 
 
-        <div class="feature">
+                <div class="countdown-item">
 
-            <div class="feature-icon">◎</div>
+                    <span class="countdown-value" id="days">
+                        00
+                    </span>
 
-            <h3 id="f2Title">
-                Multi Timeframe
-            </h3>
+                    <span class="countdown-label" id="daysLabel">
+                        Hari
+                    </span>
 
-            <p id="f2Text">
-                Analisa dilakukan melalui beberapa timeframe
-                untuk mendapatkan konteks market yang lebih lengkap.
-            </p>
-
-        </div>
+                </div>
 
 
-        <div class="feature">
+                <div class="countdown-item">
 
-            <div class="feature-icon">◉</div>
+                    <span class="countdown-value" id="hours">
+                        00
+                    </span>
 
-            <h3 id="f3Title">
-                Telegram Signal
-            </h3>
+                    <span class="countdown-label" id="hoursLabel">
+                        Jam
+                    </span>
 
-            <p id="f3Text">
-                Signal yang sudah diproses dikirim langsung
-                melalui Telegram Bot.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
+                </div>
 
 
-<!-- =========================================================
-     HOW IT WORKS
-========================================================= -->
+                <div class="countdown-item">
 
-<section class="section">
+                    <span class="countdown-value" id="minutes">
+                        00
+                    </span>
 
-    <h2 class="section-title" id="howTitle">
-        Cara Kerja
-    </h2>
+                    <span class="countdown-label" id="minutesLabel">
+                        Menit
+                    </span>
 
-    <p class="section-sub" id="howSub">
-        Gambaran sederhana bagaimana sistem bekerja.
-    </p>
+                </div>
 
-    <div class="steps">
 
-        <div class="step">
+                <div class="countdown-item">
 
-            <div class="step-number">01</div>
+                    <span class="countdown-value" id="seconds">
+                        00
+                    </span>
 
-            <div>
-                <h3 id="s1Title">
-                    Market Data
-                </h3>
+                    <span class="countdown-label" id="secondsLabel">
+                        Detik
+                    </span>
 
-                <p id="s1Text">
-                    Data XAUUSD dikumpulkan dan dipantau oleh sistem.
-                </p>
+                </div>
+
+
             </div>
 
         </div>
 
+    </section>
 
-        <div class="step">
 
-            <div class="step-number">02</div>
 
-            <div>
-                <h3 id="s2Title">
-                    AI Team Analysis
-                </h3>
+    <!-- =====================================================
+         PRICING
+    ====================================================== -->
 
-                <p id="s2Text">
-                    Multi-agent memproses SMC, timeframe dan fundamental.
-                </p>
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-number">
+                04
+            </div>
+
+            <div class="section-title" id="pricingSectionTitle">
+                Mulai Sekarang
             </div>
 
         </div>
 
 
-        <div class="step">
+        <div class="pricing-list">
 
-            <div class="step-number">03</div>
 
-            <div>
-                <h3 id="s3Title">
-                    Signal Processing
-                </h3>
+            <!-- =================================================
+                 1 MONTH
+            ================================================== -->
 
-                <p id="s3Text">
-                    Hasil analisa digabungkan menjadi satu signal.
-                </p>
+            <div class="price-card">
+
+                <div class="price-top">
+
+                    <div class="price-name">
+                        STARTER
+                    </div>
+
+                    <div class="price-duration" id="oneMonthTitle">
+                        1 Bulan
+                    </div>
+
+                </div>
+
+
+                <div class="price">
+
+                    Rp299.000
+
+                </div>
+
+
+                <div class="price-feature" id="oneMonthFeature1">
+                    Akses AI Trading Assistant
+                </div>
+
+                <div class="price-feature" id="oneMonthFeature2">
+                    Signal XAUUSD
+                </div>
+
+                <div class="price-feature" id="oneMonthFeature3">
+                    Signal langsung ke Telegram
+                </div>
+
+
+                <a
+                    class="price-button package-link"
+                    data-pkg="1month"
+                    href="#"
+                >
+                    <span id="buyButton1">
+                        LANGGANAN SEKARANG
+                    </span>
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 6 MONTH
+            ================================================== -->
+
+            <div class="price-card">
+
+                <div class="price-top">
+
+                    <div class="price-name">
+                        PRO
+                    </div>
+
+                    <div class="price-duration" id="sixMonthTitle">
+                        6 Bulan
+                    </div>
+
+                </div>
+
+
+                <div class="price">
+
+                    Rp500.000
+
+                </div>
+
+
+                <div class="price-feature" id="sixMonthFeature1">
+                    Akses AI Trading Assistant
+                </div>
+
+                <div class="price-feature" id="sixMonthFeature2">
+                    Signal XAUUSD
+                </div>
+
+                <div class="price-feature" id="sixMonthFeature3">
+                    Akses Grup Diskusi & Sharing
+                </div>
+
+
+                <a
+                    class="price-button package-link"
+                    data-pkg="6month"
+                    href="#"
+                >
+                    <span id="buyButton2">
+                        LANGGANAN SEKARANG
+                    </span>
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 12 MONTH
+            ================================================== -->
+
+            <div class="price-card featured">
+
+                <div class="price-badge" id="popularBadge">
+                    TERLARIS
+                </div>
+
+
+                <div class="price-top">
+
+                    <div class="price-name">
+                        ELITE
+                    </div>
+
+                    <div class="price-duration" id="twelveMonthTitle">
+                        12 Bulan
+                    </div>
+
+                </div>
+
+
+                <div class="price">
+
+                    Rp850.000
+
+                </div>
+
+
+                <div class="price-feature" id="twelveMonthFeature1">
+                    Akses AI Trading Assistant
+                </div>
+
+                <div class="price-feature" id="twelveMonthFeature2">
+                    Signal XAUUSD
+                </div>
+
+                <div class="price-feature" id="twelveMonthFeature3">
+                    Akses Grup Diskusi & Sharing
+                </div>
+
+
+                <a
+                    class="price-button package-link"
+                    data-pkg="12month"
+                    href="#"
+                >
+                    <span id="buyButton3">
+                        LANGGANAN SEKARANG
+                    </span>
+                </a>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 3 YEARS
+            ================================================== -->
+
+            <div class="price-card">
+
+                <div class="price-badge">
+                    PROMO
+                </div>
+
+
+                <div class="price-top">
+
+                    <div class="price-name">
+                        LIFETIME ACCESS
+                    </div>
+
+                    <div class="price-duration" id="permanentTitle">
+                        3 Tahun
+                    </div>
+
+                </div>
+
+
+                <div class="price">
+
+                    Rp999.000
+
+                    <span class="price-old">
+                        Rp1.500.000
+                    </span>
+
+                </div>
+
+
+                <div class="price-feature" id="permanentFeature1">
+                    Akses AI Trading Assistant
+                </div>
+
+                <div class="price-feature" id="permanentFeature2">
+                    Signal XAUUSD
+                </div>
+
+                <div class="price-feature" id="permanentFeature3">
+                    Akses Grup Diskusi & Sharing
+                </div>
+
+
+                <a
+                    class="price-button package-link"
+                    data-pkg="permanent"
+                    href="#"
+                >
+                    <span id="buyButton4">
+                        LANGGANAN SEKARANG
+                    </span>
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             TRIAL
+        ====================================================== -->
+
+        <div class="trial-box">
+
+            <div class="trial-title" id="trialTitle">
+                Mau Coba Terlebih Dahulu?
+            </div>
+
+
+            <div class="trial-description" id="trialDescription">
+
+                Mulai dengan akses trial untuk melihat
+                bagaimana AI Trading Assistant bekerja.
+
+            </div>
+
+
+            <a
+                class="trial-button"
+                id="trialButton"
+                href="#"
+            >
+                COBA TRIAL
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         REQUIREMENTS
+    ====================================================== -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-number">
+                05
+            </div>
+
+            <div class="section-title" id="requirementTitle">
+                Syarat Menggunakan
             </div>
 
         </div>
 
 
-        <div class="step">
+        <div class="requirements">
 
-            <div class="step-number">04</div>
 
-            <div>
-                <h3 id="s4Title">
-                    Telegram
-                </h3>
+            <div class="requirement">
 
-                <p id="s4Text">
-                    Signal dikirim langsung ke Telegram Bot.
-                </p>
+                <div class="requirement-icon">
+                    01
+                </div>
+
+                <div
+                    class="requirement-text"
+                    id="requirement1"
+                >
+                    Memiliki akun Telegram aktif untuk
+                    menerima signal.
+                </div>
+
             </div>
+
+
+            <div class="requirement">
+
+                <div class="requirement-icon">
+                    02
+                </div>
+
+                <div
+                    class="requirement-text"
+                    id="requirement2"
+                >
+                    Menggunakan broker yang menyediakan
+                    instrumen XAUUSD.
+                </div>
+
+            </div>
+
+
+            <div class="requirement">
+
+                <div class="requirement-icon">
+                    03
+                </div>
+
+                <div
+                    class="requirement-text"
+                    id="requirement3"
+                >
+                    Pastikan koneksi internet Anda stabil
+                    untuk menerima informasi dari Telegram.
+                </div>
+
+            </div>
+
+
+            <div class="requirement">
+
+                <div class="requirement-icon">
+                    04
+                </div>
+
+                <div
+                    class="requirement-text"
+                    id="requirement4"
+                >
+                    Signal AI merupakan alat bantu analisa
+                    dan bukan jaminan keuntungan trading.
+                </div>
+
+            </div>
+
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- =========================================================
-     PRICING
-========================================================= -->
 
-<section class="section">
+    <!-- =====================================================
+         MAIN CTA
+    ====================================================== -->
 
-    <h2 class="section-title" id="pricingTitle">
-        Mulai Sekarang
-    </h2>
-
-    <p class="section-sub" id="pricingSub">
-        Pilih paket akses AI Assistant sesuai kebutuhan Anda.
-    </p>
-
-
-    <div class="pricing">
-
-        <div class="price-card">
-
-            <div class="price-name">
-                Starter — 1 Bulan
-            </div>
-
-            <div class="price">
-                Rp299.000
-            </div>
-
-            <div class="price-desc">
-                AI Bot Access
-            </div>
-
-            <button
-                class="price-button"
-                data-pkg="1month">
-                MULAI SEKARANG
-            </button>
-
-        </div>
-
-
-        <div class="price-card">
-
-            <div class="price-name">
-                Pro — 6 Bulan
-            </div>
-
-            <div class="price">
-                Rp500.000
-            </div>
-
-            <div class="price-desc">
-                AI Bot + Grup Diskusi & Sharing
-            </div>
-
-            <button
-                class="price-button"
-                data-pkg="6month">
-                PILIH PAKET
-            </button>
-
-        </div>
-
-
-        <div class="price-card popular">
-
-            <div class="badge">
-                TERLARIS
-            </div>
-
-            <div class="price-name">
-                Elite — 12 Bulan
-            </div>
-
-            <div class="price">
-                Rp850.000
-            </div>
-
-            <div class="price-desc">
-                AI Bot + Grup Diskusi & Sharing
-            </div>
-
-            <button
-                class="price-button"
-                data-pkg="12month">
-                PILIH PAKET
-            </button>
-
-        </div>
-
-
-        <div class="price-card">
-
-            <div class="badge">
-                PROMO
-            </div>
-
-            <div class="price-name">
-                3 Tahun
-            </div>
-
-            <div class="price">
-                Rp999.000
-            </div>
-
-            <div class="price-desc">
-                AI Bot + Grup Diskusi & Sharing
-            </div>
-
-            <button
-                class="price-button"
-                data-pkg="permanent">
-                PILIH PAKET
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     COUNTDOWN
-========================================================= -->
-
-<section class="section">
-
-    <h2 class="section-title">
-        Limited Promotion
-    </h2>
-
-    <p class="section-sub">
-        Promo paket tertentu tersedia dalam periode terbatas.
-    </p>
-
-    <div class="countdown">
-
-        <div class="count-box">
-            <div class="count-value" id="days">00</div>
-            <div class="count-label">DAYS</div>
-        </div>
-
-        <div class="count-box">
-            <div class="count-value" id="hours">00</div>
-            <div class="count-label">HOURS</div>
-        </div>
-
-        <div class="count-box">
-            <div class="count-value" id="minutes">00</div>
-            <div class="count-label">MINUTES</div>
-        </div>
-
-        <div class="count-box">
-            <div class="count-value" id="seconds">00</div>
-            <div class="count-label">SECONDS</div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CTA
-========================================================= -->
-
-<section class="cta">
-
-    <h2 id="ctaTitle">
-        Siap Menggunakan AI Assistant?
-    </h2>
-
-    <p id="ctaText">
-        Mulai akses AI Assistant dan terima signal XAUUSD
-        langsung melalui Telegram.
-    </p>
-
-    <div class="cta-buttons">
+    <section class="main-cta">
 
         <a
-            class="btn btn-primary"
-            href="https://t.me/Intradayxauusd_bot?start=landing"
-            target="_blank"
-            id="trialButton">
-            MULAI DI TELEGRAM
+            class="cta-button"
+            id="mainCTA"
+            href="#"
+        >
+            MULAI DENGAN AI TRADING
         </a>
 
+
         <a
-            class="btn btn-secondary"
+            class="secondary-cta"
+            id="portfolioCTA"
             href="https://dashboardpanelporto-production.up.railway.app/"
-            target="_blank">
-            LIHAT PORTFOLIO
+            target="_blank"
+            rel="noopener"
+        >
+            LIHAT PERFORMANCE
         </a>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DISCLAIMER
+    ====================================================== -->
+
+    <div class="disclaimer">
+
+        <p id="disclaimerText">
+
+            Disclaimer: XAU AI Intelligence merupakan alat bantu
+            analisa market. Signal bukan merupakan rekomendasi
+            investasi dan tidak menjamin keuntungan. Trading
+            memiliki risiko dan seluruh keputusan transaksi
+            berada pada pengguna.
+
+        </p>
 
     </div>
 
-</section>
 
 
-<!-- =========================================================
-     DISCLAIMER
-========================================================= -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
-<div class="disclaimer" id="disclaimer">
-    Informasi dan signal yang diberikan merupakan hasil sistem
-    analisa dan bukan merupakan jaminan keuntungan.
-    Trading memiliki risiko. Gunakan manajemen risiko yang sesuai.
-</div>
+    <footer>
 
+        <strong>XAU AI INTELLIGENCE</strong>
 
-<footer>
-    © 2026 XAU AI SMC GOLD
-</footer>
+        <br>
+
+        <span id="footerText">
+            AI Trading Assistant for XAUUSD
+        </span>
+
+        <br><br>
+
+        © <span id="year"></span> XAU AI Intelligence
+
+    </footer>
+
 
 </main>
 
 
+
 <!-- =========================================================
-     THREE.JS
-========================================================= -->
+     JAVASCRIPT
+========================================================== -->
 
-<script type="module">
+<script>
 
-import * as THREE from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+    /* =========================================================
+       CONFIGURATION
+    ========================================================== */
 
-import { OrbitControls } from
-"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+    const BOT_USERNAME = "Intradayxauusd_bot";
 
+    const BOT_BASE =
+        "https://t.me/" + BOT_USERNAME;
 
-/* =========================================================
-   BASIC
-========================================================= */
 
-const canvas = document.getElementById("officeCanvas");
-const shell = document.querySelector(".office-shell");
+    /* =========================================================
+       PACKAGE LINKS
+    ========================================================== */
 
-const scene = new THREE.Scene();
+    const packageLinks = {
 
-scene.background = new THREE.Color("#0b1219");
+        "1month":
+            BOT_BASE + "?start=1month",
 
-scene.fog = new THREE.Fog(
-    "#0b1219",
-    12,
-    27
-);
+        "6month":
+            BOT_BASE + "?start=6month",
 
+        "12month":
+            BOT_BASE + "?start=12month",
 
-const camera = new THREE.PerspectiveCamera(
-    42,
-    shell.clientWidth / shell.clientHeight,
-    0.1,
-    100
-);
+        "permanent":
+            BOT_BASE + "?start=permanent"
 
-camera.position.set(
-    8.8,
-    7.0,
-    10.5
-);
+    };
 
 
-const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias:true,
-    alpha:false
-});
+    /* =========================================================
+       TRIAL LINK
+    ========================================================== */
 
-renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio,1.8)
-);
+    const trialLink =
+        BOT_BASE + "?start=landing";
 
-renderer.setSize(
-    shell.clientWidth,
-    shell.clientHeight
-);
 
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    /* =========================================================
+       MAIN CTA
+    ========================================================== */
 
-renderer.outputColorSpace = THREE.SRGBColorSpace;
+    document
+        .getElementById("mainCTA")
+        .href = trialLink;
 
 
-/* =========================================================
-   ORBIT
-========================================================= */
+    document
+        .getElementById("trialButton")
+        .href = trialLink;
 
-const controls = new OrbitControls(
-    camera,
-    renderer.domElement
-);
 
-controls.enableDamping = true;
-controls.dampingFactor = .055;
 
-controls.enablePan = true;
+    /* =========================================================
+       PACKAGE BUTTONS
+    ========================================================== */
 
-controls.minDistance = 7;
-controls.maxDistance = 17;
+    document
+        .querySelectorAll(".package-link")
+        .forEach(button => {
 
-controls.minPolarAngle = .65;
-controls.maxPolarAngle = 1.45;
+            const packageKey =
+                button.dataset.pkg;
 
-controls.target.set(
-    0,
-    1.6,
-    -1
-);
+            if (packageLinks[packageKey]) {
 
+                button.href =
+                    packageLinks[packageKey];
 
-/* =========================================================
-   LIGHTING
-========================================================= */
+            }
 
-const hemisphere = new THREE.HemisphereLight(
-    "#e5f2ff",
-    "#252d36",
-    1.65
-);
+        });
 
-scene.add(hemisphere);
 
 
-const ambient = new THREE.AmbientLight(
-    "#ffffff",
-    .65
-);
+    /* =========================================================
+       YEAR
+    ========================================================== */
 
-scene.add(ambient);
+    document
+        .getElementById("year")
+        .textContent =
+        new Date().getFullYear();
 
 
-const mainLight = new THREE.DirectionalLight(
-    "#fff1c9",
-    2.8
-);
 
-mainLight.position.set(
-    0,
-    9,
-    5
-);
+    /* =========================================================
+       COUNTDOWN
+       WIB / ASIA JAKARTA
+    ========================================================== */
 
-mainLight.castShadow = true;
+    function getPromoTarget() {
 
-mainLight.shadow.mapSize.width = 2048;
-mainLight.shadow.mapSize.height = 2048;
+        const now = new Date();
 
-mainLight.shadow.camera.left = -9;
-mainLight.shadow.camera.right = 9;
-mainLight.shadow.camera.top = 9;
-mainLight.shadow.camera.bottom = -5;
+        /*
+         Promo berakhir setiap
+         30 September 23:59:59 WIB.
+        */
 
-scene.add(mainLight);
+        let year =
+            now.getFullYear();
 
+        let target =
+            new Date(
+                `${year}-09-30T23:59:59+07:00`
+            );
 
-const goldLight = new THREE.PointLight(
-    "#ffd45a",
-    3.2,
-    12
-);
+        /*
+         Jika promo tahun ini
+         sudah lewat, gunakan tahun depan.
+        */
 
-goldLight.position.set(
-    0,
-    3.7,
-    -1
-);
+        if (now.getTime() > target.getTime()) {
 
-scene.add(goldLight);
+            target =
+                new Date(
+                    `${year + 1}-09-30T23:59:59+07:00`
+                );
 
+        }
 
-const leftLight = new THREE.PointLight(
-    "#8acbff",
-    2.4,
-    10
-);
+        return target;
+    }
 
-leftLight.position.set(
-    -5,
-    3.5,
-    2
-);
 
-scene.add(leftLight);
+    let promoTarget =
+        getPromoTarget();
 
 
-const rightLight = new THREE.PointLight(
-    "#ffe0a0",
-    2.4,
-    10
-);
+    function updateCountdown() {
 
-rightLight.position.set(
-    5,
-    3.5,
-    2
-);
+        const now =
+            new Date();
 
-scene.add(rightLight);
+        let difference =
+            promoTarget.getTime()
+            -
+            now.getTime();
 
 
-/* =========================================================
-   MATERIAL HELPERS
-========================================================= */
+        if (difference <= 0) {
 
-function mat(
-    color,
-    roughness=.6,
-    metalness=.1,
-    emissive=null,
-    emissiveIntensity=0
-){
+            promoTarget =
+                getPromoTarget();
 
-    return new THREE.MeshStandardMaterial({
+            difference =
+                promoTarget.getTime()
+                -
+                now.getTime();
 
-        color,
+        }
 
-        roughness,
 
-        metalness,
+        const totalSeconds =
+            Math.floor(
+                difference / 1000
+            );
 
-        emissive:
-            emissive || "#000000",
 
-        emissiveIntensity
+        const days =
+            Math.floor(
+                totalSeconds / 86400
+            );
 
-    });
 
-}
+        const hours =
+            Math.floor(
+                (totalSeconds % 86400) / 3600
+            );
 
 
-const floorMat = mat(
-    "#182028",
-    .72,
-    .12
-);
+        const minutes =
+            Math.floor(
+                (totalSeconds % 3600) / 60
+            );
 
-const wallMat = mat(
-    "#1b242d",
-    .78,
-    .08
-);
 
-const darkMat = mat(
-    "#0c1116",
-    .5,
-    .2
-);
-
-const deskMat = mat(
-    "#202930",
-    .55,
-    .18
-);
+        const seconds =
+            totalSeconds % 60;
 
-const goldMat = mat(
-    "#c9a227",
-    .35,
-    .65
-);
-
-const blackMetal = mat(
-    "#11171d",
-    .35,
-    .65
-);
 
+        document
+            .getElementById("days")
+            .textContent =
+            String(days).padStart(2, "0");
 
-/* =========================================================
-   BOX HELPER
-========================================================= */
 
-function box(
-    w,
-    h,
-    d,
-    material,
-    x=0,
-    y=0,
-    z=0
-){
-
-    const mesh =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                w,h,d
-            ),
-            material
-        );
-
-    mesh.position.set(
-        x,y,z
-    );
+        document
+            .getElementById("hours")
+            .textContent =
+            String(hours).padStart(2, "0");
 
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
 
-    scene.add(mesh);
+        document
+            .getElementById("minutes")
+            .textContent =
+            String(minutes).padStart(2, "0");
 
-    return mesh;
-}
-
-
-/* =========================================================
-   FLOOR
-========================================================= */
-
-const floor = box(
-    17,
-    .25,
-    11,
-    floorMat,
-    0,
-    -.125,
-    0
-);
 
-
-/* =========================================================
-   WALLS
-========================================================= */
-
-box(
-    17,
-    7,
-    .25,
-    wallMat,
-    0,
-    3.5,
-    -5
-);
-
-box(
-    .25,
-    7,
-    11,
-    wallMat,
-    -8.5,
-    3.5,
-    0
-);
-
-box(
-    .25,
-    7,
-    11,
-    wallMat,
-    8.5,
-    3.5,
-    0
-);
-
-
-/* =========================================================
-   BACK WINDOWS
-========================================================= */
-
-function createWindow(
-    x,
-    y,
-    z
-){
-
-    const frame = new THREE.Group();
-
-    frame.position.set(
-        x,y,z
-    );
-
-    scene.add(frame);
-
-    const glass = mat(
-        "#102b3c",
-        .2,
-        .3,
-        "#164c68",
-        .25
-    );
-
-    const pane = new THREE.Mesh(
-        new THREE.BoxGeometry(
-            3.5,
-            2.2,
-            .08
-        ),
-        glass
-    );
-
-    pane.position.z = .08;
-
-    frame.add(pane);
-
-
-    for(let i=-1;i<=1;i++){
-
-        const vertical = new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .045,
-                2.25,
-                .12
-            ),
-            blackMetal
-        );
-
-        vertical.position.x =
-            i * 1.16;
-
-        vertical.position.z =
-            .15;
-
-        frame.add(vertical);
+        document
+            .getElementById("seconds")
+            .textContent =
+            String(seconds).padStart(2, "0");
 
     }
 
 
-    const horizontal = new THREE.Mesh(
-        new THREE.BoxGeometry(
-            3.5,
-            .045,
-            .12
-        ),
-        blackMetal
-    );
+    updateCountdown();
 
-    horizontal.position.z=.15;
-
-    frame.add(horizontal);
-
-    return frame;
-}
-
-
-createWindow(
-    -4.2,
-    4.0,
-    -4.78
-);
-
-createWindow(
-    0,
-    4.0,
-    -4.78
-);
-
-createWindow(
-    4.2,
-    4.0,
-    -4.78
-);
-
-
-/* =========================================================
-   CITY LIGHTS BEHIND WINDOWS
-========================================================= */
-
-const cityGroup =
-    new THREE.Group();
-
-scene.add(cityGroup);
-
-for(let i=0;i<90;i++){
-
-    const width =
-        .03 + Math.random()*.10;
-
-    const height =
-        .02 + Math.random()*.12;
-
-    const m = new THREE.Mesh(
-        new THREE.BoxGeometry(
-            width,
-            height,
-            .02
-        ),
-        new THREE.MeshBasicMaterial({
-            color:
-                Math.random()>.45
-                    ? "#d9b84b"
-                    : "#5aa9e6"
-        })
-    );
-
-    m.position.set(
-        -6.5 + Math.random()*13,
-        2.9 + Math.random()*2.0,
-        -4.62
-    );
-
-    cityGroup.add(m);
-}
-
-
-/* =========================================================
-   WALL LOGO
-========================================================= */
-
-function createTextTexture(
-    text,
-    width=900,
-    height=220
-){
-
-    const c =
-        document.createElement("canvas");
-
-    c.width=width;
-    c.height=height;
-
-    const ctx =
-        c.getContext("2d");
-
-    ctx.clearRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-    ctx.font =
-        "700 78px Space Grotesk";
-
-    ctx.textAlign="center";
-    ctx.textBaseline="middle";
-
-    ctx.fillStyle="#f0d66a";
-
-    ctx.fillText(
-        text,
-        width/2,
-        height/2
-    );
-
-    const texture =
-        new THREE.CanvasTexture(c);
-
-    texture.colorSpace =
-        THREE.SRGBColorSpace;
-
-    return texture;
-}
-
-
-const logoTexture =
-    createTextTexture(
-        "XAU AI SMC GOLD"
+    setInterval(
+        updateCountdown,
+        1000
     );
 
 
-const logoMaterial =
-    new THREE.MeshBasicMaterial({
-        map:logoTexture,
-        transparent:true
-    });
+
+    /* =========================================================
+       TRANSLATIONS
+    ========================================================== */
+
+    const translations = {
 
 
-const logo =
-    new THREE.Mesh(
-        new THREE.PlaneGeometry(
-            5.2,
-            1.25
-        ),
-        logoMaterial
-    );
+        /* =====================================================
+           INDONESIAN
+        ====================================================== */
 
-logo.position.set(
-    0,
-    5.65,
-    -4.78
-);
+        id: {
 
-scene.add(logo);
+            eyebrow:
+                "AI POWERED MARKET ANALYTICS",
+
+            heroTitle:
+                "Professional AI Assistant For XAUUSD",
+
+            heroSubtitle:
+                "AI Trading Assistant yang membaca peluang pergerakan XAUUSD menggunakan Smart Money Concept dan Fundamental Analysis, lalu mengirimkan signal langsung ke Telegram.",
+
+            aiDescription:
+                "Sistem AI dirancang untuk membantu membaca kondisi market XAUUSD dengan pendekatan Smart Money Concept, Market Structure, Liquidity dan Fundamental Analysis.",
+
+            featureSectionTitle:
+                "Fitur AI Trading",
+
+            feature1Title:
+                "Smart Money Concept",
+
+            feature1Text:
+                "Analisa market menggunakan konsep market structure, BOS, CHoCH, liquidity, Order Block dan Fair Value Gap.",
+
+            feature2Title:
+                "Multi Timeframe",
+
+            feature2Text:
+                "Kondisi market dibaca dari beberapa timeframe untuk mendapatkan konteks pergerakan XAUUSD yang lebih lengkap.",
+
+            feature3Title:
+                "Fundamental Analysis",
+
+            feature3Text:
+                "Kondisi fundamental dan faktor ekonomi dapat digunakan sebagai bagian dari konteks analisa market.",
+
+            feature4Title:
+                "Signal Telegram",
+
+            feature4Text:
+                "Signal dikirim langsung ke Telegram sehingga Anda dapat menerima informasi market tanpa harus terus membuka chart.",
 
 
-/* =========================================================
-   CEILING LIGHTS
-========================================================= */
+            howSectionTitle:
+                "Cara Kerja",
 
-function ceilingLight(x,z){
+            step1Title:
+                "Market Data",
 
-    const fixture =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                2.8,
-                .07,
-                .32
-            ),
-            new THREE.MeshBasicMaterial({
-                color:"#fff6cf"
-            })
+            step1Text:
+                "Sistem membaca kondisi market XAUUSD dan data pergerakan harga.",
+
+            step2Title:
+                "AI Analysis",
+
+            step2Text:
+                "AI menggabungkan Smart Money Concept, Market Structure, Liquidity dan Fundamental Analysis.",
+
+            step3Title:
+                "Signal Generation",
+
+            step3Text:
+                "Sistem menghasilkan setup signal berdasarkan kondisi market yang terbaca.",
+
+            step4Title:
+                "Telegram Delivery",
+
+            step4Text:
+                "Signal dikirim langsung ke Telegram setiap siklus signal.",
+
+
+            promoSectionTitle:
+                "Promo",
+
+            promoTitle:
+                "Promo Terbatas",
+
+            promoDescription:
+                "Gunakan kesempatan harga promo sebelum periode promo berakhir.",
+
+            days:
+                "Hari",
+
+            hours:
+                "Jam",
+
+            minutes:
+                "Menit",
+
+            seconds:
+                "Detik",
+
+
+            pricingSectionTitle:
+                "Mulai Sekarang",
+
+            oneMonthTitle:
+                "1 Bulan",
+
+            oneMonthFeature1:
+                "Akses AI Trading Assistant",
+
+            oneMonthFeature2:
+                "Signal XAUUSD",
+
+            oneMonthFeature3:
+                "Signal langsung ke Telegram",
+
+
+            sixMonthTitle:
+                "6 Bulan",
+
+            sixMonthFeature1:
+                "Akses AI Trading Assistant",
+
+            sixMonthFeature2:
+                "Signal XAUUSD",
+
+            sixMonthFeature3:
+                "Akses Grup Diskusi & Sharing",
+
+
+            twelveMonthTitle:
+                "12 Bulan",
+
+            twelveMonthFeature1:
+                "Akses AI Trading Assistant",
+
+            twelveMonthFeature2:
+                "Signal XAUUSD",
+
+            twelveMonthFeature3:
+                "Akses Grup Diskusi & Sharing",
+
+
+            permanentTitle:
+                "3 Tahun",
+
+            permanentFeature1:
+                "Akses AI Trading Assistant",
+
+            permanentFeature2:
+                "Signal XAUUSD",
+
+            permanentFeature3:
+                "Akses Grup Diskusi & Sharing",
+
+
+            popularBadge:
+                "TERLARIS",
+
+
+            buyButton:
+                "LANGGANAN SEKARANG",
+
+
+            trialTitle:
+                "Mau Coba Terlebih Dahulu?",
+
+            trialDescription:
+                "Mulai dengan akses trial untuk melihat bagaimana AI Trading Assistant bekerja.",
+
+            trialButton:
+                "COBA TRIAL",
+
+
+            requirementTitle:
+                "Syarat Menggunakan",
+
+            requirement1:
+                "Memiliki akun Telegram aktif untuk menerima signal.",
+
+            requirement2:
+                "Menggunakan broker yang menyediakan instrumen XAUUSD.",
+
+            requirement3:
+                "Pastikan koneksi internet Anda stabil untuk menerima informasi dari Telegram.",
+
+            requirement4:
+                "Signal AI merupakan alat bantu analisa dan bukan jaminan keuntungan trading.",
+
+
+            mainCTA:
+                "MULAI DENGAN AI TRADING",
+
+            portfolioCTA:
+                "LIHAT PERFORMANCE",
+
+
+            disclaimer:
+                "Disclaimer: XAU AI Intelligence merupakan alat bantu analisa market. Signal bukan merupakan rekomendasi investasi dan tidak menjamin keuntungan. Trading memiliki risiko dan seluruh keputusan transaksi berada pada pengguna.",
+
+            footer:
+                "AI Trading Assistant for XAUUSD"
+
+        },
+
+
+        /* =====================================================
+           ENGLISH
+        ====================================================== */
+
+        en: {
+
+            eyebrow:
+                "AI POWERED MARKET ANALYTICS",
+
+            heroTitle:
+                "Professional AI Assistant For XAUUSD",
+
+            heroSubtitle:
+                "AI Trading Assistant that analyzes XAUUSD market conditions using Smart Money Concept and Fundamental Analysis, then delivers signals directly to Telegram.",
+
+            aiDescription:
+                "The AI system is designed to help analyze XAUUSD market conditions using Smart Money Concept, Market Structure, Liquidity and Fundamental Analysis.",
+
+            featureSectionTitle:
+                "AI Trading Features",
+
+            feature1Title:
+                "Smart Money Concept",
+
+            feature1Text:
+                "Market analysis using market structure, BOS, CHoCH, liquidity, Order Blocks and Fair Value Gaps.",
+
+            feature2Title:
+                "Multi Timeframe",
+
+            feature2Text:
+                "Market conditions are analyzed across multiple timeframes to provide broader XAUUSD market context.",
+
+            feature3Title:
+                "Fundamental Analysis",
+
+            feature3Text:
+                "Fundamental conditions and economic factors can be incorporated into the overall market analysis.",
+
+            feature4Title:
+                "Telegram Signals",
+
+            feature4Text:
+                "Signals are delivered directly to Telegram so you can receive market information without constantly watching the chart.",
+
+
+            howSectionTitle:
+                "How It Works",
+
+            step1Title:
+                "Market Data",
+
+            step1Text:
+                "The system reads XAUUSD market conditions and price movement data.",
+
+            step2Title:
+                "AI Analysis",
+
+            step2Text:
+                "AI combines Smart Money Concept, Market Structure, Liquidity and Fundamental Analysis.",
+
+            step3Title:
+                "Signal Generation",
+
+            step3Text:
+                "The system generates a signal setup based on the detected market conditions.",
+
+            step4Title:
+                "Telegram Delivery",
+
+            step4Text:
+                "Signals are delivered directly to Telegram during each signal cycle.",
+
+
+            promoSectionTitle:
+                "Promotion",
+
+            promoTitle:
+                "Limited Promotion",
+
+            promoDescription:
+                "Take advantage of the promotional price before the promotion period ends.",
+
+            days:
+                "Days",
+
+            hours:
+                "Hours",
+
+            minutes:
+                "Minutes",
+
+            seconds:
+                "Seconds",
+
+
+            pricingSectionTitle:
+                "Get Started",
+
+            oneMonthTitle:
+                "1 Month",
+
+            oneMonthFeature1:
+                "AI Trading Assistant Access",
+
+            oneMonthFeature2:
+                "XAUUSD Signals",
+
+            oneMonthFeature3:
+                "Signals Delivered Directly to Telegram",
+
+
+            sixMonthTitle:
+                "6 Months",
+
+            sixMonthFeature1:
+                "AI Trading Assistant Access",
+
+            sixMonthFeature2:
+                "XAUUSD Signals",
+
+            sixMonthFeature3:
+                "Discussion & Sharing Group Access",
+
+
+            twelveMonthTitle:
+                "12 Months",
+
+            twelveMonthFeature1:
+                "AI Trading Assistant Access",
+
+            twelveMonthFeature2:
+                "XAUUSD Signals",
+
+            twelveMonthFeature3:
+                "Discussion & Sharing Group Access",
+
+
+            permanentTitle:
+                "3 Years",
+
+            permanentFeature1:
+                "AI Trading Assistant Access",
+
+            permanentFeature2:
+                "XAUUSD Signals",
+
+            permanentFeature3:
+                "Discussion & Sharing Group Access",
+
+
+            popularBadge:
+                "BEST SELLER",
+
+
+            buyButton:
+                "SUBSCRIBE NOW",
+
+
+            trialTitle:
+                "Want to Try It First?",
+
+            trialDescription:
+                "Start with trial access and see how the AI Trading Assistant works.",
+
+            trialButton:
+                "TRY THE TRIAL",
+
+
+            requirementTitle:
+                "Requirements",
+
+            requirement1:
+                "Have an active Telegram account to receive signals.",
+
+            requirement2:
+                "Use a broker that provides the XAUUSD instrument.",
+
+            requirement3:
+                "Make sure your internet connection is stable to receive Telegram updates.",
+
+            requirement4:
+                "AI signals are analytical tools and do not guarantee trading profits.",
+
+
+            mainCTA:
+                "START WITH AI TRADING",
+
+            portfolioCTA:
+                "VIEW PERFORMANCE",
+
+
+            disclaimer:
+                "Disclaimer: XAU AI Intelligence is a market analysis tool. Signals are not investment recommendations and do not guarantee profits. Trading involves risk and all trading decisions remain the responsibility of the user.",
+
+            footer:
+                "AI Trading Assistant for XAUUSD"
+
+        },
+
+
+        /* =====================================================
+           CHINESE
+        ====================================================== */
+
+        zh: {
+
+            eyebrow:
+                "AI 智能市场分析",
+
+            heroTitle:
+                "专业 XAUUSD AI 交易助手",
+
+            heroSubtitle:
+                "AI Trading Assistant 使用 Smart Money Concept 与基本面分析读取 XAUUSD 市场状况，并将交易信号直接发送到 Telegram。",
+
+            aiDescription:
+                "AI 系统通过 Smart Money Concept、市场结构、流动性以及基本面分析，帮助分析 XAUUSD 市场环境。",
+
+            featureSectionTitle:
+                "AI 交易功能",
+
+            feature1Title:
+                "Smart Money Concept",
+
+            feature1Text:
+                "结合市场结构、BOS、CHoCH、流动性、Order Block 和 Fair Value Gap 进行市场分析。",
+
+            feature2Title:
+                "多时间周期",
+
+            feature2Text:
+                "通过多个时间周期分析市场，为 XAUUSD 提供更完整的市场环境。",
+
+            feature3Title:
+                "基本面分析",
+
+            feature3Text:
+                "将经济环境和基本面因素作为市场分析的一部分。",
+
+            feature4Title:
+                "Telegram 信号",
+
+            feature4Text:
+                "交易信号直接发送到 Telegram，无需一直盯着交易图表。",
+
+
+            howSectionTitle:
+                "工作方式",
+
+            step1Title:
+                "市场数据",
+
+            step1Text:
+                "系统读取 XAUUSD 市场状况和价格走势数据。",
+
+            step2Title:
+                "AI 分析",
+
+            step2Text:
+                "AI 综合 Smart Money Concept、市场结构、流动性和基本面分析。",
+
+            step3Title:
+                "生成信号",
+
+            step3Text:
+                "系统根据当前市场环境生成交易信号。",
+
+            step4Title:
+                "Telegram 发送",
+
+            step4Text:
+                "信号在每个信号周期直接发送到 Telegram。",
+
+
+            promoSectionTitle:
+                "优惠",
+
+            promoTitle:
+                "限时优惠",
+
+            promoDescription:
+                "在优惠活动结束之前享受当前优惠价格。",
+
+            days:
+                "天",
+
+            hours:
+                "小时",
+
+            minutes:
+                "分钟",
+
+            seconds:
+                "秒",
+
+
+            pricingSectionTitle:
+                "立即开始",
+
+            oneMonthTitle:
+                "1个月",
+
+            oneMonthFeature1:
+                "AI Trading Assistant 使用权限",
+
+            oneMonthFeature2:
+                "XAUUSD 交易信号",
+
+            oneMonthFeature3:
+                "信号直接发送到 Telegram",
+
+
+            sixMonthTitle:
+                "6个月",
+
+            sixMonthFeature1:
+                "AI Trading Assistant 使用权限",
+
+            sixMonthFeature2:
+                "XAUUSD 交易信号",
+
+            sixMonthFeature3:
+                "讨论与分享群组权限",
+
+
+            twelveMonthTitle:
+                "12个月",
+
+            twelveMonthFeature1:
+                "AI Trading Assistant 使用权限",
+
+            twelveMonthFeature2:
+                "XAUUSD 交易信号",
+
+            twelveMonthFeature3:
+                "讨论与分享群组权限",
+
+
+            permanentTitle:
+                "3年",
+
+            permanentFeature1:
+                "AI Trading Assistant 使用权限",
+
+            permanentFeature2:
+                "XAUUSD 交易信号",
+
+            permanentFeature3:
+                "讨论与分享群组权限",
+
+
+            popularBadge:
+                "最受欢迎",
+
+
+            buyButton:
+                "立即订阅",
+
+
+            trialTitle:
+                "想先试试看？",
+
+            trialDescription:
+                "先体验试用权限，了解 AI Trading Assistant 的工作方式。",
+
+            trialButton:
+                "开始试用",
+
+
+            requirementTitle:
+                "使用要求",
+
+            requirement1:
+                "需要拥有有效的 Telegram 账号来接收信号。",
+
+            requirement2:
+                "需要使用提供 XAUUSD 产品的交易平台。",
+
+            requirement3:
+                "请确保网络连接稳定，以正常接收 Telegram 信息。",
+
+            requirement4:
+                "AI 信号仅作为市场分析工具，并不保证交易收益。",
+
+
+            mainCTA:
+                "开始 AI 交易",
+
+            portfolioCTA:
+                "查看表现",
+
+
+            disclaimer:
+                "免责声明：XAU AI Intelligence 是市场分析工具。交易信号不构成投资建议，也不保证盈利。交易存在风险，所有交易决定由用户自行承担。",
+
+            footer:
+                "XAUUSD AI 交易助手"
+
+        }
+
+    };
+
+
+
+    /* =========================================================
+       TRANSLATION HELPER
+    ========================================================== */
+
+    function setText(id, value) {
+
+        const element =
+            document.getElementById(id);
+
+        if (element) {
+
+            element.textContent =
+                value;
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       APPLY LANGUAGE
+    ========================================================== */
+
+    function applyLanguage(lang) {
+
+        const t =
+            translations[lang];
+
+        if (!t) return;
+
+
+        setText(
+            "eyebrowText",
+            t.eyebrow
         );
 
-    fixture.position.set(
-        x,
-        6.75,
-        z
-    );
-
-    scene.add(fixture);
-
-
-    const glow =
-        new THREE.PointLight(
-            "#fff0c2",
-            1.5,
-            6
+        setText(
+            "heroTitle",
+            t.heroTitle
         );
 
-    glow.position.set(
-        x,
-        6.3,
-        z
-    );
-
-    scene.add(glow);
-}
-
-
-ceilingLight(-4,-1);
-ceilingLight(0,-1);
-ceilingLight(4,-1);
-
-ceilingLight(-4,3.2);
-ceilingLight(0,3.2);
-ceilingLight(4,3.2);
-
-
-/* =========================================================
-   DESK
-========================================================= */
-
-function createDesk(
-    x,
-    z,
-    rotation=0
-){
-
-    const g =
-        new THREE.Group();
-
-    g.position.set(
-        x,
-        0,
-        z
-    );
-
-    g.rotation.y =
-        rotation;
-
-    scene.add(g);
-
-
-    const top =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                2.45,
-                .16,
-                1.15
-            ),
-            deskMat
+        setText(
+            "heroSubtitle",
+            t.heroSubtitle
         );
 
-    top.position.y=1.15;
-
-    top.castShadow=true;
-    top.receiveShadow=true;
-
-    g.add(top);
+        setText(
+            "aiDescription",
+            t.aiDescription
+        );
 
 
-    const legPositions=[
-        [-.95,-.42],
-        [.95,-.42],
-        [-.95,.42],
-        [.95,.42]
-    ];
+        setText(
+            "featureSectionTitle",
+            t.featureSectionTitle
+        );
+
+        setText(
+            "feature1Title",
+            t.feature1Title
+        );
+
+        setText(
+            "feature1Text",
+            t.feature1Text
+        );
+
+        setText(
+            "feature2Title",
+            t.feature2Title
+        );
+
+        setText(
+            "feature2Text",
+            t.feature2Text
+        );
+
+        setText(
+            "feature3Title",
+            t.feature3Title
+        );
+
+        setText(
+            "feature3Text",
+            t.feature3Text
+        );
+
+        setText(
+            "feature4Title",
+            t.feature4Title
+        );
+
+        setText(
+            "feature4Text",
+            t.feature4Text
+        );
 
 
-    legPositions.forEach(p=>{
+        setText(
+            "howSectionTitle",
+            t.howSectionTitle
+        );
 
-        const leg =
-            new THREE.Mesh(
-                new THREE.BoxGeometry(
-                    .10,
-                    1.1,
-                    .10
-                ),
-                blackMetal
+        setText(
+            "step1Title",
+            t.step1Title
+        );
+
+        setText(
+            "step1Text",
+            t.step1Text
+        );
+
+        setText(
+            "step2Title",
+            t.step2Title
+        );
+
+        setText(
+            "step2Text",
+            t.step2Text
+        );
+
+        setText(
+            "step3Title",
+            t.step3Title
+        );
+
+        setText(
+            "step3Text",
+            t.step3Text
+        );
+
+        setText(
+            "step4Title",
+            t.step4Title
+        );
+
+        setText(
+            "step4Text",
+            t.step4Text
+        );
+
+
+        setText(
+            "promoSectionTitle",
+            t.promoSectionTitle
+        );
+
+        setText(
+            "promoTitle",
+            t.promoTitle
+        );
+
+        setText(
+            "promoDescription",
+            t.promoDescription
+        );
+
+        setText(
+            "daysLabel",
+            t.days
+        );
+
+        setText(
+            "hoursLabel",
+            t.hours
+        );
+
+        setText(
+            "minutesLabel",
+            t.minutes
+        );
+
+        setText(
+            "secondsLabel",
+            t.seconds
+        );
+
+
+        setText(
+            "pricingSectionTitle",
+            t.pricingSectionTitle
+        );
+
+
+        setText(
+            "oneMonthTitle",
+            t.oneMonthTitle
+        );
+
+        setText(
+            "oneMonthFeature1",
+            t.oneMonthFeature1
+        );
+
+        setText(
+            "oneMonthFeature2",
+            t.oneMonthFeature2
+        );
+
+        setText(
+            "oneMonthFeature3",
+            t.oneMonthFeature3
+        );
+
+
+        setText(
+            "sixMonthTitle",
+            t.sixMonthTitle
+        );
+
+        setText(
+            "sixMonthFeature1",
+            t.sixMonthFeature1
+        );
+
+        setText(
+            "sixMonthFeature2",
+            t.sixMonthFeature2
+        );
+
+        setText(
+            "sixMonthFeature3",
+            t.sixMonthFeature3
+        );
+
+
+        setText(
+            "twelveMonthTitle",
+            t.twelveMonthTitle
+        );
+
+        setText(
+            "twelveMonthFeature1",
+            t.twelveMonthFeature1
+        );
+
+        setText(
+            "twelveMonthFeature2",
+            t.twelveMonthFeature2
+        );
+
+        setText(
+            "twelveMonthFeature3",
+            t.twelveMonthFeature3
+        );
+
+
+        setText(
+            "permanentTitle",
+            t.permanentTitle
+        );
+
+        setText(
+            "permanentFeature1",
+            t.permanentFeature1
+        );
+
+        setText(
+            "permanentFeature2",
+            t.permanentFeature2
+        );
+
+        setText(
+            "permanentFeature3",
+            t.permanentFeature3
+        );
+
+
+        setText(
+            "popularBadge",
+            t.popularBadge
+        );
+
+
+        document
+            .querySelectorAll(".price-button span")
+            .forEach(element => {
+
+                element.textContent =
+                    t.buyButton;
+
+            });
+
+
+        setText(
+            "trialTitle",
+            t.trialTitle
+        );
+
+        setText(
+            "trialDescription",
+            t.trialDescription
+        );
+
+        setText(
+            "trialButton",
+            t.trialButton
+        );
+
+
+        setText(
+            "requirementTitle",
+            t.requirementTitle
+        );
+
+        setText(
+            "requirement1",
+            t.requirement1
+        );
+
+        setText(
+            "requirement2",
+            t.requirement2
+        );
+
+        setText(
+            "requirement3",
+            t.requirement3
+        );
+
+        setText(
+            "requirement4",
+            t.requirement4
+        );
+
+
+        setText(
+            "mainCTA",
+            t.mainCTA
+        );
+
+        setText(
+            "portfolioCTA",
+            t.portfolioCTA
+        );
+
+
+        setText(
+            "disclaimerText",
+            t.disclaimer
+        );
+
+        setText(
+            "footerText",
+            t.footer
+        );
+
+
+        document.documentElement.lang =
+            lang === "zh"
+                ? "zh-CN"
+                : lang;
+
+
+
+        /* ---------------------------------------------
+           Active language
+        ---------------------------------------------- */
+
+        document
+            .querySelectorAll(".language-btn")
+            .forEach(button => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.lang === lang
+                );
+
+            });
+
+
+        /*
+         Simpan bahasa agar ketika
+         halaman dibuka kembali tetap sama.
+        */
+
+        localStorage.setItem(
+            "xau_ai_language",
+            lang
+        );
+
+    }
+
+
+
+    /* =========================================================
+       LANGUAGE BUTTON
+    ========================================================== */
+
+    document
+        .querySelectorAll(".language-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    applyLanguage(
+                        button.dataset.lang
+                    );
+
+                }
             );
 
-        leg.position.set(
-            p[0],
-            .55,
-            p[1]
+        });
+
+
+
+    /* =========================================================
+       LOAD SAVED LANGUAGE
+    ========================================================== */
+
+    const savedLanguage =
+        localStorage.getItem(
+            "xau_ai_language"
         );
 
-        leg.castShadow=true;
 
-        g.add(leg);
-
-    });
-
-
-    return g;
-}
+    applyLanguage(
+        savedLanguage &&
+        translations[savedLanguage]
+            ? savedLanguage
+            : "id"
+    );
 
 
-/* =========================================================
-   MONITOR CHART
-========================================================= */
 
-const chartTextures=[];
-
-
-function createChartCanvas(
-    seed
-){
+    /* =========================================================
+       BACKGROUND NETWORK ANIMATION
+       Tidak menggunakan Three.js.
+    ========================================================== */
 
     const canvas =
-        document.createElement("canvas");
-
-    canvas.width=500;
-    canvas.height=300;
+        document.getElementById("bgCanvas");
 
     const ctx =
         canvas.getContext("2d");
 
-    chartTextures.push({
-        canvas,
-        ctx,
-        seed,
-        texture:null
-    });
 
-    return canvas;
-}
+    let width = 0;
+    let height = 0;
 
+    let particles = [];
 
-function drawChart(
-    obj,
-    time
-){
-
-    const {
-        canvas,
-        ctx,
-        seed
-    } = obj;
-
-    const w=canvas.width;
-    const h=canvas.height;
-
-    ctx.fillStyle="#081017";
-
-    ctx.fillRect(
-        0,0,w,h
-    );
+    const PARTICLE_COUNT =
+        window.innerWidth < 600
+            ? 28
+            : 48;
 
 
-    /* grid */
+    function resizeCanvas() {
 
-    ctx.strokeStyle=
-        "rgba(120,145,165,.13)";
-
-    ctx.lineWidth=1;
-
-    for(let x=0;x<w;x+=50){
-
-        ctx.beginPath();
-
-        ctx.moveTo(x,0);
-        ctx.lineTo(x,h);
-
-        ctx.stroke();
-
-    }
-
-    for(let y=0;y<h;y+=50){
-
-        ctx.beginPath();
-
-        ctx.moveTo(0,y);
-        ctx.lineTo(w,y);
-
-        ctx.stroke();
-
-    }
-
-
-    /* candles */
-
-    let base =
-        160 +
-        Math.sin(
-            time*.0005+seed
-        )*25;
-
-
-    for(
-        let i=0;
-        i<22;
-        i++
-    ){
-
-        const x =
-            18+i*21;
-
-        const wave =
-            Math.sin(
-                i*.7+
-                time*.001+
-                seed
-            )*25;
-
-        const open =
-            base+wave;
-
-        const close =
-            open+
-            Math.sin(
-                i*1.3+
-                time*.002+
-                seed
-            )*25;
-
-        const high =
+        width =
+            canvas.width =
+            window.innerWidth *
             Math.min(
-                open,
-                close
-            )-
-            (7+
-             Math.random()*7);
+                window.devicePixelRatio || 1,
+                1.5
+            );
 
-        const low =
-            Math.max(
-                open,
-                close
-            )+
-            (7+
-             Math.random()*7);
-
-
-        const bullish =
-            close < open;
-
-
-        ctx.strokeStyle=
-            bullish
-                ? "#42c7a5"
-                : "#d65a5a";
-
-        ctx.fillStyle=
-            ctx.strokeStyle;
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-            x,
-            high
-        );
-
-        ctx.lineTo(
-            x,
-            low
-        );
-
-        ctx.stroke();
-
-
-        const top =
+        height =
+            canvas.height =
+            window.innerHeight *
             Math.min(
-                open,
-                close
+                window.devicePixelRatio || 1,
+                1.5
             );
 
-        const bottom =
-            Math.max(
-                open,
-                close
-            );
+        canvas.style.width =
+            window.innerWidth + "px";
 
+        canvas.style.height =
+            window.innerHeight + "px";
 
-        ctx.fillRect(
-            x-4,
-            top,
-            8,
-            Math.max(
-                4,
-                bottom-top
-            )
-        );
-
-    }
-
-
-    /* moving gold line */
-
-    ctx.strokeStyle="#ffd84d";
-    ctx.lineWidth=3;
-
-    ctx.beginPath();
-
-
-    for(
-        let x=0;
-        x<w;
-        x+=5
-    ){
-
-        const y =
-            135 +
-            Math.sin(
-                x*.028+
-                time*.0012+
-                seed
-            )*38 +
-            Math.sin(
-                x*.08+
-                time*.0008
-            )*12;
-
-        if(x===0)
-            ctx.moveTo(x,y);
-        else
-            ctx.lineTo(x,y);
-
-    }
-
-    ctx.stroke();
-
-
-    /* title */
-
-    ctx.fillStyle="#dce4eb";
-    ctx.font="600 18px Arial";
-
-    ctx.fillText(
-        "XAUUSD",
-        15,
-        25
-    );
-
-    ctx.fillStyle="#748394";
-    ctx.font="12px monospace";
-
-    ctx.fillText(
-        "AI ANALYSIS",
-        390,
-        25
-    );
-
-
-    if(!obj.texture){
-
-        obj.texture =
-            new THREE.CanvasTexture(
-                canvas
-            );
-
-        obj.texture.colorSpace =
-            THREE.SRGBColorSpace;
-
-    }
-
-    obj.texture.needsUpdate=true;
-}
-
-
-function createMonitor(
-    x,
-    y,
-    z,
-    rotation,
-    seed
-){
-
-    const g =
-        new THREE.Group();
-
-    g.position.set(
-        x,y,z
-    );
-
-    g.rotation.y =
-        rotation;
-
-    scene.add(g);
-
-
-    const body =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                1.65,
-                1.05,
-                .14
+        ctx.setTransform(
+            Math.min(
+                window.devicePixelRatio || 1,
+                1.5
             ),
-            blackMetal
-        );
-
-    body.castShadow=true;
-
-    g.add(body);
-
-
-    const chartObj={
-        canvas:createChartCanvas(seed),
-        ctx:null,
-        seed,
-        texture:null
-    };
-
-    chartObj.ctx =
-        chartObj.canvas.getContext("2d");
-
-    chartTextures.push(
-        chartObj
-    );
-
-
-    drawChart(
-        chartObj,
-        performance.now()
-    );
-
-
-    const screenMat =
-        new THREE.MeshBasicMaterial({
-            map:chartObj.texture
-        });
-
-
-    const screen =
-        new THREE.Mesh(
-            new THREE.PlaneGeometry(
-                1.48,
-                .82
+            0,
+            0,
+            Math.min(
+                window.devicePixelRatio || 1,
+                1.5
             ),
-            screenMat
-        );
-
-    screen.position.z=.076;
-
-    g.add(screen);
-
-
-    const stand =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .10,
-                .48,
-                .10
-            ),
-            blackMetal
-        );
-
-    stand.position.y=-.70;
-
-    g.add(stand);
-
-
-    const foot =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .55,
-                .07,
-                .28
-            ),
-            blackMetal
-        );
-
-    foot.position.y=-.94;
-
-    g.add(foot);
-
-
-    return g;
-}
-
-
-/* =========================================================
-   DESKS + MONITORS
-========================================================= */
-
-const deskPositions=[
-    [-5.4,1.7],
-    [-2.7,1.7],
-    [0,1.7],
-    [2.7,1.7],
-    [5.4,1.7]
-];
-
-
-deskPositions.forEach(
-    (p,i)=>{
-
-        createDesk(
-            p[0],
-            p[1],
+            0,
             0
         );
 
-        createMonitor(
-            p[0],
-            2.05,
-            p[1]-.08,
+        width =
+            window.innerWidth;
+
+        height =
+            window.innerHeight;
+
+        createParticles();
+
+    }
+
+
+    function createParticles() {
+
+        particles = [];
+
+        for (
+            let i = 0;
+            i < PARTICLE_COUNT;
+            i++
+        ) {
+
+            particles.push({
+
+                x:
+                    Math.random() *
+                    width,
+
+                y:
+                    Math.random() *
+                    height,
+
+                vx:
+                    (Math.random() - 0.5)
+                    * 0.22,
+
+                vy:
+                    (Math.random() - 0.5)
+                    * 0.22,
+
+                radius:
+                    Math.random() * 1.3
+                    + 0.4,
+
+                alpha:
+                    Math.random() * 0.35
+                    + 0.08
+
+            });
+
+        }
+
+    }
+
+
+    function drawBackground() {
+
+        ctx.clearRect(
             0,
-            i*3.71
-        );
-
-    }
-);
-
-
-/* =========================================================
-   CHAIRS
-========================================================= */
-
-function createChair(
-    x,
-    z
-){
-
-    const g =
-        new THREE.Group();
-
-    g.position.set(
-        x,
-        0,
-        z
-    );
-
-    scene.add(g);
-
-
-    const seat =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .75,
-                .12,
-                .75
-            ),
-            darkMat
-        );
-
-    seat.position.y=.62;
-
-    g.add(seat);
-
-
-    const back =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .68,
-                .85,
-                .10
-            ),
-            darkMat
-        );
-
-    back.position.set(
-        0,
-        1.05,
-        .34
-    );
-
-    g.add(back);
-
-
-    const pole =
-        new THREE.Mesh(
-            new THREE.CylinderGeometry(
-                .06,
-                .06,
-                .55,
-                8
-            ),
-            blackMetal
-        );
-
-    pole.position.y=.32;
-
-    g.add(pole);
-
-
-    return g;
-}
-
-
-deskPositions.forEach(
-    p=>{
-        createChair(
-            p[0],
-            p[1]+.95
-        );
-    }
-);
-
-
-/* =========================================================
-   MEETING TABLE
-========================================================= */
-
-const meeting =
-    new THREE.Group();
-
-meeting.position.set(
-    0,
-    0,
-    -1.7
-);
-
-scene.add(meeting);
-
-
-const meetingTop =
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            2.0,
-            2.0,
-            .16,
-            32
-        ),
-        deskMat
-    );
-
-meetingTop.scale.z=.7;
-
-meetingTop.position.y=1.02;
-
-meeting.add(meetingTop);
-
-
-const meetingPole =
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            .16,
-            .16,
-            1,
-            16
-        ),
-        blackMetal
-    );
-
-meetingPole.position.y=.5;
-
-meeting.add(meetingPole);
-
-
-const meetingBase =
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            .8,
-            .8,
-            .10,
-            16
-        ),
-        blackMetal
-    );
-
-meetingBase.position.y=.05;
-
-meeting.add(meetingBase);
-
-
-/* =========================================================
-   COFFEE STATION
-========================================================= */
-
-function createCoffeeStation(){
-
-    const g =
-        new THREE.Group();
-
-    g.position.set(
-        6.1,
-        0,
-        -3.2
-    );
-
-    scene.add(g);
-
-
-    const counter =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                2.0,
-                .95,
-                .8
-            ),
-            deskMat
-        );
-
-    counter.position.y=.48;
-
-    counter.castShadow=true;
-
-    g.add(counter);
-
-
-    const top =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                2.1,
-                .10,
-                .9
-            ),
-            goldMat
-        );
-
-    top.position.y=1.02;
-
-    g.add(top);
-
-
-    /* machine */
-
-    const machine =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .55,
-                .60,
-                .48
-            ),
-            blackMetal
-        );
-
-    machine.position.set(
-        -.35,
-        1.35,
-        0
-    );
-
-    g.add(machine);
-
-
-    /* cups */
-
-    for(let i=0;i<3;i++){
-
-        const cup =
-            new THREE.Mesh(
-                new THREE.CylinderGeometry(
-                    .08,
-                    .065,
-                    .18,
-                    12
-                ),
-                new THREE.MeshStandardMaterial({
-                    color:"#e8edf2",
-                    roughness:.35
-                })
-            );
-
-        cup.position.set(
-            .35+i*.23,
-            1.15,
-            0
-        );
-
-        g.add(cup);
-
-    }
-
-}
-
-createCoffeeStation();
-
-
-/* =========================================================
-   PLANTS
-========================================================= */
-
-function createPlant(
-    x,
-    z
-){
-
-    const g =
-        new THREE.Group();
-
-    g.position.set(
-        x,
-        0,
-        z
-    );
-
-    scene.add(g);
-
-
-    const pot =
-        new THREE.Mesh(
-            new THREE.CylinderGeometry(
-                .28,
-                .22,
-                .45,
-                12
-            ),
-            mat(
-                "#6e5140",
-                .85,
-                .05
-            )
-        );
-
-    pot.position.y=.22;
-
-    g.add(pot);
-
-
-    for(let i=0;i<9;i++){
-
-        const leaf =
-            new THREE.Mesh(
-                new THREE.SphereGeometry(
-                    .20,
-                    8,
-                    8
-                ),
-                mat(
-                    "#315d45",
-                    .8,
-                    .02
-                )
-            );
-
-        leaf.scale.set(
-            .7,
-            1.6,
-            .45
-        );
-
-        leaf.position.set(
-            Math.cos(i)*.25,
-            .7+
-            Math.sin(i*.7)*.15,
-            Math.sin(i)*.25
-        );
-
-        g.add(leaf);
-
-    }
-}
-
-
-createPlant(
-    -6.8,
-    -3.8
-);
-
-createPlant(
-    6.8,
-    2.7
-);
-
-
-/* =========================================================
-   AGENTS
-========================================================= */
-
-const agentsData=[
-
-    {
-        id:0,
-        name:"M30 MACRO",
-        role:"Macro Analyst",
-        tf:"M30",
-        shirt:"#34495e",
-        skin:"#c58c68"
-    },
-
-    {
-        id:1,
-        name:"M15 SMC",
-        role:"SMC Analyst",
-        tf:"M15",
-        shirt:"#725c25",
-        skin:"#b97e5f"
-    },
-
-    {
-        id:2,
-        name:"M5 ENTRY",
-        role:"Entry Analyst",
-        tf:"M5",
-        shirt:"#294f5d",
-        skin:"#c99473"
-    },
-
-    {
-        id:3,
-        name:"M1 EXECUTION",
-        role:"Execution Analyst",
-        tf:"M1",
-        shirt:"#51406b",
-        skin:"#ad7559"
-    },
-
-    {
-        id:4,
-        name:"FUNDAMENTAL",
-        role:"Fundamental Analyst",
-        tf:"FUND",
-        shirt:"#455b45",
-        skin:"#c38a69"
-    }
-
-];
-
-
-const agents=[];
-
-
-/* =========================================================
-   PERSON CREATION
-========================================================= */
-
-function createPerson(
-    data
-){
-
-    const g =
-        new THREE.Group();
-
-    g.userData.agent=data;
-
-    scene.add(g);
-
-
-    /* body */
-
-    const body =
-        new THREE.Mesh(
-            new THREE.CapsuleGeometry(
-                .24,
-                .58,
-                5,
-                10
-            ),
-            mat(
-                data.shirt,
-                .68,
-                .05
-            )
-        );
-
-    body.position.y=1.05;
-
-    body.castShadow=true;
-
-    g.add(body);
-
-
-    /* neck */
-
-    const neck =
-        new THREE.Mesh(
-            new THREE.CylinderGeometry(
-                .08,
-                .08,
-                .13,
-                10
-            ),
-            mat(
-                data.skin,
-                .9
-            )
-        );
-
-    neck.position.y=1.53;
-
-    g.add(neck);
-
-
-    /* head */
-
-    const head =
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .25,
-                16,
-                16
-            ),
-            mat(
-                data.skin,
-                .85
-            )
-        );
-
-    head.position.y=1.78;
-
-    head.castShadow=true;
-
-    g.add(head);
-
-
-    /* hair */
-
-    const hair =
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .255,
-                16,
-                16
-            ),
-            mat(
-                "#191717",
-                .9
-            )
-        );
-
-    hair.scale.set(
-        1,
-        .48,
-        1
-    );
-
-    hair.position.set(
-        0,
-        1.96,
-        -.015
-    );
-
-    g.add(hair);
-
-
-    /* arms */
-
-    const armMat =
-        mat(
-            data.shirt,
-            .7
-        );
-
-
-    const leftArm =
-        new THREE.Mesh(
-            new THREE.CapsuleGeometry(
-                .07,
-                .40,
-                4,
-                8
-            ),
-            armMat
-        );
-
-    leftArm.position.set(
-        -.30,
-        1.10,
-        0
-    );
-
-    leftArm.rotation.z=-.12;
-
-    leftArm.castShadow=true;
-
-    g.add(leftArm);
-
-
-    const rightArm =
-        leftArm.clone();
-
-    rightArm.position.x=.30;
-    rightArm.rotation.z=.12;
-
-    g.add(rightArm);
-
-
-    /* hands */
-
-    const handMat =
-        mat(
-            data.skin,
-            .9
-        );
-
-
-    const lh =
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .075,
-                8,
-                8
-            ),
-            handMat
-        );
-
-    lh.position.set(
-        -.33,
-        .86,
-        0
-    );
-
-    g.add(lh);
-
-
-    const rh =
-        lh.clone();
-
-    rh.position.x=.33;
-
-    g.add(rh);
-
-
-    /* legs */
-
-    const pants =
-        mat(
-            "#20262d",
-            .8
-        );
-
-
-    const leftLeg =
-        new THREE.Mesh(
-            new THREE.CapsuleGeometry(
-                .085,
-                .48,
-                4,
-                8
-            ),
-            pants
-        );
-
-    leftLeg.position.set(
-        -.12,
-        .48,
-        0
-    );
-
-    leftLeg.castShadow=true;
-
-    g.add(leftLeg);
-
-
-    const rightLeg =
-        leftLeg.clone();
-
-    rightLeg.position.x=.12;
-
-    g.add(rightLeg);
-
-
-    /* shoes */
-
-    const shoeMat =
-        mat(
-            "#101317",
-            .4,
-            .3
-        );
-
-
-    const leftShoe =
-        new THREE.Mesh(
-            new THREE.BoxGeometry(
-                .18,
-                .09,
-                .34
-            ),
-            shoeMat
-        );
-
-    leftShoe.position.set(
-        -.12,
-        .18,
-        -.06
-    );
-
-    g.add(leftShoe);
-
-
-    const rightShoe =
-        leftShoe.clone();
-
-    rightShoe.position.x=.12;
-
-    g.add(rightShoe);
-
-
-    /* chest LED */
-
-    const led =
-        new THREE.Mesh(
-            new THREE.SphereGeometry(
-                .035,
-                8,
-                8
-            ),
-            new THREE.MeshBasicMaterial({
-                color:"#ffd84d"
-            })
-        );
-
-    led.position.set(
-        0,
-        1.18,
-        -.25
-    );
-
-    g.add(led);
-
-
-    g.userData.parts={
-        body,
-        head,
-        leftArm,
-        rightArm,
-        leftLeg,
-        rightLeg,
-        leftShoe,
-        rightShoe
-    };
-
-
-    return g;
-}
-
-
-agentsData.forEach(
-    data=>{
-
-        const person =
-            createPerson(data);
-
-        agents.push({
-            group:person,
-            data,
-            state:"working",
-            progress:0,
-            target:new THREE.Vector3(),
-            start:new THREE.Vector3(),
-            pathIndex:0,
-            bubbleTimer:0,
-            bubbleDuration:0,
-            speech:"",
-            nextSpeech:0
-        });
-
-    }
-);
-
-
-/* =========================================================
-   INITIAL POSITIONS
-========================================================= */
-
-const workPositions=[
-
-    new THREE.Vector3(-5.4,.0,2.45),
-
-    new THREE.Vector3(-2.7,.0,2.45),
-
-    new THREE.Vector3(0,.0,2.45),
-
-    new THREE.Vector3(2.7,.0,2.45),
-
-    new THREE.Vector3(5.4,.0,2.45)
-
-];
-
-
-agents.forEach(
-    (a,i)=>{
-
-        a.group.position.copy(
-            workPositions[i]
-        );
-
-        a.group.rotation.y=Math.PI;
-
-    }
-);
-
-
-/* =========================================================
-   ACTIVITY LOCATIONS
-========================================================= */
-
-const activityPoints=[
-
-    new THREE.Vector3(-4.5,0,-.8),
-    new THREE.Vector3(-2.0,0,-.4),
-    new THREE.Vector3(0,0,-1.1),
-    new THREE.Vector3(2.1,0,-.7),
-    new THREE.Vector3(4.0,0,-1.2),
-
-    new THREE.Vector3(-5.5,0,-2.8),
-    new THREE.Vector3(5.4,0,-3.0),
-
-    new THREE.Vector3(-1.2,0,-2.0),
-    new THREE.Vector3(1.2,0,-2.0)
-];
-
-
-/* =========================================================
-   SPEECH
-========================================================= */
-
-const conversations={
-
-    0:[
-        "XAUUSD hari ini sungguh volatil.",
-        "Macro masih perlu kita perhatikan.",
-        "Ada perubahan momentum di market.",
-        "Coba lihat struktur M30."
-    ],
-
-    1:[
-        "M15 mulai menunjukkan perubahan struktur.",
-        "Liquidity di atas masih menarik.",
-        "Saya melihat kemungkinan sweep.",
-        "Tunggu konfirmasi SMC."
-    ],
-
-    2:[
-        "M5 mulai membentuk setup.",
-        "Entry jangan terburu-buru.",
-        "Tunggu retest area.",
-        "Struktur entry mulai menarik."
-    ],
-
-    3:[
-        "M1 sudah mulai bergerak.",
-        "Execution harus tetap disiplin.",
-        "Spread masih harus diperhatikan.",
-        "Tunggu trigger yang jelas."
-    ],
-
-    4:[
-        "Fundamental hari ini perlu diperhatikan.",
-        "News bisa meningkatkan volatility.",
-        "Saya sedang cek kondisi fundamental.",
-        "Macro event bisa mempengaruhi gold."
-    ]
-
-};
-
-
-function showBubble(
-    agent,
-    text
-){
-
-    agent.speech=text;
-
-    agent.bubbleTimer=0;
-
-    agent.bubbleDuration=
-        3.5+
-        Math.random()*2;
-
-    const bubble=
-        document.getElementById(
-            "speechBubble"
-        );
-
-    const name=
-        document.getElementById(
-            "bubbleName"
-        );
-
-    const content=
-        document.getElementById(
-            "bubbleText"
-        );
-
-    name.textContent=
-        agent.data.name;
-
-    content.textContent=
-        text;
-
-    bubble.classList.add(
-        "visible"
-    );
-
-    activeBubbleAgent=agent;
-}
-
-
-let activeBubbleAgent=null;
-
-
-/* =========================================================
-   SPEECH BUBBLE POSITION
-========================================================= */
-
-const projected =
-    new THREE.Vector3();
-
-
-function positionBubble(){
-
-    if(!activeBubbleAgent)
-        return;
-
-    const agent=
-        activeBubbleAgent;
-
-    projected.setFromMatrixPosition(
-        agent.group.matrixWorld
-    );
-
-    projected.y+=2.35;
-
-    projected.project(
-        camera
-    );
-
-    const x=
-        (projected.x*.5+.5)*
-        shell.clientWidth;
-
-    const y=
-        (-projected.y*.5+.5)*
-        shell.clientHeight;
-
-
-    const bubble=
-        document.getElementById(
-            "speechBubble"
-        );
-
-    bubble.style.left=
-        `${x}px`;
-
-    bubble.style.top=
-        `${y}px`;
-
-}
-
-
-/* =========================================================
-   SELECTED AGENT
-========================================================= */
-
-let selectedAgent=null;
-
-const agentCard=
-    document.getElementById(
-        "agentCard"
-    );
-
-
-function showAgentCard(
-    agent
-){
-
-    selectedAgent=agent;
-
-    document.getElementById(
-        "agentName"
-    ).textContent=
-        agent.data.name;
-
-    document.getElementById(
-        "agentRole"
-    ).textContent=
-        agent.data.role;
-
-    document.getElementById(
-        "agentTF"
-    ).textContent=
-        "TIMEFRAME " +
-        agent.data.tf;
-
-    agentCard.classList.add(
-        "visible"
-    );
-
-}
-
-
-function hideAgentCard(){
-
-    selectedAgent=null;
-
-    agentCard.classList.remove(
-        "visible"
-    );
-
-}
-
-
-/* =========================================================
-   AGENT CARD POSITION
-========================================================= */
-
-function positionAgentCard(){
-
-    if(!selectedAgent)
-        return;
-
-    projected.setFromMatrixPosition(
-        selectedAgent.group.matrixWorld
-    );
-
-    projected.y+=2.0;
-
-    projected.project(
-        camera
-    );
-
-    const x=
-        (projected.x*.5+.5)*
-        shell.clientWidth;
-
-    const y=
-        (-projected.y*.5+.5)*
-        shell.clientHeight;
-
-
-    agentCard.style.left=
-        `${x}px`;
-
-    agentCard.style.top=
-        `${y}px`;
-
-}
-
-
-/* =========================================================
-   RAYCASTER
-========================================================= */
-
-const raycaster=
-    new THREE.Raycaster();
-
-const mouse=
-    new THREE.Vector2();
-
-
-function getPointerPosition(
-    event
-){
-
-    const rect=
-        canvas.getBoundingClientRect();
-
-    mouse.x=
-        ((event.clientX-rect.left)/
-        rect.width)*2-1;
-
-    mouse.y=
-        -((event.clientY-rect.top)/
-        rect.height)*2+1;
-
-}
-
-
-function findAgentFromObject(
-    object
-){
-
-    let current=
-        object;
-
-    while(current){
-
-        if(
-            current.userData &&
-            current.userData.agent
-        ){
-
-            return agents.find(
-                a=>
-                    a.group===
-                    current
-            );
-
-        }
-
-        current=
-            current.parent;
-
-    }
-
-    return null;
-}
-
-
-/* =========================================================
-   POINTER DOWN
-========================================================= */
-
-canvas.addEventListener(
-    "pointerdown",
-    event=>{
-
-        getPointerPosition(
-            event
-        );
-
-        raycaster.setFromCamera(
-            mouse,
-            camera
-        );
-
-
-        const objects=[];
-
-        agents.forEach(
-            a=>{
-                a.group.traverse(
-                    child=>{
-                        if(child.isMesh)
-                            objects.push(child);
-                    }
-                );
-            }
-        );
-
-
-        const hits=
-            raycaster.intersectObjects(
-                objects,
-                false
-            );
-
-
-        if(hits.length){
-
-            const agent=
-                findAgentFromObject(
-                    hits[0].object
-                );
-
-            if(agent){
-
-                showAgentCard(
-                    agent
-                );
-
-                event.preventDefault();
-
-            }
-
-        }
-
-    },
-    {passive:false}
-);
-
-
-/* =========================================================
-   POINTER UP
-========================================================= */
-
-function pointerRelease(){
-
-    hideAgentCard();
-
-}
-
-
-canvas.addEventListener(
-    "pointerup",
-    pointerRelease
-);
-
-canvas.addEventListener(
-    "pointercancel",
-    pointerRelease
-);
-
-window.addEventListener(
-    "pointerup",
-    pointerRelease
-);
-
-
-/* =========================================================
-   HOVER CURSOR
-========================================================= */
-
-canvas.addEventListener(
-    "pointermove",
-    event=>{
-
-        getPointerPosition(
-            event
-        );
-
-        raycaster.setFromCamera(
-            mouse,
-            camera
-        );
-
-
-        const objects=[];
-
-        agents.forEach(
-            a=>{
-                a.group.traverse(
-                    child=>{
-                        if(child.isMesh)
-                            objects.push(child);
-                    }
-                );
-            }
-        );
-
-
-        const hits=
-            raycaster.intersectObjects(
-                objects,
-                false
-            );
-
-
-        canvas.style.cursor=
-            hits.length
-                ? "pointer"
-                : "grab";
-
-    }
-);
-
-
-/* =========================================================
-   TIME / CYCLE
-========================================================= */
-
-function jakartaTime(){
-
-    const parts =
-        new Intl.DateTimeFormat(
-            "en-GB",
-            {
-                timeZone:"Asia/Jakarta",
-                hour:"2-digit",
-                minute:"2-digit",
-                second:"2-digit",
-                hour12:false
-            }
-        ).formatToParts(
-            new Date()
-        );
-
-    const get=
-        type=>
-            Number(
-                parts.find(
-                    p=>p.type===type
-                ).value
-            );
-
-    return {
-        hour:get("hour"),
-        minute:get("minute"),
-        second:get("second")
-    };
-
-}
-
-
-/* =========================================================
-   AI BEHAVIOUR
-========================================================= */
-
-let previousMinute=-1;
-let previousHour=-1;
-
-
-function chooseActivity(
-    agent,
-    index
-){
-
-    const point=
-        activityPoints[
-            Math.floor(
-                Math.random()*
-                activityPoints.length
-            )
-        ];
-
-    agent.start.copy(
-        agent.group.position
-    );
-
-    agent.target.copy(
-        point
-    );
-
-    agent.progress=0;
-
-    agent.state="walking";
-
-    agent.group.userData.walkStart=
-        performance.now();
-
-    agent.group.userData.walkDuration=
-        5000+
-        Math.random()*5000;
-
-}
-
-
-function goWork(
-    agent,
-    index
-){
-
-    agent.start.copy(
-        agent.group.position
-    );
-
-    agent.target.copy(
-        workPositions[index]
-    );
-
-    agent.progress=0;
-
-    agent.state="returning";
-
-    agent.group.userData.walkStart=
-        performance.now();
-
-    agent.group.userData.walkDuration=
-        4000+
-        Math.random()*2500;
-
-}
-
-
-function goMeeting(
-    agent
-){
-
-    const angle=
-        (agent.data.id/
-        agents.length)*
-        Math.PI*2;
-
-    const target=
-        new THREE.Vector3(
-            Math.cos(angle)*1.8,
             0,
-            -1.7+
-            Math.sin(angle)*1.0
+            width,
+            height
         );
-
-
-    agent.start.copy(
-        agent.group.position
-    );
-
-    agent.target.copy(
-        target
-    );
-
-    agent.progress=0;
-
-    agent.state="meeting";
-
-    agent.group.userData.walkStart=
-        performance.now();
-
-    agent.group.userData.walkDuration=
-        3500+
-        Math.random()*1500;
-
-}
-
-
-/* =========================================================
-   MOVE PERSON
-========================================================= */
-
-function movePerson(
-    agent,
-    now
-){
-
-    if(
-        agent.state!=="walking" &&
-        agent.state!=="returning" &&
-        agent.state!=="meeting"
-    ){
-
-        return;
-
-    }
-
-
-    const duration=
-        agent.group.userData.walkDuration;
-
-    const elapsed=
-        now-
-        agent.group.userData.walkStart;
-
-
-    let p=
-        Math.min(
-            1,
-            elapsed/duration
-        );
-
-
-    /* smooth movement */
-
-    const smooth=
-        p*p*(3-2*p);
-
-
-    agent.group.position.lerpVectors(
-        agent.start,
-        agent.target,
-        smooth
-    );
-
-
-    const dx=
-        agent.target.x-
-        agent.start.x;
-
-    const dz=
-        agent.target.z-
-        agent.start.z;
-
-
-    const desiredRotation=
-        Math.atan2(
-            dx,
-            dz
-        );
-
-
-    let diff=
-        desiredRotation-
-        agent.group.rotation.y;
-
-
-    while(diff>Math.PI)
-        diff-=Math.PI*2;
-
-    while(diff<-Math.PI)
-        diff+=Math.PI*2;
-
-
-    agent.group.rotation.y+=
-        diff*.12;
-
-
-    /* walking animation */
-
-    const walkPhase=
-        now*.009+
-        agent.data.id*1.5;
-
-    const parts=
-        agent.group.userData.parts;
-
-    const swing=
-        Math.sin(walkPhase)*.45;
-
-    parts.leftLeg.rotation.x=
-        swing;
-
-    parts.rightLeg.rotation.x=
-        -swing;
-
-    parts.leftArm.rotation.x=
-        -swing*.65;
-
-    parts.rightArm.rotation.x=
-        swing*.65;
-
-
-    agent.group.position.y=
-        Math.abs(
-            Math.sin(walkPhase)
-        )*.045;
-
-
-    if(p>=1){
-
-        agent.group.position.y=0;
-
-        if(
-            agent.state==="meeting"
-        ){
-
-            agent.state="talking";
-
-        }else{
-
-            agent.state="talking";
-
-        }
-
-        agent.bubbleTimer=0;
-
-        agent.nextSpeech=
-            now+
-            1800+
-            Math.random()*2500;
-
-    }
-
-}
-
-
-/* =========================================================
-   WORK ANIMATION
-========================================================= */
-
-function animateWorking(
-    agent,
-    now
-){
-
-    const parts=
-        agent.group.userData.parts;
-
-
-    const idle=
-        Math.sin(
-            now*.0014+
-            agent.data.id
-        );
-
-
-    agent.group.position.y=
-        idle*.012;
-
-
-    parts.leftArm.rotation.x=
-        Math.sin(
-            now*.004+
-            agent.data.id
-        )*.08;
-
-    parts.rightArm.rotation.x=
-        Math.sin(
-            now*.004+
-            agent.data.id+
-            1
-        )*.08;
-
-
-    parts.head.rotation.y=
-        Math.sin(
-            now*.0008+
-            agent.data.id
-        )*.09;
-
-
-    parts.head.rotation.x=
-        Math.sin(
-            now*.001+
-            agent.data.id
-        )*.035;
-
-}
-
-
-/* =========================================================
-   TALKING ANIMATION
-========================================================= */
-
-function animateTalking(
-    agent,
-    now
-){
-
-    const parts=
-        agent.group.userData.parts;
-
-
-    const wave=
-        Math.sin(
-            now*.003+
-            agent.data.id
-        );
-
-
-    parts.leftArm.rotation.z=
-        -.12+
-        wave*.12;
-
-    parts.rightArm.rotation.z=
-        .12-
-        wave*.12;
-
-
-    parts.head.rotation.y=
-        Math.sin(
-            now*.0017+
-            agent.data.id
-        )*.18;
-
-}
-
-
-/* =========================================================
-   MAIN AI CYCLE
-========================================================= */
-
-function updateAgents(
-    now
-){
-
-    const time=
-        jakartaTime();
-
-    const minute=
-        time.minute;
-
-    const second=
-        time.second;
-
-
-    /* -----------------------------------------------------
-       MINUTE 00
-    ----------------------------------------------------- */
-
-    if(
-        minute===0 &&
-        previousMinute!==0
-    ){
-
-        agents.forEach(
-            agent=>{
-
-                goMeeting(
-                    agent
-                );
-
-            }
-        );
-
-    }
-
-
-    /* -----------------------------------------------------
-       MINUTE 40
-    ----------------------------------------------------- */
-
-    if(
-        minute===40 &&
-        previousMinute!==40
-    ){
-
-        showBubble(
-            agents[0],
-            "Oke team, kembali ke meja masing-masing. Kita siapkan analisa untuk signal berikutnya."
-        );
-
-        document.getElementById(
-            "officeStatus"
-        ).textContent=
-            "LEADER CALLING TEAM";
-
-
-        setTimeout(
-            ()=>{
-
-                agents.forEach(
-                    (agent,index)=>{
-
-                        goWork(
-                            agent,
-                            index
-                        );
-
-                    }
-                );
-
-            },
-            2500
-        );
-
-    }
-
-
-    /* -----------------------------------------------------
-       HOUR 00 SIGNAL
-    ----------------------------------------------------- */
-
-    if(
-        minute===0 &&
-        second>=3 &&
-        second<=18
-    ){
-
-        document.getElementById(
-            "officeStatus"
-        ).textContent=
-            "SIGNAL CYCLE ACTIVE";
-
-
-        if(
-            second===5
-        ){
-
-            showBubble(
-                agents[0],
-                "SEND SIGNAL TO TELEGRAM NOW!"
-            );
-
-        }
-
-    }
-
-
-    /* -----------------------------------------------------
-       NORMAL STATUS
-    ----------------------------------------------------- */
-
-    if(
-        minute!==0 &&
-        minute!==40
-    ){
-
-        document.getElementById(
-            "officeStatus"
-        ).textContent=
-            "AI TEAM ANALYZING";
-
-    }
-
-
-    /* -----------------------------------------------------
-       BEFORE 40
-    ----------------------------------------------------- */
-
-    if(
-        minute>=1 &&
-        minute<40
-    ){
-
-        agents.forEach(
-            (agent,index)=>{
-
-                if(
-                    agent.state==="working" ||
-                    agent.state==="talking"
-                ){
-
-                    const chance=
-                        Math.random();
-
-                    if(
-                        agent.nextSpeech &&
-                        now>agent.nextSpeech
-                    ){
-
-                        const lines=
-                            conversations[
-                                agent.data.id
-                            ];
-
-                        showBubble(
-                            agent,
-                            lines[
-                                Math.floor(
-                                    Math.random()*
-                                    lines.length
-                                )
-                            ]
-                        );
-
-                        agent.nextSpeech=
-                            now+
-                            7000+
-                            Math.random()*7000;
-
-                    }
-
-
-                    /*
-                     * occasionally move
-                     */
-
-                    if(
-                        Math.random()<
-                        .0018
-                    ){
-
-                        chooseActivity(
-                            agent,
-                            index
-                        );
-
-                    }else{
-
-                        if(
-                            agent.state==="working"
-                        ){
-
-                            animateWorking(
-                                agent,
-                                now
-                            );
-
-                        }else{
-
-                            animateTalking(
-                                agent,
-                                now
-                            );
-
-                        }
-
-                    }
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* -----------------------------------------------------
-       UPDATE MOVEMENT
-    ----------------------------------------------------- */
-
-    agents.forEach(
-        agent=>{
-
-            movePerson(
-                agent,
-                now
-            );
-
-        }
-    );
-
-
-    /* -----------------------------------------------------
-       BUBBLE TIMER
-    ----------------------------------------------------- */
-
-    if(activeBubbleAgent){
-
-        activeBubbleAgent.bubbleTimer+=
-            .016;
-
-        if(
-            activeBubbleAgent.bubbleTimer>
-            activeBubbleAgent.bubbleDuration
-        ){
-
-            document
-                .getElementById(
-                    "speechBubble"
-                )
-                .classList.remove(
-                    "visible"
-                );
-
-            activeBubbleAgent=null;
-
-        }
-
-    }
-
-
-    previousMinute=minute;
-    previousHour=time.hour;
-
-}
-
-
-/* =========================================================
-   BETTER RANDOM SOCIAL MOVEMENT
-========================================================= */
-
-setInterval(
-    ()=>{
-
-        const time=
-            jakartaTime();
-
-        if(
-            time.minute>=1 &&
-            time.minute<40
-        ){
-
-            const candidates=
-                agents.filter(
-                    a=>
-                        a.state==="working" ||
-                        a.state==="talking"
-                );
-
-
-            if(candidates.length){
-
-                const a=
-                    candidates[
-                        Math.floor(
-                            Math.random()*
-                            candidates.length
-                        )
-                    ];
-
-                chooseActivity(
-                    a,
-                    a.data.id
-                );
-
-            }
-
-        }
-
-    },
-    9000
-);
-
-
-/* =========================================================
-   INITIAL SPEECH
-========================================================= */
-
-setTimeout(
-    ()=>{
-
-        showBubble(
-            agents[1],
-            "XAUUSD hari ini sungguh volatil."
-        );
-
-    },
-    1800
-);
-
-
-/* =========================================================
-   CHART ANIMATION
-========================================================= */
-
-let lastChartUpdate=0;
-
-function updateCharts(
-    now
-){
-
-    if(
-        now-lastChartUpdate<
-        70
-    ){
-
-        return;
-
-    }
-
-    lastChartUpdate=now;
-
-
-    chartTextures.forEach(
-        obj=>{
-
-            drawChart(
-                obj,
-                now
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   SELECTED AGENT RING
-========================================================= */
-
-const selectionRing =
-    new THREE.Mesh(
-        new THREE.RingGeometry(
-            .34,
-            .40,
-            32
-        ),
-        new THREE.MeshBasicMaterial({
-            color:"#ffd84d",
-            transparent:true,
-            opacity:.9,
-            side:THREE.DoubleSide
-        })
-    );
-
-selectionRing.rotation.x=
-    -Math.PI/2;
-
-selectionRing.visible=false;
-
-scene.add(
-    selectionRing
-);
-
-
-function updateSelectionRing(
-    now
-){
-
-    if(!selectedAgent){
-
-        selectionRing.visible=false;
-
-        return;
-
-    }
-
-
-    selectionRing.visible=true;
-
-    selectionRing.position.copy(
-        selectedAgent.group.position
-    );
-
-    selectionRing.position.y=.02;
-
-    const scale=
-        1+
-        Math.sin(now*.005)*.08;
-
-    selectionRing.scale.set(
-        scale,
-        scale,
-        scale
-    );
-
-}
-
-
-/* =========================================================
-   OFFICE CAMERA MOTION
-========================================================= */
-
-let cameraAutoTime=0;
-
-function updateCamera(
-    now
-){
-
-    cameraAutoTime+=.001;
-
-
-    /*
-     * very subtle camera breathing.
-     * OrbitControls remains active.
-     */
-
-    if(
-        !controls.state ||
-        true
-    ){
-
-        const targetX=
-            8.8+
-            Math.sin(
-                now*.00012
-            )*.18;
-
-        const targetZ=
-            10.5+
-            Math.cos(
-                now*.00010
-            )*.18;
 
 
         /*
-         * only if user isn't actively
-         * dragging the camera.
-         */
+         Particle movement
+        */
 
-        if(!isPointerDown){
+        particles.forEach(p => {
 
-            camera.position.x +=
-                (targetX-
-                 camera.position.x)
-                *.002;
+            p.x += p.vx;
+            p.y += p.vy;
 
-            camera.position.z +=
-                (targetZ-
-                 camera.position.z)
-                *.002;
+
+            if (
+                p.x < -20 ||
+                p.x > width + 20
+            ) {
+
+                p.vx *= -1;
+
+            }
+
+
+            if (
+                p.y < -20 ||
+                p.y > height + 20
+            ) {
+
+                p.vy *= -1;
+
+            }
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                p.x,
+                p.y,
+                p.radius,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(201,162,39,${p.alpha})`;
+
+            ctx.fill();
+
+        });
+
+
+        /*
+         Connecting lines
+        */
+
+        for (
+            let i = 0;
+            i < particles.length;
+            i++
+        ) {
+
+            for (
+                let j = i + 1;
+                j < particles.length;
+                j++
+            ) {
+
+                const a =
+                    particles[i];
+
+                const b =
+                    particles[j];
+
+                const dx =
+                    a.x - b.x;
+
+                const dy =
+                    a.y - b.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (distance < 115) {
+
+                    const alpha =
+                        (1 -
+                        distance / 115)
+                        * 0.07;
+
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        a.x,
+                        a.y
+                    );
+
+                    ctx.lineTo(
+                        b.x,
+                        b.y
+                    );
+
+                    ctx.strokeStyle =
+                        `rgba(201,162,39,${alpha})`;
+
+                    ctx.lineWidth = 1;
+
+                    ctx.stroke();
+
+                }
+
+            }
 
         }
 
-    }
 
-}
-
-
-let isPointerDown=false;
-
-canvas.addEventListener(
-    "pointerdown",
-    ()=>{
-        isPointerDown=true;
-    }
-);
-
-window.addEventListener(
-    "pointerup",
-    ()=>{
-        isPointerDown=false;
-    }
-);
-
-
-/* =========================================================
-   RESIZE
-========================================================= */
-
-function resize(){
-
-    const width=
-        shell.clientWidth;
-
-    const height=
-        shell.clientHeight;
-
-
-    camera.aspect=
-        width/height;
-
-    camera.updateProjectionMatrix();
-
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
-
-    renderer.setPixelRatio(
-        Math.min(
-            window.devicePixelRatio,
-            1.8
-        )
-    );
-
-}
-
-
-window.addEventListener(
-    "resize",
-    resize
-);
-
-
-/* =========================================================
-   RENDER LOOP
-========================================================= */
-
-const clock=
-    new THREE.Clock();
-
-
-function animate(){
-
-    requestAnimationFrame(
-        animate
-    );
-
-
-    const now=
-        performance.now();
-
-
-    updateAgents(
-        now
-    );
-
-
-    updateCharts(
-        now
-    );
-
-
-    updateSelectionRing(
-        now
-    );
-
-
-    updateCamera(
-        now
-    );
-
-
-    positionBubble();
-
-    positionAgentCard();
-
-
-    /* gold light breathing */
-
-    goldLight.intensity=
-        3.2+
-        Math.sin(
-            now*.0015
-        )*.35;
-
-
-    controls.update();
-
-    renderer.render(
-        scene,
-        camera
-    );
-
-}
-
-
-resize();
-
-animate();
-
-
-</script>
-
-
-<!-- =========================================================
-     LANGUAGE + WEBSITE LOGIC
-========================================================= -->
-
-<script>
-
-/* =========================================================
-   TRANSLATIONS
-========================================================= */
-
-const translations={
-
-id:{
-
-heroSubtitle:
-"AI Trading Assistant yang menggabungkan Smart Money Concept, Fundamental Analysis dan beberapa timeframe untuk membaca kondisi XAUUSD dan mengirimkan signal langsung ke Telegram.",
-
-visualTitle:
-"AI Team Sedang Menganalisa XAUUSD",
-
-visualText:
-"Visualisasi Team AI yang sedang menganalisa XAUUSD menggunakan Smart Money Concept (SMC) yang dikombinasikan dengan Fundamental Analysis dari beberapa timeframe. Setiap jam, sistem menggabungkan hasil analisa untuk menghasilkan signal dan mengirimkannya langsung ke Telegram Bot.",
-
-featureTitle:
-"Fitur AI Trading",
-
-featureSub:
-"Sistem visualisasi AI yang menggambarkan proses kerja multi-agent sebelum signal dikirim ke Telegram.",
-
-f1Title:
-"Smart Money Concept",
-
-f1Text:
-"Market Structure, BOS, CHoCH, Liquidity, Order Block dan Fair Value Gap.",
-
-f2Title:
-"Multi Timeframe",
-
-f2Text:
-"Analisa dilakukan melalui beberapa timeframe untuk mendapatkan konteks market yang lebih lengkap.",
-
-f3Title:
-"Telegram Signal",
-
-f3Text:
-"Signal yang sudah diproses dikirim langsung melalui Telegram Bot.",
-
-howTitle:
-"Cara Kerja",
-
-howSub:
-"Gambaran sederhana bagaimana sistem bekerja.",
-
-s1Title:
-"Market Data",
-
-s1Text:
-"Data XAUUSD dikumpulkan dan dipantau oleh sistem.",
-
-s2Title:
-"AI Team Analysis",
-
-s2Text:
-"Multi-agent memproses SMC, timeframe dan fundamental.",
-
-s3Title:
-"Signal Processing",
-
-s3Text:
-"Hasil analisa digabungkan menjadi satu signal.",
-
-s4Title:
-"Telegram",
-
-s4Text:
-"Signal dikirim langsung ke Telegram Bot.",
-
-pricingTitle:
-"Mulai Sekarang",
-
-pricingSub:
-"Pilih paket akses AI Assistant sesuai kebutuhan Anda.",
-
-ctaTitle:
-"Siap Menggunakan AI Assistant?",
-
-ctaText:
-"Mulai akses AI Assistant dan terima signal XAUUSD langsung melalui Telegram.",
-
-trial:
-"MULAI DI TELEGRAM",
-
-hint:
-"DRAG untuk memutar kantor • SCROLL untuk zoom • tekan/tahan AI untuk melihat identitas",
-
-disclaimer:
-"Informasi dan signal yang diberikan merupakan hasil sistem analisa dan bukan merupakan jaminan keuntungan. Trading memiliki risiko. Gunakan manajemen risiko yang sesuai."
-
-},
-
-en:{
-
-heroSubtitle:
-"AI Trading Assistant combining Smart Money Concept, Fundamental Analysis and multiple timeframes to monitor XAUUSD conditions and send signals directly to Telegram.",
-
-visualTitle:
-"AI Team Analyzing XAUUSD",
-
-visualText:
-"Visualization of an AI team analyzing XAUUSD using Smart Money Concept (SMC) combined with Fundamental Analysis across multiple timeframes. Every hour, the system combines the analysis to generate a signal and send it directly to the Telegram Bot.",
-
-featureTitle:
-"AI Trading Features",
-
-featureSub:
-"A visualization of the multi-agent AI workflow before signals are sent to Telegram.",
-
-f1Title:
-"Smart Money Concept",
-
-f1Text:
-"Market Structure, BOS, CHoCH, Liquidity, Order Block and Fair Value Gap.",
-
-f2Title:
-"Multi Timeframe",
-
-f2Text:
-"Analysis across multiple timeframes provides broader market context.",
-
-f3Title:
-"Telegram Signal",
-
-f3Text:
-"Processed signals are delivered directly through the Telegram Bot.",
-
-howTitle:
-"How It Works",
-
-howSub:
-"A simple overview of the system workflow.",
-
-s1Title:
-"Market Data",
-
-s1Text:
-"XAUUSD market data is collected and monitored by the system.",
-
-s2Title:
-"AI Team Analysis",
-
-s2Text:
-"Multiple AI agents process SMC, timeframe and fundamental data.",
-
-s3Title:
-"Signal Processing",
-
-s3Text:
-"The analysis results are combined into a single signal.",
-
-s4Title:
-"Telegram",
-
-s4Text:
-"The signal is delivered directly to the Telegram Bot.",
-
-pricingTitle:
-"Get Started",
-
-pricingSub:
-"Choose the AI Assistant access plan that fits your needs.",
-
-ctaTitle:
-"Ready to Use AI Assistant?",
-
-ctaText:
-"Start using the AI Assistant and receive XAUUSD signals directly through Telegram.",
-
-trial:
-"START ON TELEGRAM",
-
-hint:
-"DRAG to rotate • SCROLL to zoom • press/hold an AI to see identity",
-
-disclaimer:
-"Information and signals provided are generated by an analytical system and do not guarantee profits. Trading involves risk. Use appropriate risk management."
-
-},
-
-zh:{
-
-heroSubtitle:
-"AI Trading Assistant 结合 Smart Money Concept、基本面分析以及多个时间周期，监控 XAUUSD 市场并将信号直接发送到 Telegram。",
-
-visualTitle:
-"AI 团队正在分析 XAUUSD",
-
-visualText:
-"这是 AI 团队分析 XAUUSD 的可视化场景，结合 Smart Money Concept（SMC）、基本面分析以及多个时间周期。系统每小时整合分析结果，生成信号并直接发送到 Telegram Bot。",
-
-featureTitle:
-"AI 交易功能",
-
-featureSub:
-"展示多 AI Agent 在信号发送到 Telegram 之前的分析流程。",
-
-f1Title:
-"Smart Money Concept",
-
-f1Text:
-"分析 Market Structure、BOS、CHoCH、Liquidity、Order Block 和 Fair Value Gap。",
-
-f2Title:
-"多时间周期",
-
-f2Text:
-"通过多个时间周期分析获得更完整的市场背景。",
-
-f3Title:
-"Telegram Signal",
-
-f3Text:
-"处理完成后的信号直接发送到 Telegram Bot。",
-
-howTitle:
-"工作方式",
-
-howSub:
-"系统运行流程概览。",
-
-s1Title:
-"市场数据",
-
-s1Text:
-"系统持续收集和监控 XAUUSD 市场数据。",
-
-s2Title:
-"AI 团队分析",
-
-s2Text:
-"多个 AI Agent 分析 SMC、时间周期和基本面数据。",
-
-s3Title:
-"信号处理",
-
-s3Text:
-"系统将分析结果整合成一个交易信号。",
-
-s4Title:
-"Telegram",
-
-s4Text:
-"信号直接发送到 Telegram Bot。",
-
-pricingTitle:
-"立即开始",
-
-pricingSub:
-"选择适合您的 AI Assistant 方案。",
-
-ctaTitle:
-"准备使用 AI Assistant？",
-
-ctaText:
-"开始使用 AI Assistant，并通过 Telegram 接收 XAUUSD 信号。",
-
-trial:
-"进入 TELEGRAM",
-
-hint:
-"拖动旋转办公室 • 滚轮缩放 • 按住 AI 查看身份",
-
-disclaimer:
-"所提供的信息和信号来自分析系统，并不保证盈利。交易具有风险，请使用适当的风险管理。"
-
-}
-
-};
-
-
-/* =========================================================
-   LANGUAGE SWITCH
-========================================================= */
-
-function setLanguage(
-    lang
-){
-
-    const t=
-        translations[lang];
-
-    if(!t)
-        return;
-
-
-    document.documentElement.lang=
-        lang==="zh"
-            ? "zh"
-            : lang;
-
-
-    const ids={
-        heroSubtitle:"heroSubtitle",
-        visualTitle:"visualTitle",
-        visualText:"visualText",
-        featureTitle:"featureTitle",
-        featureSub:"featureSub",
-        f1Title:"f1Title",
-        f1Text:"f1Text",
-        f2Title:"f2Title",
-        f2Text:"f2Text",
-        f3Title:"f3Title",
-        f3Text:"f3Text",
-        howTitle:"howTitle",
-        howSub:"howSub",
-        s1Title:"s1Title",
-        s1Text:"s1Text",
-        s2Title:"s2Title",
-        s2Text:"s2Text",
-        s3Title:"s3Title",
-        s3Text:"s3Text",
-        s4Title:"s4Title",
-        s4Text:"s4Text",
-        pricingTitle:"pricingTitle",
-        pricingSub:"pricingSub",
-        ctaTitle:"ctaTitle",
-        ctaText:"ctaText",
-        disclaimer:"disclaimer"
-    };
-
-
-    Object.entries(ids)
-        .forEach(
-            ([key,id])=>{
-
-                const el=
-                    document.getElementById(id);
-
-                if(el)
-                    el.textContent=
-                        t[key];
-
-            }
+        requestAnimationFrame(
+            drawBackground
         );
 
-
-    document
-        .getElementById(
-            "trialButton"
-        )
-        .textContent=
-            t.trial;
+    }
 
 
-    document
-        .querySelector(
-            ".office-hint"
-        )
-        .innerHTML=
-            t.hint;
+    window.addEventListener(
+        "resize",
+        resizeCanvas
+    );
 
+
+    resizeCanvas();
+
+    drawBackground();
+
+
+
+    /* =========================================================
+       TELEGRAM CLICK TRACKING
+    ========================================================== */
 
     document
         .querySelectorAll(
-            ".lang-btn"
+            ".package-link, #mainCTA, #trialButton"
         )
-        .forEach(
-            btn=>{
+        .forEach(link => {
 
-                btn.classList.toggle(
-                    "active",
-                    btn.dataset.lang===lang
-                );
-
-            }
-        );
-
-
-    localStorage.setItem(
-        "xau_ai_language",
-        lang
-    );
-
-}
-
-
-document
-    .querySelectorAll(
-        ".lang-btn"
-    )
-    .forEach(
-        btn=>{
-
-            btn.addEventListener(
+            link.addEventListener(
                 "click",
-                ()=>{
-                    setLanguage(
-                        btn.dataset.lang
-                    );
-                }
-            );
+                () => {
 
-        }
-    );
+                    try {
 
+                        gtag(
+                            "event",
+                            "telegram_cta_click",
+                            {
+                                event_category:
+                                    "conversion",
 
-const savedLanguage=
-    localStorage.getItem(
-        "xau_ai_language"
-    ) || "id";
+                                event_label:
+                                    link.dataset.pkg ||
+                                    "trial"
 
-setLanguage(
-    savedLanguage
-);
-
-
-/* =========================================================
-   TELEGRAM PACKAGE LINKS
-========================================================= */
-
-const BOT=
-    "https://t.me/Intradayxauusd_bot";
-
-
-const packageLinks={
-
-    "1month":
-        `${BOT}?start=1month`,
-
-    "6month":
-        `${BOT}?start=6month`,
-
-    "12month":
-        `${BOT}?start=12month`,
-
-    "permanent":
-        `${BOT}?start=permanent`
-
-};
-
-
-document
-    .querySelectorAll(
-        ".price-button"
-    )
-    .forEach(
-        button=>{
-
-            button.addEventListener(
-                "click",
-                ()=>{
-
-                    const pkg=
-                        button.dataset.pkg;
-
-                    if(
-                        packageLinks[pkg]
-                    ){
-
-                        window.open(
-                            packageLinks[pkg],
-                            "_blank"
+                            }
                         );
+
+                    } catch (error) {
+
+                        /*
+                         Google Analytics tidak boleh
+                         mengganggu fungsi website.
+                        */
 
                     }
 
                 }
             );
 
-        }
-    );
+        });
 
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-function getPromoTarget(){
-
-    const now=
-        new Date();
-
-    let target=
-        new Date(
-            now.getFullYear(),
-            8,
-            30,
-            23,
-            59,
-            59
-        );
-
-    if(
-        target.getTime()<
-        now.getTime()
-    ){
-
-        target=
-            new Date(
-                now.getFullYear()+1,
-                8,
-                30,
-                23,
-                59,
-                59
-            );
-
-    }
-
-    return target;
-
-}
-
-
-let promoTarget=
-    getPromoTarget();
-
-
-function updateCountdown(){
-
-    const now=
-        new Date();
-
-    let diff=
-        promoTarget.getTime()-
-        now.getTime();
-
-
-    if(diff<=0){
-
-        promoTarget=
-            getPromoTarget();
-
-        diff=
-            promoTarget.getTime()-
-            now.getTime();
-
-    }
-
-
-    const days=
-        Math.floor(
-            diff/
-            86400000
-        );
-
-    diff%=
-        86400000;
-
-
-    const hours=
-        Math.floor(
-            diff/
-            3600000
-        );
-
-    diff%=
-        3600000;
-
-
-    const minutes=
-        Math.floor(
-            diff/
-            60000
-        );
-
-    diff%=
-        60000;
-
-
-    const seconds=
-        Math.floor(
-            diff/
-            1000
-        );
-
-
-    document.getElementById(
-        "days"
-    ).textContent=
-        String(days)
-        .padStart(2,"0");
-
-
-    document.getElementById(
-        "hours"
-    ).textContent=
-        String(hours)
-        .padStart(2,"0");
-
-
-    document.getElementById(
-        "minutes"
-    ).textContent=
-        String(minutes)
-        .padStart(2,"0");
-
-
-    document.getElementById(
-        "seconds"
-    ).textContent=
-        String(seconds)
-        .padStart(2,"0");
-
-}
-
-
-updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
 
 </script>
 
